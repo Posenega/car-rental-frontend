@@ -45,10 +45,19 @@ export default function page() {
       console.log(message)
     },
   })
+  const loginApi = useApiStatus({
+    api: CarRentalApi.user.login,
+    onSuccess({ result }) {
+      storeAccessToken(result.accessToken)
+    },
+    onFail({ message }) {
+      console.log(message)
+    },
+  })
 
   const submit = (data: UserLoginParams | UserRegisterParams) => {
     if (isLogin) {
-      CarRentalApi.user.login(data as UserLoginParams)
+      loginApi.fire(data as UserLoginParams)
     } else {
       registerApi.fire(data as UserRegisterParams)
     }

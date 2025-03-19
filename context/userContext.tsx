@@ -23,6 +23,7 @@ export const UserProvider: React.FC<{
   }
 
   const storeAccessToken = (token: string) => {
+    localStorage.setItem("accessToken", token)
     setAccessToken(token)
   }
 
