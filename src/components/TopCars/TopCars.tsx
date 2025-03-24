@@ -5,15 +5,23 @@ const TopCars = () => {
   const cars = [
     {
       name: "Kia EV6",
-      image: "/assets/kia-ev6.png",
+      image: "/assets/kia_ev6.png",
       price: "90$/day",
-      features: ["Fully Electric (77.4 kWh battery)", "Hybrid", "Spacious"],
+      features: [
+        { icon: "mdi:car-electric", text: "Fully Electric" },
+        { icon: "mdi:account-group-outline", text: "5 people" },
+        { icon: "mdi:car-door", text: "4 doors" },
+      ],
     },
     {
       name: "Toyota Prius",
       image: "/assets/toyota-prius.png",
       price: "75$/day",
-      features: ["Fully Electric (71.4 kWh battery)", "Spacious", "Hybrid"],
+      features: [
+        { icon: "mdi:car-electric", text: "Fully Electric" },
+        { icon: "mdi:account-group-outline", text: "5 people" },
+        { icon: "mdi:car-door", text: "4 doors" },
+      ],
     },
   ];
 
@@ -21,8 +29,8 @@ const TopCars = () => {
     <section className={styles.topCars}>
       <h2 className={styles.title}>Top Cars</h2>
       <div className={styles.carList}>
-        {cars.map((car, index) => (
-          <CarCard key={index} {...car} />
+        {cars.map((car, i) => (
+          <CarCard key={i} {...car} />
         ))}
       </div>
     </section>

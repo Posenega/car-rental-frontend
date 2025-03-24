@@ -1,10 +1,14 @@
 import styles from "./TopCars.module.css";
+import { Icon } from "@iconify/react";
 
 interface CarCardProps {
   name: string;
   image: string;
   price: string;
-  features: string[];
+  features: {
+    icon: string;
+    text: string;
+  }[];
 }
 
 const CarCard = ({ name, image, price, features }: CarCardProps) => {
@@ -12,10 +16,13 @@ const CarCard = ({ name, image, price, features }: CarCardProps) => {
     <div className={styles.card}>
       <img src={image} alt={name} className={styles.carImage} />
       <div className={styles.details}>
-        <h3>{name}</h3>
-        <ul>
-          {features.map((feature, idx) => (
-            <li key={idx}>{feature}</li>
+        <h3 className={styles.carTitle}>{name}</h3>
+        <ul className={styles.featureList}>
+          {features.map((f, i) => (
+            <li key={i} className={styles.featureItem}>
+              <Icon icon={f.icon} className={styles.icon} />
+              {f.text}
+            </li>
           ))}
         </ul>
         <div className={styles.footer}>

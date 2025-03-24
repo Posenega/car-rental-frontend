@@ -1,51 +1,169 @@
 .hero {
-    background: url('/assets/heroesection.png') center/cover no-repeat;
-    height: 400px;
-    position: relative;
-}
-
-.overlay {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background-color: #2f2f2f;
     color: white;
     text-align: center;
-    padding: 0 20px;
+    padding: 100px 20px 40px;
+    /* more top space for navbar, less bottom space */
 }
 
-.overlay h1 {
-    font-size: 28px;
+.title {
+    font-size: 36px;
+    font-weight: bold;
     margin-bottom: 20px;
+    /* reduced space */
+}
+
+.cars {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    /* reduced height */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.car {
+    position: absolute;
+    bottom: 0;
+    max-width: 400px;
+    /* make cars bigger */
+    width: 40vw;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.car1 {
+    left: 10%;
+    z-index: 1;
+}
+
+.car2 {
+    left: 28%;
+    z-index: 2;
+}
+
+.car3 {
+    left: 50%;
+    z-index: 3;
 }
 
 .searchContainer {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+    padding: 0 5vw;
 }
 
-.searchContainer input {
-    padding: 10px;
+.searchInput {
+    flex: 1;
+    padding: 10px 16px;
     border-radius: 20px;
     border: none;
-    width: 250px;
-    max-width: 100%;
+    max-width: 500px;
+    font-size: 16px;
+    min-width: 200px;
 }
 
-.searchContainer button {
-    padding: 10px 20px;
+.filterBtn {
+    padding: 10px 24px;
     background-color: #303AA7;
+    color: white;
     border: none;
     border-radius: 20px;
-    color: white;
+    font-weight: bold;
     cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap;
 }
 
 @media (max-width: 768px) {
-    .overlay h1 {
+    .cars {
+        padding-top: 40px;
+        height: auto !important;
+        margin-bottom: 20px;
+    }
+
+    .car {
+        max-width: 260px;
+        width: 50vw;
+    }
+
+    .car1 {
+        left: 5%;
+    }
+
+    .car2 {
+        left: 30%;
+    }
+
+    .car3 {
+        left: 55%;
+    }
+
+    .title {
         font-size: 22px;
+    }
+
+    .searchContainer {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 0 4vw;
+    }
+
+    .searchInput {
+        width: 65%;
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .filterBtn {
+        font-size: 14px;
+        padding: 8px 14px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .cars {
+        padding-top: 110px;
+    }
+
+    .car {
+        max-width: 240px;
+        width: 45vw;
+    }
+
+    .car1 {
+        left: 0%;
+    }
+
+    .car2 {
+        left: 25%;
+    }
+
+    .car3 {
+        left: 50%;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .searchInput {
+        width: 60%;
+        font-size: 13px;
+        padding: 7px 10px;
+    }
+
+    .filterBtn {
+        font-size: 13px;
+        padding: 7px 12px;
     }
 }

@@ -1,85 +1,120 @@
 .topCars {
-    padding: 60px 20px;
+    padding: 60px 5%;
+    background-color: #f7f7f7;
 }
 
 .title {
     font-size: 28px;
-    text-align: center;
+    font-weight: bold;
     margin-bottom: 30px;
+    text-align: left;
 }
 
 .carList {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
 }
 
 .card {
     display: flex;
-    flex-direction: column;
     background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    gap: 16px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    padding: 30px;
+    width: 500px;
+    height: auto;
+    align-items: center;
+    gap: 30px;
 }
 
 .carImage {
-    width: 100%;
-    max-width: 300px;
-    align-self: center;
+    width: 250px;
+    max-height: 200px;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
 .details {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.details h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
+.carTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
-.details ul {
-    list-style: disc;
-    padding-left: 20px;
-    margin-bottom: 10px;
+.featureList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.icon {
+    font-size: 20px;
+    color: #303AA7;
 }
 
 .footer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 16px;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .price {
-    font-weight: bold;
     font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #303AA7;
+    text-decoration-thickness: 2px;
+    color: #000;
 }
 
 .reserveBtn {
     background-color: #303AA7;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-size: 15px;
     cursor: pointer;
 }
 
-@media (min-width: 768px) {
-    .carList {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
+@media (max-width: 768px) {
     .card {
-        flex-direction: row;
-        max-width: 600px;
+        flex-direction: column;
+        text-align: center;
         width: 100%;
     }
 
     .carImage {
-        width: 200px;
-        height: auto;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .details {
+        align-items: center;
+    }
+
+    .footer {
+        justify-content: center;
     }
 }

@@ -1,120 +1,120 @@
-.carCategory {
-    padding: 60px 20px;
+.categorySection {
+    padding: 60px 5%;
     background-color: #f7f7f7;
-    position: relative;
+}
+
+.titleWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .title {
-    text-align: left;
     font-size: 28px;
-    margin-bottom: 30px;
-    margin-left: 40px;
+    font-weight: bold;
+    text-align: left;
 }
 
-.carouselWrapper {
+.arrows {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    gap: 15px;
 }
 
-.arrow {
-    font-size: 24px;
-    background-color: #303AA7;
-    color: white;
-    border: none;
+.arrowBtn {
+    border: 2px solid #303AA7;
+    background-color: transparent;
+    color: #303AA7;
+    font-size: 20px;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
-.left {
-    left: 10px;
-}
-
-.right {
-    right: 10px;
-}
-
-.carousel {
+.slider {
     display: flex;
-    gap: 20px;
+    gap: 30px;
     overflow: hidden;
-    justify-content: center;
-    max-width: 1200px;
 }
 
 .card {
-    flex: 0 0 320px;
     background: white;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.cardImageWrapper {
-    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    min-width: 340px;
+    max-width: 400px;
+    height: auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
 }
 
-.cardImage {
+.image {
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
-}
-
-.categoryIcon {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 30px;
-    color: #303AA7;
+    display: block;
 }
 
 .cardTitle {
-    font-size: 20px;
-    margin: 10px 0;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px;
 }
 
 .featureList {
     list-style: none;
-    padding: 0;
-    margin: 10px 0;
+    padding: 0 20px;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
-.feature {
-    border: 1px solid black;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    background-color: transparent;
-}
-
-.viewAll {
+.featureItem {
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    font-size: 12px;
+    border: 1px solid #303AA7;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #000;
+    gap: 6px;
 }
 
-.viewCarsButton {
+.icon {
+    font-size: 12px;
+    color: #303AA7;
+}
+
+.viewBtn {
+    margin: 20px;
     background-color: #303AA7;
     color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 8px 22px;
     font-size: 14px;
+    border: none;
+    border-radius: 30px;
     cursor: pointer;
-    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .slider {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .card {
+        flex: 0 0 80%;
+        scroll-snap-align: center;
+    }
 }
