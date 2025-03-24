@@ -1,0 +1,120 @@
+.carCategory {
+    padding: 60px 20px;
+    background-color: #f7f7f7;
+    position: relative;
+}
+
+.title {
+    text-align: left;
+    font-size: 28px;
+    margin-bottom: 30px;
+    margin-left: 40px;
+}
+
+.carouselWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.arrow {
+    font-size: 24px;
+    background-color: #303AA7;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.left {
+    left: 10px;
+}
+
+.right {
+    right: 10px;
+}
+
+.carousel {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    justify-content: center;
+    max-width: 1200px;
+}
+
+.card {
+    flex: 0 0 320px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.cardImageWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.categoryIcon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    color: #303AA7;
+}
+
+.cardTitle {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.featureList {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.feature {
+    border: 1px solid black;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    background-color: transparent;
+}
+
+.viewAll {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.viewCarsButton {
+    background-color: #303AA7;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+}
