@@ -1,0 +1,56 @@
+/* Main background */
+.main {
+    background-color: #2B2A2A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Navbar container */
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .navbar div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  /* Inner nav bar */
+  .navContainer {
+    background-color: #e5e5e5;
+    padding: 12px 50px;
+    border-radius: 50px; /* Rounded edges */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensures proper spacing */
+    gap: 80px; /* Creates space between linkContainer and icons */
+  }
+  
+  
+  /* Navbar links */
+  .navContainer a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+    margin: 0 10px; 
+  
+  }
+  
+  .navContainer a:hover {
+    color: gray;
+  
+  }
+  
+  /* Icons */
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  

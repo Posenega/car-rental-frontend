@@ -1,0 +1,236 @@
+/* AboutUsPage.module.css */
+/*margin :20px*/
+.page {
+  font-family: sans-serif;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2B2A2A;
+}
+.info,.stat,.chooseUs,.mission{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.info {
+  width: 85%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.main img{
+  width: 100%;
+  height: 650px;
+  object-fit: cover;
+}
+
+.main h1{
+  color: #fff;
+  font-size: 48px;
+  margin-top: 20px;
+}
+
+.info p {
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.6;
+  font-family: monospace;
+}
+.main h2{
+  font-size: 43px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-family: monospace;
+}
+
+/* Mission Section */
+.mission {
+  width: 85%;
+  gap: 2rem;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.mission h3{
+  font-size: 18px;
+  font-family: monospace;
+  font-weight: 300;
+}
+.mission_cards{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 100px;
+  margin:0;
+}
+.mission_card {
+  flex: 1 1 200px;
+}
+
+.vertical_line {
+  display: inline-block; 
+  border-left: 2px solid #b60000;
+  height: 100px;
+  width: 0; 
+}
+
+/* Why Choose Us Section */
+.chooseUs {
+  display: flex;
+  flex-direction: column; 
+  width: 100%;
+  background-color: white;
+  justify-content: center;
+  margin-bottom: 0;
+  align-items: center; 
+  padding-top: 30px;
+}
+.choose_cards {
+  width: 85%;
+  display: grid;
+  grid-template-columns: repeat(2, auto); 
+  justify-content: space-between;               
+  gap: 40px;                             
+  margin-bottom: 30px;
+}
+
+.choose_card {
+  width:500px;
+  height: 150px;              
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.chooseUs h2 {
+  width: 85%;
+  color: black;
+}
+.choose_top{
+  display: flex;
+  flex-wrap: nowrap;
+  gap:10px;
+  overflow: auto;
+}
+.choose_card h3 {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: black;
+}
+
+.choose_card p {
+  line-height: 1.5;
+  color: black;
+  width: 75%;
+
+}
+
+.choose_card a {
+  color: #0070f3;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+
+
+ 
+}
+
+.choose_card a:hover {
+  text-decoration: underline;
+}
+
+/* Stats Section */
+.stat {
+  width: 100%;
+  height: 170px;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(1, 1, 1, 0.525);
+  margin-bottom: 0;
+
+}
+.stat_card {
+  flex: auto;
+  margin: 10px;
+  display: flex;              
+  flex-direction: column;     
+  justify-content: center;   
+  align-items: center;       
+  text-align: center;     
+}
+.stat_card h3 {
+  font-size: 40px;
+  color: white;
+}
+
+
+.stat_card p {
+  margin: 0.5rem 0 0;
+  font-size: 18px;
+  font-weight:500;
+  color: #ffffff;
+  font-family: monospace;
+}
+/* responsivness*/
+@media (max-width: 768px) {
+  /* Scale down the image height */
+  .main img {
+    height: auto;
+  }
+  /* Adjust heading sizes */
+  .main h1 {
+    font-size: 36px;
+  }
+  .main h2 {
+    font-size: 32px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+  /* Allow mission cards to wrap and reduce gap */
+  .mission_cards {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  /* Change grid to a single column for choose cards */
+  .choose_cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  /* Make choose cards flexible */
+  .choose_card {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main h1 {
+    font-size: 28px;
+  }
+  .main h2 {
+    font-size: 24px;
+  }
+  .info p {
+    font-size: 16px;
+  }
+  .mission h3 {
+    font-size: 16px;
+  }
+  .choose_card h3 {
+    font-size: 20px;
+  }
+  .choose_card p {
+    width: 100%;
+    font-size: 14px;
+  }
+  .stat_card h3 {
+    font-size: 32px;
+  }
+  .stat_card p {
+    font-size: 16px;
+  }
+}

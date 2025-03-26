@@ -1,0 +1,62 @@
+.main {
+  background-color: #2B2A2A;
+    display: flex;
+    justify-content: space-between;
+    height: 200px;
+    flex-wrap: nowrap;
+    
+  }
+  .main div{
+    margin: 20px;
+    margin-left: 40px;
+    width: 400px;
+    overflow: hidden;
+    align-items: center;
+  }
+  
+  .main div div{
+    margin:0;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    
+  }
+  .main h2{
+    color: white;
+    font-size: 27px;
+    margin-left:10px;
+  }
+  .main p{
+    color: white;
+    font-size: 13px;
+    margin-bottom: 40px;
+    width: 250px;
+  }
+  .links{
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+  }
+  .links li{
+    margin-bottom: 10px;
+    list-style: none;
+  }
+  .links a:hover{
+    color: gray;
+  }
+  .icons{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+  .c{
+    color: white;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  
