@@ -14,7 +14,7 @@ const AboutUsPage = () => {
         <h1>ABOUT US</h1>
         <section className={styles.info}>
           <p>
-            At Mount Motors, we believe that car rentals should be simple,
+            2 At Mount Motors, we believe that car rentals should be simple,
             affordable, and accessible to everyone. Whether you’re planning a
             quick weekend getaway or a long business trip, we’re here to get you
             moving with ease and confidence.
@@ -29,11 +29,11 @@ const AboutUsPage = () => {
                 Provide reliable and high-quality rental cars across Lebanon
               </h3>
             </div>
-            <div className="vertical_line"></div>
+            {/* <div className="vertical_line"></div> */}
             <div className={styles.mission_card}>
               <h3>Make car booking effortless with a modern user experience</h3>
             </div>
-            <div className="vertical_line"></div>
+            {/* <div className="vertical_line"></div> */}
             <div className={styles.mission_card}>
               <h3>
                 Offer flexible and affordable pricing with full transparency

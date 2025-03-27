@@ -63,9 +63,7 @@
   gap: 100px;
   margin:0;
 }
-.mission_card {
-  flex: 1 1 200px;
-}
+
 
 .vertical_line {
   display: inline-block; 
@@ -173,6 +171,13 @@
   color: #ffffff;
   font-family: monospace;
 }
+
+@media (max-width: 850px){
+  .mission_cards{
+    gap:50px;
+  }
+}
+
 /* responsivness*/
 @media (max-width: 768px) {
   /* Scale down the image height */
@@ -190,7 +195,10 @@
   }
   /* Allow mission cards to wrap and reduce gap */
   .mission_cards {
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    justify-content: center;
+  text-align: center;
     gap: 20px;
   }
   /* Change grid to a single column for choose cards */
