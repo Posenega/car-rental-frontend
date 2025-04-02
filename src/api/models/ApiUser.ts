@@ -1,5 +1,3 @@
-import { User } from "@/model/user"
-
 export interface UserLoginParams {
   email: string
   password: string

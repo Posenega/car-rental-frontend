@@ -6,6 +6,7 @@ import {
 } from "./models/ApiUser"
 import { User } from "@/model/user"
 import { sign } from "crypto"
+import { BranchesReponse, BranchParams } from "./models/ApiBranch"
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -37,5 +38,13 @@ export const CarRentalApi = {
       }),
     signout: (): Promise<AxiosResponse<AuthResponse>> =>
       api.delete("/users/signout"),
+  },
+  branch: {
+    create: (
+      body: BranchParams
+    ): Promise<AxiosResponse<BranchParams>> =>
+      api.post("/branch/create", body),
+    getAll: (): Promise<AxiosResponse<BranchesReponse>> =>
+      api.get("/branch/getAll"),
   },
 }

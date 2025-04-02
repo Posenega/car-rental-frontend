@@ -1,11 +1,12 @@
 "use client"
 import { Geist, Geist_Mono, Roboto } from "next/font/google"
 import "./globals.css"
-import { UserContext, UserProvider } from "../../context/userContext"
+import { UserContext, UserProvider } from "../context/userContext"
 import { useContext, useEffect } from "react"
 import { UserContextType } from "@/model/user"
 import { useApiStatus } from "@/hooks/useApiStatus"
 import { CarRentalApi } from "@/api/Api"
+import { BranchProvider } from "@/context/branchContext"
 
 const roboto = Roboto({
   weight: [
@@ -31,9 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <AuthLayer>
-          <body className={`${roboto.variable}`}>{children}</body>
-        </AuthLayer>
+        <BranchProvider>
+          <AuthLayer>
+            <body className={`${roboto.variable}`}>{children}</body>
+          </AuthLayer>
+        </BranchProvider>
       </UserProvider>
     </html>
   )
@@ -75,8 +78,10 @@ function AuthLayer({ children }: { children: React.ReactNode }) {
     const token = localStorage.getItem("accessToken")
     if (token) {
       storeAccessToken(token)
-      console.log("getting ingo")
       getUserInfo.fire(token)
+      return
+    } else {
+      refreshToken.fire()
     }
   }, [])
   return <>{children}</>

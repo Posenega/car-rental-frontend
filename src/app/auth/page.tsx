@@ -8,7 +8,7 @@ import {
   UserLoginParams,
   UserRegisterParams,
 } from "@/api/models/ApiUser"
-import { UserContext } from "../../../context/userContext"
+import { UserContext } from "../../context/userContext"
 import { User, UserContextType } from "@/model/user"
 
 export default function page() {
@@ -40,6 +40,7 @@ export default function page() {
     api: CarRentalApi.user.register,
     onSuccess({ result }) {
       storeAccessToken(result.accessToken)
+      window.location.pathname = "/"
     },
     onFail({ message }) {
       console.log(message)
@@ -49,6 +50,7 @@ export default function page() {
     api: CarRentalApi.user.login,
     onSuccess({ result }) {
       storeAccessToken(result.accessToken)
+      window.location.pathname = "/"
     },
     onFail({ message }) {
       console.log(message)
