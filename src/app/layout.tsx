@@ -55,18 +55,18 @@ function AuthLayer({ children }: { children: React.ReactNode }) {
     onFail({ message }) {
       if (message === "jwt expired") {
         refreshToken.fire()
-        // localStorage.removeItem("accessToken")
-        // window.location.pathname = "/auth"
       }
     },
   })
   const refreshToken = useApiStatus({
     api: CarRentalApi.user.refreshToken,
     onSuccess({ result }) {
-      console.log("refreshed token")
-      console.log(result)
+      storeAccessToken(result.accessToken)
+      getUserInfo.fire(result.accessToken)
     },
     onFail({ message }) {
+      CarRentalApi.user.signout()
+      storeAccessToken("")
       console.log(message)
     },
   })

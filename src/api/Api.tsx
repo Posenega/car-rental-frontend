@@ -5,6 +5,7 @@ import {
   UserRegisterParams,
 } from "./models/ApiUser"
 import { User } from "@/model/user"
+import { sign } from "crypto"
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -34,5 +35,7 @@ export const CarRentalApi = {
       api.get("/users/refresh", {
         withCredentials: true,
       }),
+    signout: (): Promise<AxiosResponse<AuthResponse>> =>
+      api.delete("/users/signout"),
   },
 }

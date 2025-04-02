@@ -19,4 +19,5 @@ export type UserContextType = {
   storeAccessToken: (token: string) => void
   storeUser: (user: User) => void
   login: (user: User, token: string) => void
+  signout: () => void
 }

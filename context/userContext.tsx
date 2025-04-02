@@ -22,21 +22,33 @@ export const UserProvider: React.FC<{
     setUser(user)
   }
 
-  const storeAccessToken = (token: string) => {
-    localStorage.setItem("accessToken", token)
-    setAccessToken(token)
+  const storeAccessToken = (token: string | null) => {
+    localStorage.setItem("accessToken", token as string)
+    setAccessToken(token === "" ? null : token)
   }
 
   const login = (user: User, token: string) => {
     setUser(user)
     localStorage.setItem("token", token)
   }
+
+  const signout = () => {
+    localStorage.removeItem("accessToken")
+    setAccessToken("")
+    setUser({
+      _id: "",
+      userName: "",
+      email: "",
+    })
+  }
+
   const value = {
     user,
     storeUser,
     login,
     storeAccessToken,
     accessToken,
+    signout,
   }
 
   return (
