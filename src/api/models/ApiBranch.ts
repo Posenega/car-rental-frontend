@@ -7,6 +7,7 @@ export interface BranchParams {
   openingHours: string
   url: string
   mapLocation: MapLocation
+  branchImage: File | undefined
 }
 
 export interface BranchesReponse {

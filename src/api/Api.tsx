@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios"
+import axios, { Axios, AxiosResponse } from "axios"
 import {
   AuthResponse,
   UserLoginParams,
@@ -41,10 +41,14 @@ export const CarRentalApi = {
   },
   branch: {
     create: (
-      body: BranchParams
-    ): Promise<AxiosResponse<BranchParams>> =>
+      body: FormData
+    ): Promise<AxiosResponse<{ message: string }>> =>
       api.post("/branch/create", body),
     getAll: (): Promise<AxiosResponse<BranchesReponse>> =>
       api.get("/branch/getAll"),
+    delete: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string }>> =>
+      api.delete(`/branch/delete/${id}`),
   },
 }

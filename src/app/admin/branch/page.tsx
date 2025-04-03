@@ -3,19 +3,27 @@ import React, { useContext, useEffect } from "react"
 import Layout from "../layout"
 import styles from "./page.module.scss"
 import MapComponent from "@/components/MapComponent/MapComponent"
-import { Controller, useController, useForm } from "react-hook-form"
-import { Vidaloka } from "next/font/google"
+import {
+  Controller,
+  set,
+  useController,
+  useForm,
+} from "react-hook-form"
 import { useApiStatus } from "@/hooks/useApiStatus"
 import { CarRentalApi } from "@/api/Api"
 import { BranchParams } from "@/api/models/ApiBranch"
 import { BranchContext } from "@/context/branchContext"
 import { BranchContextType, MapLocation } from "@/model/branch"
+import Image from "next/image"
+import { get } from "http"
 
 export default function page() {
   const { storeBranches, branches } = useContext(
     BranchContext
   ) as BranchContextType
   const [coords, setCoords] = React.useState<MapLocation[]>([])
+  const [image, setImage] = React.useState<string>("")
+  const [imageFile, setImageFile] = React.useState<File>()
   const [mapLocation, setMapLocation] = React.useState<MapLocation>({
     lat: 0,
     lng: 0,
@@ -27,6 +35,7 @@ export default function page() {
       phoneNumber: "",
       openingHours: "",
       url: "",
+      branchImage: "",
     },
   })
   const handleSelect = (location: {
@@ -46,7 +55,9 @@ export default function page() {
   // === API CALLS
   const createBranchApi = useApiStatus({
     api: CarRentalApi.branch.create,
-    onSuccess({ result }) {},
+    onSuccess({ result }) {
+      getBranchesApi.fire()
+    },
     onFail({ message }) {
       console.log(message)
     },
@@ -68,19 +79,35 @@ export default function page() {
     },
   })
 
+  const deleteBranchApi = useApiStatus({
+    api: CarRentalApi.branch.delete,
+    onSuccess({ result }) {
+      getBranchesApi.fire()
+      console.log(result)
+    },
+    onFail({ message }) {
+      console.log(message)
+    },
+  })
+
   const submit = (data: any) => {
-    const body: BranchParams = {
-      branchName: data.branchName,
-      location: data.location,
-      phoneNumber: data.phoneNumber,
-      openingHours: data.openingHours,
-      url: data.url,
-      mapLocation: {
+    const formData = new FormData()
+
+    formData.append("branchName", data.branchName)
+    formData.append("location", data.location)
+    formData.append("phoneNumber", data.phoneNumber)
+    formData.append("openingHours", data.openingHours)
+    formData.append("url", data.url)
+    formData.append("mypathtofolder", "branches")
+    formData.append(
+      "mapLocation",
+      JSON.stringify({
         lat: mapLocation.lat,
         lng: mapLocation.lng,
-      },
-    }
-    createBranchApi.fire(body)
+      })
+    )
+    if (imageFile) formData.append("branchImage", imageFile)
+    createBranchApi.fire(formData)
   }
 
   // === ON LOAD CALLS
@@ -157,14 +184,52 @@ export default function page() {
               )
             }}
           />
+          <Controller
+            control={control}
+            name="branchImage"
+            render={({ field: { value, onChange } }) => {
+              return (
+                <input
+                  value={value}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0]
+                    if (file) {
+                      const reader = new FileReader()
+                      reader.onloadend = () => {
+                        setImage(reader.result as string)
+                      }
+                      reader.readAsDataURL(file)
+                    }
+                    setImageFile(e.target.files?.[0])
+                  }}
+                  type="file"
+                />
+              )
+            }}
+          />
+          {image && (
+            <div className={styles.imageContainer}>
+              <Image height={200} width={200} alt="alt" src={image} />
+            </div>
+          )}
           <MapComponent coords={coords} onSelect={handleSelect} />
           <button onClick={handleSubmit(submit)}>Add Branch</button>
         </div>
         <div>
           <h1>Branches</h1>
           {branches.map((value) => {
-            console.log(value)
-            return <p key={value._id}>{value.branchName}</p>
+            return (
+              <p>
+                <span key={value._id}>{value.branchName}</span>{" "}
+                <span
+                  onClick={() => {
+                    deleteBranchApi.fire(value._id)
+                  }}
+                >
+                  delete
+                </span>
+              </p>
+            )
           })}
         </div>
       </main>
