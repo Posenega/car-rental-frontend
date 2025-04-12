@@ -5,8 +5,8 @@ import {
   UserRegisterParams,
 } from "./models/ApiUser"
 import { User } from "@/model/user"
-import { sign } from "crypto"
 import { BranchesReponse, BranchParams } from "./models/ApiBranch"
+import { Car } from "./models/ApiCar"
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -37,7 +37,9 @@ export const CarRentalApi = {
         withCredentials: true,
       }),
     signout: (): Promise<AxiosResponse<AuthResponse>> =>
-      api.delete("/users/signout"),
+      api.delete("/users/signout", {
+        withCredentials: true,
+      }),
   },
   branch: {
     create: (
@@ -50,5 +52,14 @@ export const CarRentalApi = {
       id: string
     ): Promise<AxiosResponse<{ message: string }>> =>
       api.delete(`/branch/delete/${id}`),
+  },
+  car: {
+    create: (
+      body: FormData
+    ): Promise<AxiosResponse<{ message: string }>> =>
+      api.post("/car/create", body),
+    getAll: (): Promise<
+      AxiosResponse<{ cars: Car[]; message: string }>
+    > => api.get("/car/"),
   },
 }

@@ -71,6 +71,9 @@ function AuthLayer({ children }: { children: React.ReactNode }) {
       CarRentalApi.user.signout()
       storeAccessToken("")
       console.log(message)
+      if (window.location.pathname !== "/auth") {
+        window.location.pathname = "/auth"
+      }
     },
   })
 

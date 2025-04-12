@@ -2,6 +2,7 @@
 import { UserContext } from "@/context/userContext"
 import { UserContextType } from "@/model/user"
 import React, { useContext, useEffect, useState } from "react"
+import style from "./style.module.scss"
 
 export default function Layout({
   children,
@@ -18,12 +19,12 @@ export default function Layout({
     }
   })
   return (
-    <div>
+    <main className={style.main}>
       {lock ? (
         <>{/* TODO: Render something instead of nothing */}</>
       ) : (
         children
       )}
-    </div>
+    </main>
   )
 }

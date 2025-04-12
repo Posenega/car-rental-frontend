@@ -11,11 +11,12 @@ import {
 } from "react-hook-form"
 import { useApiStatus } from "@/hooks/useApiStatus"
 import { CarRentalApi } from "@/api/Api"
-import { BranchParams } from "@/api/models/ApiBranch"
 import { BranchContext } from "@/context/branchContext"
 import { BranchContextType, MapLocation } from "@/model/branch"
 import Image from "next/image"
-import { get } from "http"
+import CustomInput, {
+  CustomFileInput,
+} from "@/components/CustomInput/CustomInput"
 
 export default function page() {
   const { storeBranches, branches } = useContext(
@@ -116,123 +117,74 @@ export default function page() {
   }, [])
 
   return (
-    <Layout>
-      <main className={styles.main}>
-        <div className={styles.form}>
-          <Controller
-            control={control}
-            name="branchName"
-            render={({ field: { value, onChange } }) => {
-              return (
-                <input
-                  value={value}
-                  onChange={onChange}
-                  placeholder="Branch Name"
-                />
-              )
-            }}
-          />
-          <Controller
-            control={control}
-            name="location"
-            render={({ field: { value, onChange } }) => {
-              return (
-                <input
-                  value={value}
-                  onChange={onChange}
-                  placeholder="Location"
-                />
-              )
-            }}
-          />
-          <Controller
-            control={control}
-            name="phoneNumber"
-            render={({ field: { value, onChange } }) => {
-              return (
-                <input
-                  value={value}
-                  onChange={onChange}
-                  placeholder="Phone Number"
-                />
-              )
-            }}
-          />
-          <Controller
-            control={control}
-            name="openingHours"
-            render={({ field: { value, onChange } }) => {
-              return (
-                <input
-                  value={value}
-                  onChange={onChange}
-                  placeholder="Opening Hours"
-                />
-              )
-            }}
-          />
-          <Controller
-            control={control}
-            name="url"
-            render={({ field: { value } }) => {
-              return (
-                <input
-                  value={value}
-                  disabled={true}
-                  placeholder="Google Maps URL"
-                />
-              )
-            }}
-          />
-          <Controller
-            control={control}
-            name="branchImage"
-            render={({ field: { value, onChange } }) => {
-              return (
-                <input
-                  value={value}
-                  onChange={(e) => {
-                    const file = e.target.files?.[0]
-                    if (file) {
-                      const reader = new FileReader()
-                      reader.onloadend = () => {
-                        setImage(reader.result as string)
-                      }
-                      reader.readAsDataURL(file)
-                    }
-                    setImageFile(e.target.files?.[0])
-                  }}
-                  type="file"
-                />
-              )
-            }}
-          />
-          {image && (
-            <div className={styles.imageContainer}>
-              <Image height={200} width={200} alt="alt" src={image} />
-            </div>
-          )}
-          <MapComponent coords={coords} onSelect={handleSelect} />
-          <button onClick={handleSubmit(submit)}>Add Branch</button>
-        </div>
-        <div>
-          <h1>Branches</h1>
-          {branches.map((value) => {
-            return (
-              <p>
-                <span key={value._id}>{value.branchName}</span>{" "}
-                <span
-                  onClick={() => {
-                    deleteBranchApi.fire(value._id)
-                  }}
-                >
-                  delete
-                </span>
-              </p>
-            )
-          })}
-        </div>
-      </main>
-    </Layout>
+    <>
+      <div className={styles.form}>
+        <CustomInput
+          control={control}
+          name="branchName"
+          placeholder="Branch Name"
+        />
+        <CustomInput
+          control={control}
+          name="location"
+          placeholder="Location"
+        />
+        <CustomInput
+          control={control}
+          name="phoneNumber"
+          placeholder="Phone Number"
+        />
+        <CustomInput
+          control={control}
+          name="openingHours"
+          placeholder="Opening Hours"
+        />
+        <CustomInput
+          disabled={true}
+          control={control}
+          name="url"
+          placeholder="URL"
+        />
+        <CustomFileInput
+          control={control}
+          name="branchImage"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const file = e.target.files?.[0]
+            if (file) {
+              const reader = new FileReader()
+              reader.onloadend = () => {
+                setImage(reader.result as string)
+              }
+              reader.readAsDataURL(file)
+            }
+            setImageFile(e.target.files?.[0])
+          }}
+        />
+        {image && (
+          <div className={styles.imageContainer}>
+            <Image height={200} width={200} alt="alt" src={image} />
+          </div>
+        )}
+        <MapComponent coords={coords} onSelect={handleSelect} />
+        <button onClick={handleSubmit(submit)}>Add Branch</button>
+      </div>
+      <div>
+        <h1>Branches</h1>
+        {branches.map((value) => {
+          return (
+            <p>
+              <span key={value._id}>{value.branchName}</span>{" "}
+              <span
+                onClick={() => {
+                  deleteBranchApi.fire(value._id)
+                }}
+              >
+                delete
+              </span>
+            </p>
+          )
+        })}
+      </div>
+    </>
   )
 }

@@ -46,6 +46,8 @@ export const UserProvider: React.FC<{
       email: "",
       isAdmin: false,
     })
+    console.log("hello")
+    window.location.pathname = "/auth"
   }
 
   const value = {
