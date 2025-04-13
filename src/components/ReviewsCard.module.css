@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    color: black;
+    border: 2px solid #f0f2f3;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    gap: 5px;
+    margin-top: 40px;
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+/* === Car Info Section === */
+.Info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 25px;
+}
+
+.Info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+
+}
+
+.container p {
+    font-size: 23px;
+}
+
+.date {
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    font-size: 20px;
+    color: blue;
+
+
+}
