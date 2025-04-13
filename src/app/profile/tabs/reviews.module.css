@@ -1,0 +1,26 @@
+.bookings h2 {
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+.cardGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+@media (max-width: 992px) {
+    .cardGrid {
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cardGrid {
+        flex-direction: column;
+        align-items: center;
+    }
+}

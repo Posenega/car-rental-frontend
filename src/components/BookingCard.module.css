@@ -78,7 +78,7 @@
 /* === Action Buttons === */
 .buttons {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 
     margin-top: 10px;
@@ -103,4 +103,76 @@
     width: 150px;
     font-weight: bold;
     font-size: 15px;
+}
+
+/* ===== Tablet (≤ 768px) ===== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        align-items: center;
+    }
+
+    .carInfo {
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .carInfo img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    .carInfo h2 {
+        font-size: 28px;
+    }
+
+    .carInfo h3 {
+        font-size: 20px;
+    }
+
+    .sub {
+        margin-left: 0;
+        margin-top: 20px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .info {
+        font-size: 18px;
+        align-items: center;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+}
+
+/* ===== Phone (≤ 480px) ===== */
+@media (max-width: 480px) {
+    .carInfo h2 {
+        font-size: 24px;
+    }
+
+    .carInfo h3 {
+        font-size: 18px;
+    }
+
+    .info {
+        font-size: 16px;
+        gap: 10px;
+    }
+
+    .view {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .buttons a {
+        font-size: 14px;
+    }
 }

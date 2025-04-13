@@ -1,16 +1,37 @@
 import styles from "./ReviewsCard.module.css";
-import img from "../assets/lea.jpg";
-const ReviewsCard = () => {
+import { FaStar } from "react-icons/fa";
+
+type ReviewsProps = {
+  name: string;
+  image: string;
+  reviewText: string;
+  date: string;
+  rating: number; // from 1 to 5
+};
+
+const ReviewsCard = ({ name, image, reviewText, date, rating }: ReviewsProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.Info}>
-        <img src={img.src} alt="Car" />
-        <h2>Lea c.</h2>
-      </div>
-        <p>Great variety of cars and the online reservation was so easy. I just wish the prices were a bit lower.</p>
-      <div className={styles.date}>
-      <p>23/02/2025</p>
+        <img src={image} alt="Reviewer" />
+        <div>
+          <h2>{name}</h2>
+          <div className={styles.stars}>
+            {[...Array(5)].map((_, i) => (
+              <FaStar
+                key={i}
+                size={18}
+                color={i < rating ? "#FFD700" : "#ccc"} // gold if filled
+              />
+            ))}
+          </div>
         </div>
+      </div>
+
+      <p>{reviewText}</p>
+      <div className={styles.date}>
+        <p>{date}</p>
+      </div>
     </div>
   );
 };

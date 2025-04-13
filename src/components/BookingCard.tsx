@@ -1,43 +1,68 @@
 import styles from "./BookingCard.module.css";
-import img from "../assets/car.png";
 
-const BookingCard = () => {
+type BookingProps = {
+  carImage: string;
+  carModel: string;
+  carType: string;
+  totalPrice: string;
+  pickupBranch: string;
+  pickupDate: string;
+  returnBranch: string;
+  returnDate: string;
+  addons: string;
+  status: string;
+  invoiceLink: string;
+};
+
+const BookingCard = ({
+  carImage,
+  carModel,
+  carType,
+  totalPrice,
+  pickupBranch,
+  pickupDate,
+  returnBranch,
+  returnDate,
+  addons,
+  status,
+  invoiceLink,
+}: BookingProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.carInfo}>
-        <img src={img.src} alt="Car" />
-        <h2>Lexus UX 250h</h2>
-        <h3>Hybrid</h3>
+        <img src={carImage} alt="Car" />
+        <h2>{carModel}</h2>
+        <h3>{carType}</h3>
         <p>
-          <span className={styles.priceLabel}>Total Price:</span> 800$
+          <span className={styles.priceLabel}>Total Price:</span> {totalPrice}
         </p>
       </div>
 
       <div className={styles.sub}>
         <div className={styles.info}>
-          <p><strong>Pickup Branch:</strong> Beirut</p>
-          <p><strong>Pickup Date:</strong> 13/03/2025</p>
-          <p><strong>Add-ons:</strong> GPS, Child Seat</p>
-          <p><strong>Booking Status:</strong> Confirmed</p>
+          <p><strong>Pickup Branch:</strong> {pickupBranch}</p>
+          <p><strong>Pickup Date:</strong> {pickupDate}</p>
+          <p><strong>Add-ons:</strong> {addons}</p>
+          <p><strong>Booking Status:</strong> {status}</p>
         </div>
 
         <div className={styles.buttons}>
-          <a className={styles.invoice} href="#">
+          <a className={styles.invoice} href={invoiceLink} target="_blank" rel="noopener noreferrer">
             Download Invoice <span>📥</span>
           </a>
         </div>
       </div>
+
       <div className={styles.sub}>
         <div className={styles.info}>
-          <p><strong>Return Branch:</strong> Saida</p>
-          <p><strong>Return Date:</strong> 18/03/2025</p>
+          <p><strong>Return Branch:</strong> {returnBranch}</p>
+          <p><strong>Return Date:</strong> {returnDate}</p>
         </div>
 
         <div className={styles.buttons}>
           <button className={styles.view}>View Details</button>
         </div>
       </div>
-      
     </div>
   );
 };
