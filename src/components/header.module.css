@@ -1,6 +1,6 @@
 /* Main background */
 .main {
-  background-color: #2B2A2A;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
