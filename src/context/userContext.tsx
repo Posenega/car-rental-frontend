@@ -13,6 +13,7 @@ export const UserProvider: React.FC<{
     _id: "",
     userName: "",
     email: "",
+    isAdmin: false,
   })
   const [accessToken, setAccessToken] = React.useState<string | null>(
     null
@@ -23,8 +24,12 @@ export const UserProvider: React.FC<{
   }
 
   const storeAccessToken = (token: string | null) => {
-    localStorage.setItem("accessToken", token as string)
     setAccessToken(token === "" ? null : token)
+    if (token === "") {
+      localStorage.removeItem("accessToken")
+    } else {
+      localStorage.setItem("accessToken", token as string)
+    }
   }
 
   const login = (user: User, token: string) => {
@@ -39,7 +44,10 @@ export const UserProvider: React.FC<{
       _id: "",
       userName: "",
       email: "",
+      isAdmin: false,
     })
+    console.log("hello")
+    window.location.pathname = "/auth"
   }
 
   const value = {
