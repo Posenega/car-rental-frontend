@@ -1,165 +1,165 @@
 .hero {
-    background-color: #2f2f2f;
-    color: white;
-    text-align: center;
-    padding: 100px 20px 40px;
+  background-color: #2f2f2f;
+  color: white;
+  text-align: center;
+  padding: 100px 20px 40px;
 }
 
 .title {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .cars {
-    position: relative;
-    width: 100%;
-    height: 260px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 20px;
 }
 
 .car {
-    position: absolute;
-    bottom: 0;
-    max-width: 400px;
-    width: 40vw;
-    height: auto;
-    transition: all 0.3s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  max-width: 400px;
+  width: 40vw;
+  height: auto;
+  transition: all 0.3s ease-in-out;
 }
 
 .car1 {
-    left: 10%;
-    z-index: 1;
+  left: 10%;
+  z-index: 1;
 }
 
 .car2 {
-    left: 28%;
-    z-index: 2;
+  left: 28%;
+  z-index: 2;
 }
 
 .car3 {
-    left: 50%;
-    z-index: 3;
+  left: 50%;
+  z-index: 3;
 }
 
 .searchContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: nowrap;
-    padding: 0 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+  padding: 0 5vw;
 }
 
 .searchInput {
-    flex: 1;
-    padding: 10px 16px;
-    border-radius: 20px;
-    border: none;
-    max-width: 500px;
-    font-size: 16px;
-    min-width: 200px;
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  max-width: 500px;
+  font-size: 16px;
+  min-width: 200px;
 }
 
 .filterBtn {
-    padding: 10px 24px;
-    background-color: #303AA7;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    white-space: nowrap;
+  padding: 10px 24px;
+  background-color: #303aa7;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
-    .cars {
-        padding-top: 40px;
-        height: auto !important;
-        margin-bottom: 20px;
-    }
+  .cars {
+    padding-top: 40px;
+    height: auto !important;
+    margin-bottom: 20px;
+  }
 
-    .car {
-        max-width: 260px;
-        width: 50vw;
-    }
+  .car {
+    max-width: 260px;
+    width: 50vw;
+  }
 
-    .car1 {
-        left: 5%;
-    }
+  .car1 {
+    left: 5%;
+  }
 
-    .car2 {
-        left: 30%;
-    }
+  .car2 {
+    left: 30%;
+  }
 
-    .car3 {
-        left: 55%;
-    }
+  .car3 {
+    left: 55%;
+  }
 
-    .title {
-        font-size: 22px;
-    }
+  .title {
+    font-size: 22px;
+  }
 
-    .searchContainer {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        padding: 0 4vw;
-    }
+  .searchContainer {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4vw;
+  }
 
-    .searchInput {
-        width: 65%;
-        font-size: 14px;
-        padding: 8px 12px;
-    }
+  .searchInput {
+    width: 65%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
 
-    .filterBtn {
-        font-size: 14px;
-        padding: 8px 14px;
-        white-space: nowrap;
-    }
+  .filterBtn {
+    font-size: 14px;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 480px) {
-    .cars {
-        padding-top: 110px;
-    }
+  .cars {
+    padding-top: 110px;
+  }
 
-    .car {
-        max-width: 240px;
-        width: 45vw;
-    }
+  .car {
+    max-width: 240px;
+    width: 45vw;
+  }
 
-    .car1 {
-        left: 0%;
-    }
+  .car1 {
+    left: 0%;
+  }
 
-    .car2 {
-        left: 25%;
-    }
+  .car2 {
+    left: 25%;
+  }
 
-    .car3 {
-        left: 50%;
-    }
+  .car3 {
+    left: 50%;
+  }
 
-    .title {
-        font-size: 18px;
-    }
+  .title {
+    font-size: 18px;
+  }
 
-    .searchInput {
-        width: 60%;
-        font-size: 13px;
-        padding: 7px 10px;
-    }
+  .searchInput {
+    width: 60%;
+    font-size: 13px;
+    padding: 7px 10px;
+  }
 
-    .filterBtn {
-        font-size: 13px;
-        padding: 7px 12px;
-    }
+  .filterBtn {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
 }
