@@ -1,0 +1,184 @@
+.page {
+    background-color: #f2f2f2;
+    padding: 80px 7vw 40px;
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    gap: 40px;
+    max-width: 1100px;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.inlineGroup {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.nameField {
+    flex: 2;
+    min-width: 200px;
+}
+
+.halfWidth {
+    flex: 1;
+    min-width: 160px;
+}
+
+.smallField {
+    width: 100px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: inline-block;
+    color: #303aa7;
+}
+
+.input {
+    padding: 10px 12px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    font-size: 14px !important;
+}
+
+.phoneWrapper {
+    width: 100%;
+}
+
+.phoneContainer {
+    width: 100%;
+}
+
+.phoneInput {
+    padding-left: 48px !important;
+}
+
+.phoneButton {
+    border-radius: 8px 0 0 8px !important;
+}
+
+.invalid {
+    border: 2px solid red !important;
+}
+
+.errorText {
+    font-size: 12px;
+    color: red;
+    margin-top: 4px;
+}
+
+.locations {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.locations span {
+    background: #303AA7;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.reserveBtn {
+    background-color: #303AA7;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: fit-content;
+}
+
+.summaryCard {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 370px;
+    max-height: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.summaryTitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.summaryImage {
+    width: 100%;
+    max-height: 130px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.carInfo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.model {
+    color: black;
+}
+
+.badge {
+    color: #303aa7;
+    font-weight: bold;
+}
+
+.summaryGrid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 14px;
+    gap: 10px;
+    padding: 0 10px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.total {
+    font-weight: bold;
+    color: #303aa7;
+}
