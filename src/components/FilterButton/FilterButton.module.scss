@@ -1,0 +1,25 @@
+.ctn {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(48, 48, 48);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: fit-content;
+    gap: 0.8rem;
+    span {
+        font-size: 0.8rem;
+    }
+}
+
+.filled_box {
+    @extend .ctn;
+    background-color: #787e82;
+    color: white;
+    border: none;
+    font-weight: 400;
+    gap: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 60px;
+}
