@@ -2,7 +2,7 @@
 import { Roboto } from "next/font/google"
 import "./globals.css"
 import { UserContext, UserProvider } from "../context/userContext"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContextType } from "@/model/user"
 import { useApiStatus } from "@/hooks/useApiStatus"
 import { CarRentalApi } from "@/api/Api"
@@ -32,14 +32,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const [path, setPath] = useState("")
+  const [isDark, setIsDark] = useState(false)
+  useEffect(() => {
+    let path = window.location.pathname
+    setPath(path)
+    if (
+      path.includes("cars") ||
+      path.includes("about") ||
+      path === "/"
+    ) {
+      setIsDark(true)
+    }
+  }, [])
   return (
     <html lang="en">
       <UserProvider>
         <BranchProvider>
           <AuthLayer>
-            <Header />
+            {path.includes("auth") || <Header />}
             <body className={`${roboto.variable}`}>{children}</body>
-            <Footer />
+            {path.includes("auth") || <Footer />}
           </AuthLayer>
         </BranchProvider>
       </UserProvider>

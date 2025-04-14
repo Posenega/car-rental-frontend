@@ -1,18 +1,18 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import styles from "./header.module.css";
-import { MdPersonOutline } from "react-icons/md";
-import { HiOutlineShoppingCart } from "react-icons/hi";
-import { IoCarSportOutline } from "react-icons/io5";
+import React, { useState } from "react"
+import styles from "./header.module.css"
+import { MdPersonOutline } from "react-icons/md"
+import { HiOutlineShoppingCart } from "react-icons/hi"
+import { IoCarSportOutline } from "react-icons/io5"
 
 const Header = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false)
 
   return (
     <header>
       <div className={styles.page}>
-        <main className={styles.main}>
+        <div className={styles.main}>
           <header className={styles.navbar}>
             <nav className={styles.navContainer}>
               <a href="/" className={styles.icon}>
@@ -33,8 +33,7 @@ const Header = () => {
                 <div className={styles.dropdownWrapper}>
                   <div
                     className={styles.icon}
-                    onClick={() => setShowDropdown(!showDropdown)}
-                  >
+                    onClick={() => setShowDropdown(!showDropdown)}>
                     <MdPersonOutline size={24} />
                   </div>
                   {showDropdown && (
@@ -51,10 +50,10 @@ const Header = () => {
               </div>
             </nav>
           </header>
-        </main>
+        </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

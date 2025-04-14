@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./branches.module.css";
-import BranchCard from "../../components/BranchCard";
-import img from "../../assets/branch.png";
+import React from "react"
+import styles from "./branches.module.css"
+import BranchCard from "../../components/BranchCard"
+import img from "../../assets/branch.png"
 
 const branches = [
   {
@@ -20,20 +20,21 @@ const branches = [
     mapUrl: "https://maps.google.com/?q=Jounieh",
     image: img.src,
   },
-];
+]
 
 const BranchesPage = () => {
   return (
-    <div className={styles.page}>
-      <h1>Explore our Branches</h1>
-      <div className={styles.branch_container}>
-        {branches.map((branch, idx) => (
-          <BranchCard key={idx} {...branch} />
-        ))}
+    <main>
+      <div className={styles.page}>
+        <h1>Explore our Branches</h1>
+        <div className={styles.branch_container}>
+          {branches.map((branch, idx) => (
+            <BranchCard key={idx} {...branch} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
-};
+    </main>
+  )
+}
 
-export default BranchesPage;
-
+export default BranchesPage

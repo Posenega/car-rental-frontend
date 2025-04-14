@@ -1,9 +1,9 @@
 /* Main background */
 .main {
   background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  margin: auto;
+  width: 100%;
 }
 
 /* Navbar container */
@@ -36,7 +36,6 @@
   /* Creates space between linkContainer and icons */
 }
 
-
 /* Navbar links */
 .navContainer a {
   color: black;
@@ -44,12 +43,10 @@
   font-size: 18px;
   transition: 0.3s;
   margin: 0 10px;
-
 }
 
 .navContainer a:hover {
   color: gray;
-
 }
 
 /* Icons */
@@ -65,7 +62,6 @@
   background-color: black;
   width: 90%;
   margin: 5 px auto;
-
 }
 
 .dropdownWrapper {
@@ -102,7 +98,6 @@
   text-decoration: underline;
   border-radius: 0;
 }
-
 
 .rightIcons {
   position: relative;
