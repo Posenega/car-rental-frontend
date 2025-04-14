@@ -3,21 +3,18 @@
     color: white;
     text-align: center;
     padding: 100px 20px 40px;
-    /* more top space for navbar, less bottom space */
 }
 
 .title {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
-    /* reduced space */
 }
 
 .cars {
     position: relative;
     width: 100%;
     height: 260px;
-    /* reduced height */
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -28,7 +25,6 @@
     position: absolute;
     bottom: 0;
     max-width: 400px;
-    /* make cars bigger */
     width: 40vw;
     height: auto;
     transition: all 0.3s ease-in-out;
