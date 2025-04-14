@@ -1,0 +1,237 @@
+/* General */
+.wrapper {
+    padding: 60px 7vw;
+    background-color: #f2f2f2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+/* Top layout */
+.content {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Inputs */
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    background: white;
+    resize: none;
+}
+
+.inputGroup textarea {
+    height: 100px;
+}
+
+.phoneContainer {
+    width: 100%;
+}
+
+.phoneInput {
+    padding-left: 48px !important;
+    width: 100% !important;
+}
+
+.phoneButton {
+    border-radius: 10px 0 0 10px !important;
+}
+
+.sendBtn {
+    background-color: #303aa7;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    width: fit-content;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sendBtn:hover {
+    background-color: #1f2999;
+}
+
+/* MAP */
+.map {
+    flex: 1;
+    position: relative;
+    min-width: 320px;
+}
+
+.mapImage {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.pin {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #303aa7;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Reach out section */
+.reachOut {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.reachBtn {
+    border: 1px solid #303aa7;
+    color: #303aa7;
+    font-weight: 600;
+    background: transparent;
+    padding: 6px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.subheading {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+/* Contact options layout */
+.contactOptions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.option {
+    flex: 1;
+    max-width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.optionIcon {
+    font-size: 32px;
+    color: #303aa7;
+}
+
+.option p {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.option span {
+    font-size: 14px;
+    color: #444;
+}
+
+.option a {
+    color: #303aa7;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+@media (max-width: 992px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left,
+    .map {
+        width: 100%;
+    }
+
+    .map {
+        margin-top: 20px;
+    }
+
+    .contactOptions {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .option {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        padding: 40px 5vw;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .subheading {
+        font-size: 20px;
+    }
+
+    .inputGroup input,
+    .inputGroup textarea {
+        font-size: 13px;
+    }
+
+    .optionIcon {
+        font-size: 28px;
+    }
+
+    .option p {
+        font-size: 15px;
+    }
+
+    .option span,
+    .option a {
+        font-size: 13px;
+    }
+
+    .sendBtn,
+    .reachBtn {
+        font-size: 14px;
+        padding: 8px 18px;
+    }
+}
