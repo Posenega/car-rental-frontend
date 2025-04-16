@@ -1,32 +1,28 @@
-import axios, { Axios, AxiosResponse } from "axios"
+import axios, { Axios, AxiosResponse } from "axios";
 import {
   AuthResponse,
   UserLoginParams,
   UserRegisterParams,
-} from "./models/ApiUser"
-import { User } from "@/model/user"
-import { BranchesReponse, BranchParams } from "./models/ApiBranch"
-import { Car } from "./models/ApiCar"
+} from "./models/ApiUser";
+import { User } from "@/model/user";
+import { BranchesReponse, BranchParams } from "./models/ApiBranch";
+import { Car, CarFilters } from "./models/ApiCar";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
-})
+});
 
 export const CarRentalApi = {
   instance: api,
   user: {
-    login: (
-      body: UserLoginParams
-    ): Promise<AxiosResponse<AuthResponse>> =>
+    login: (body: UserLoginParams): Promise<AxiosResponse<AuthResponse>> =>
       api.post("/users/login", body),
     register: (
       body: UserRegisterParams
     ): Promise<AxiosResponse<AuthResponse>> =>
       api.post("/users/register", body),
-    getUserInfo: (
-      token: string
-    ): Promise<AxiosResponse<{ user: User }>> =>
+    getUserInfo: (token: string): Promise<AxiosResponse<{ user: User }>> =>
       api.get("/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -46,24 +42,20 @@ export const CarRentalApi = {
       api.put("/users/uploadProfileImage", body),
   },
   branch: {
-    create: (
-      body: FormData
-    ): Promise<AxiosResponse<{ message: string }>> =>
+    create: (body: FormData): Promise<AxiosResponse<{ message: string }>> =>
       api.post("/branch/create", body),
     getAll: (): Promise<AxiosResponse<BranchesReponse>> =>
       api.get("/branch/getAll"),
-    delete: (
-      id: string
-    ): Promise<AxiosResponse<{ message: string }>> =>
+    delete: (id: string): Promise<AxiosResponse<{ message: string }>> =>
       api.delete(`/branch/delete/${id}`),
   },
   car: {
-    create: (
-      body: FormData
-    ): Promise<AxiosResponse<{ message: string }>> =>
+    create: (body: FormData): Promise<AxiosResponse<{ message: string }>> =>
       api.post("/car/create", body),
-    getAll: (): Promise<
-      AxiosResponse<{ cars: Car[]; message: string }>
-    > => api.get("/car/"),
+    getAll: (): Promise<AxiosResponse<{ cars: Car[]; message: string }>> =>
+      api.get("/car/"),
+    filter: (params: CarFilters): Promise<AxiosResponse<{ cars: Car[] }>> => {
+      return api.get("/car/filtered", { params });
+    },
   },
-}
+};

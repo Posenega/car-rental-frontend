@@ -1,26 +1,36 @@
-import React, { useState } from "react"
-import styles from "./FilterBar.module.scss"
-import Arrow from "@/icons/Arrow"
-import Suv from "@/icons/Suv"
-import Electric from "@/icons/Electric"
-import Convertible from "@/icons/Convertible"
-import Eco from "@/icons/Eco"
-import Sedan from "@/icons/Sedan"
-import Bus from "@/icons/Bus"
-import Check from "@/icons/Check"
-import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider"
-import ReactSwitch from "react-switch"
+import React, { useState } from "react";
+import styles from "./FilterBar.module.scss";
+import Arrow from "@/icons/Arrow";
+import Suv from "@/icons/Suv";
+import Electric from "@/icons/Electric";
+import Convertible from "@/icons/Convertible";
+import Eco from "@/icons/Eco";
+import Sedan from "@/icons/Sedan";
+import Bus from "@/icons/Bus";
+import Check from "@/icons/Check";
+import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider";
+import ReactSwitch from "react-switch";
+import { CarFilters } from "@/api/models/ApiCar";
 
-export default function FilterBar() {
-  const [min, setMin] = useState<number>(250)
-  const [max, setMax] = useState<number>(10000)
-  const [nbDoors, setNbDoors] = useState<number>(2)
-  const [nbPassengers, setNbPassengers] = useState<number>(2)
-  const [fuelType, setFuelType] = useState<string>("Gasoline")
-  const [gearboxType, setGearboxType] = useState<string>("Automatic")
-  const [ac, setAc] = useState<boolean>(false)
-  const [electricWindows, setElectricWindows] =
-    useState<boolean>(false)
+export default function FilterBar({
+  onApplyFilters,
+}: {
+  onApplyFilters: (filters: CarFilters) => void;
+}) {
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [min, setMin] = useState<number>(250);
+  const [max, setMax] = useState<number>(10000);
+  const [price, setPrice] = useState<{ min: number; max: number }>({
+    min: 0,
+    max: 250,
+  });
+  const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+  const [nbDoors, setNbDoors] = useState<number>(2);
+  const [selectedPassengers, setSelectedPassengers] = useState<number>(2);
+  const [fuelType, setFuelType] = useState<string>("");
+  const [gearboxType, setGearboxType] = useState<string>("");
+  const [ac, setAc] = useState<boolean>(false);
+  const [electricWindows, setElectricWindows] = useState<boolean>(false);
   return (
     <div className={styles.filter_ctn}>
       <div className={styles.filter_head}>
@@ -33,37 +43,30 @@ export default function FilterBar() {
           <Arrow size={15} />
         </div>
         <div className={styles.filter_car_cat_list}>
-          <div className={styles.filter_car_cat}>
-            <Suv />
-            SUV
-          </div>
-          <div className={styles.filter_car_cat}>
-            <Electric />
-            Electric
-          </div>
-          <div
-            className={styles.filter_car_cat + " " + styles.selected}
-          >
-            <Convertible />
-            Convertible
-            <div>
-              <div className={styles.border}>
-                <Check />
-              </div>
+          {[
+            { label: "SUV", Icon: Suv },
+            { label: "Electric", Icon: Electric },
+            { label: "Convertible", Icon: Convertible },
+            { label: "Hybrid", Icon: Eco },
+            { label: "Sedan", Icon: Sedan },
+            { label: "Bus", Icon: Bus },
+          ].map(({ label, Icon }) => (
+            <div
+              key={label}
+              className={`${styles.filter_car_cat} ${
+                selectedCategory === label ? styles.selected : ""
+              }`}
+              onClick={() => setSelectedCategory(label)}
+            >
+              <Icon />
+              {label}
+              {selectedCategory === label && (
+                <div className={styles.border}>
+                  <Check />
+                </div>
+              )}
             </div>
-          </div>
-          <div className={styles.filter_car_cat}>
-            <Eco />
-            Hybrid
-          </div>
-          <div className={styles.filter_car_cat}>
-            <Sedan />
-            Sedan
-          </div>
-          <div className={styles.filter_car_cat}>
-            <Bus />
-            Bus
-          </div>
+          ))}
         </div>
       </div>
       <div className={styles.filter_car_price_ctn}>
@@ -73,20 +76,51 @@ export default function FilterBar() {
         </div>
         <div>
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={selectedPrice === "0-50"}
+              onChange={() => {
+                setSelectedPrice("0-50");
+                setPrice({ min: 0, max: 50 });
+              }}
+            />
             <span>$0 - $50</span>
           </div>
+
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={selectedPrice === "50-150"}
+              onChange={() => {
+                setSelectedPrice("50-150");
+                setPrice({ min: 50, max: 150 });
+              }}
+            />
             <span>$50 - $150</span>
           </div>
+
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={selectedPrice === "150-250"}
+              onChange={() => {
+                setSelectedPrice("150-250");
+                setPrice({ min: 150, max: 250 });
+              }}
+            />
             <span>$150 - $250</span>
           </div>
+
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
-            <span>$250</span>
+            <input
+              type="checkbox"
+              checked={selectedPrice === "250+"}
+              onChange={() => {
+                setSelectedPrice("250+");
+                setPrice({ min: 250, max: 100000 });
+              }}
+            />
+            <span>$250+</span>
           </div>
         </div>
       </div>
@@ -100,8 +134,8 @@ export default function FilterBar() {
             min={1000}
             max={100000}
             onChange={({ min, max }) => {
-              setMin(min)
-              setMax(max)
+              setMin(min);
+              setMax(max);
             }}
           />
           <div className={styles.filter_engine_range}>
@@ -124,7 +158,7 @@ export default function FilterBar() {
         <div className={styles.filter_car_doors_stepper}>
           <span
             onClick={() => {
-              if (nbDoors > 2) setNbDoors(nbDoors - 1)
+              if (nbDoors > 2) setNbDoors(nbDoors - 1);
             }}
           >
             -
@@ -132,7 +166,7 @@ export default function FilterBar() {
           <div>{nbDoors}</div>
           <span
             onClick={() => {
-              if (nbDoors < 5) setNbDoors(nbDoors + 1)
+              if (nbDoors < 5) setNbDoors(nbDoors + 1);
             }}
           >
             +
@@ -145,11 +179,37 @@ export default function FilterBar() {
           <Arrow size={15} />
         </div>
         <div className={styles.filter_car_passenger_ctn_list}>
-          <div className={styles.selected}>2</div>
-          <div>4</div>
-          <div>5</div>
-          <div>7</div>
-          <div>9+</div>
+          <div
+            className={`${selectedPassengers === 2 ? styles.selected : ""}`}
+            onClick={() => setSelectedPassengers(2)}
+          >
+            2
+          </div>
+
+          <div
+            className={`${selectedPassengers === 4 ? styles.selected : ""}`}
+            onClick={() => setSelectedPassengers(4)}
+          >
+            4
+          </div>
+          <div
+            className={`${selectedPassengers === 5 ? styles.selected : ""}`}
+            onClick={() => setSelectedPassengers(5)}
+          >
+            5
+          </div>
+          <div
+            className={`${selectedPassengers === 7 ? styles.selected : ""}`}
+            onClick={() => setSelectedPassengers(7)}
+          >
+            7
+          </div>
+          <div
+            className={`${selectedPassengers === 9 ? styles.selected : ""}`}
+            onClick={() => setSelectedPassengers(9)}
+          >
+            9+
+          </div>
         </div>
       </div>
       <div className={styles.filter_car_fuel_ctn}>
@@ -159,19 +219,38 @@ export default function FilterBar() {
         </div>
         <div>
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={fuelType === "Gasoline"}
+              onChange={() => setFuelType("Gasoline")}
+            />
             <span>Gasoline</span>
           </div>
+
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={fuelType === "Diesel"}
+              onChange={() => setFuelType("Diesel")}
+            />
             <span>Diesel</span>
           </div>
+
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={fuelType === "Hybrid"}
+              onChange={() => setFuelType("Hybrid")}
+            />
             <span>Hybrid</span>
           </div>
+
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={fuelType === "Electric"}
+              onChange={() => setFuelType("Electric")}
+            />
             <span>Electric</span>
           </div>
         </div>
@@ -183,11 +262,20 @@ export default function FilterBar() {
         </div>
         <div>
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={gearboxType === "Automatic"}
+              onChange={() => setGearboxType("Automatic")}
+            />
             <span>Automatic</span>
           </div>
+
           <div className={styles.filter_car_price}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={gearboxType === "Manual"}
+              onChange={() => setGearboxType("Manual")}
+            />
             <span>Manual</span>
           </div>
         </div>
@@ -200,7 +288,7 @@ export default function FilterBar() {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <ReactSwitch
             onChange={() => {
-              setAc(!ac)
+              setAc(!ac);
             }}
             checked={ac}
             offColor="#ccc"
@@ -225,7 +313,7 @@ export default function FilterBar() {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <ReactSwitch
             onChange={() => {
-              setElectricWindows(!electricWindows)
+              setElectricWindows(!electricWindows);
             }}
             checked={electricWindows}
             offColor="#ccc"
@@ -242,7 +330,30 @@ export default function FilterBar() {
           />
         </div>
       </div>
+      <div className={styles.floating_button_wrapper}>
+        <button
+          className={styles.floating_button}
+          onClick={() => {
+            onApplyFilters({
+              type: selectedCategory,
+              minPrice: price.min,
+              maxPrice: price.max,
+              minEngineSize: min,
+              maxEngineSize: max,
+              numberOfDoors: nbDoors,
+              numberOfPassengers: selectedPassengers,
+              fuelType,
+              gearboxType,
+              ac,
+              electricWindows,
+            });
+          }}
+        >
+          Apply All
+        </button>
+      </div>
+
       <div></div>
     </div>
-  )
+  );
 }

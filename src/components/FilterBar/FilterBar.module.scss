@@ -26,6 +26,7 @@
       }
     }
   }
+
   .filter_head {
     @extend .filter_box;
     display: flex;
@@ -44,6 +45,7 @@
       text-transform: uppercase;
     }
   }
+
   .filter_car_cat_ctn {
     @extend .filter_box;
 
@@ -97,6 +99,7 @@
       }
     }
   }
+
   .filter_car_price_ctn {
     @extend .filter_box;
     .filter_car_price {
@@ -110,6 +113,7 @@
       font-size: 0.8rem;
     }
   }
+
   .filter_car_engine_ctn {
     @extend .filter_box;
     .filter_engine_range {
@@ -136,12 +140,14 @@
       }
     }
   }
+
   .nb_box {
     border-radius: 30px;
     padding: 0.1rem 1rem;
     font-size: 0.8rem;
     background-color: #161616;
   }
+
   .filter_car_doors_ctn {
     @extend .filter_box;
     .filter_car_doors_stepper {
@@ -160,6 +166,7 @@
       }
     }
   }
+
   .filter_car_passengers_ctn {
     @extend .filter_box;
     .filter_car_passenger_ctn_list {
@@ -176,8 +183,33 @@
       }
     }
   }
+
   .filter_car_fuel_ctn,
   .filter_car_box_ctn {
     @extend .filter_car_price_ctn;
+  }
+
+  .floating_button_wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; 
+    z-index: 100;
+  }
+
+  .floating_button {
+    background-color: #303aa7;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.2s ease;
+  }
+
+  .floating_button:hover {
+    background-color: #1f289e;
   }
 }
