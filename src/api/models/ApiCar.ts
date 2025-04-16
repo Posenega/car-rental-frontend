@@ -30,6 +30,7 @@ export interface ICar {
   branch: string
   insurancePrice: IInsurancePrice
   servicesPrice: IServicesPrice
+  type: string
 }
 
 // Optional: A default car object to initialize forms or state
@@ -49,6 +50,7 @@ export const defaultCar: ICar = {
   carDescription: "",
   tankPrice: 0,
   branch: "",
+  type: "",
   insurancePrice: {
     full: 0,
     tiresAndWindscreen: 0,
@@ -81,6 +83,7 @@ export class Car implements ICar {
   branch: string
   insurancePrice: IInsurancePrice
   servicesPrice: IServicesPrice
+  type: string
 
   constructor(data: ICar = defaultCar) {
     this.carName = data.carName
@@ -100,5 +103,6 @@ export class Car implements ICar {
     this.branch = data.branch
     this.insurancePrice = data.insurancePrice
     this.servicesPrice = data.servicesPrice
+    this.type = data.type
   }
 }

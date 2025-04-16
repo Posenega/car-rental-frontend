@@ -29,6 +29,7 @@ export interface ICar {
   branch: string
   insurancePrice: InsurancePrice
   servicesPrice: ServicesPrice
+  type: string
 }
 
 export class Car implements ICar {
@@ -49,6 +50,7 @@ export class Car implements ICar {
   branch: string
   insurancePrice: InsurancePrice
   servicesPrice: ServicesPrice
+  type: string
   constructor(car: ICar) {
     this.carName = car.carName
     this.carYear = car.carYear
@@ -67,14 +69,8 @@ export class Car implements ICar {
     this.branch = car.branch
     this.insurancePrice = car.insurancePrice
     this.servicesPrice = car.servicesPrice
+    this.type = car.type
   }
-}
-
-export type CarContextType = {
-  car: Car | undefined
-  cars: Car[]
-  storeCar: (car: Car) => void
-  storeCars: (cars: Car[]) => void
 }
 
 export const carFormObject = {
@@ -84,7 +80,7 @@ export const carFormObject = {
   engineRange: "",
   fuelType: "",
   transmission: "",
-  passenegerCapacity: "",
+  passengerCapacity: "", // corrected spelling
   numberOfDoors: "",
   AirConditioning: "",
   electricWindows: "",
@@ -104,4 +100,11 @@ export const carFormObject = {
     sateliteNavigation: 0,
     gps: 0,
   },
+}
+
+export type CarContextType = {
+  car: Car | undefined
+  cars: Car[]
+  storeCar: (car: any) => void
+  storeCars: (cars: Car[]) => void
 }

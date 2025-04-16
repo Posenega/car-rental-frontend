@@ -1,182 +1,183 @@
 .filter_ctn {
-    display: flex;
-    flex-direction: column;
-    width: 275px;
-    border: 2px solid rgb(80, 80, 80);
-    border-left: 0;
-    .filter_box {
-        height: fit-content;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 1rem;
-        border-bottom: 2px solid rgb(80, 80, 80);
-        > div:nth-child(1) {
-            font-size: 1rem;
-            color: white;
-            font-weight: 700;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            > svg {
-                cursor: pointer;
-            }
-        }
+  display: flex;
+  flex-direction: column;
+  width: 275px;
+  border: 2px solid rgb(80, 80, 80);
+  border-left: 0;
+
+  .filter_box {
+    height: fit-content;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-bottom: 2px solid rgb(80, 80, 80);
+    > div:nth-child(1) {
+      font-size: 1rem;
+      color: white;
+      font-weight: 700;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      > svg {
+        cursor: pointer;
+      }
     }
-    .filter_head {
-        @extend .filter_box;
+  }
+  .filter_head {
+    @extend .filter_box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    span:nth-child(1) {
+      font-size: 2rem;
+      color: white;
+      font-weight: 700;
+    }
+    span:nth-child(2) {
+      font-size: 0.8rem;
+      color: rgb(179, 179, 179);
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+  }
+  .filter_car_cat_ctn {
+    @extend .filter_box;
+
+    .filter_car_cat_list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .filter_car_cat {
+        svg {
+          width: 30px;
+          fill: white !important;
+          height: 30px;
+          path {
+            fill: white !important;
+          }
+        }
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        gap: 0.7rem;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        color: white;
+        font-weight: 300;
         align-items: center;
+        padding: 0.2rem 0;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          background-color: #303aa74f;
+          border-radius: 5px;
+        }
+      }
+      .selected {
+        background-color: #303aa74f;
+        width: 100%;
+        border-radius: 5px;
+        .border {
+          border: 1px solid white;
+          border-radius: 60px;
+          height: 18px;
+          width: 18px;
+          > svg {
+            width: inherit;
+            height: inherit;
+            fill: white !important;
+            path {
+              fill: white !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .filter_car_price_ctn {
+    @extend .filter_box;
+    .filter_car_price {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 0.2rem;
+      gap: 0.5rem;
+      color: white;
+      font-weight: 300;
+      font-size: 0.8rem;
+    }
+  }
+  .filter_car_engine_ctn {
+    @extend .filter_box;
+    .filter_engine_range {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .filter_engine_range_box {
+        display: flex;
+        flex-direction: column;
+        border-radius: 4px;
+        border: 2px solid rgb(162, 162, 162);
+        padding: 0.1rem 0.4rem;
+        width: 40%;
+        gap: 0.2rem;
         span:nth-child(1) {
-            font-size: 2rem;
-            color: white;
-            font-weight: 700;
+          font-size: 0.7rem;
+          color: rgb(162, 162, 162);
         }
         span:nth-child(2) {
-            font-size: 0.8rem;
-            color: rgb(179, 179, 179);
-            font-weight: 300;
-            text-transform: uppercase;
+          font-size: 0.8rem;
+          color: white;
+          font-weight: 700;
         }
+      }
     }
-    .filter_car_cat_ctn {
-        @extend .filter_box;
-
-        .filter_car_cat_list {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            .filter_car_cat {
-                svg {
-                    width: 30px;
-                    fill: white !important;
-                    height: 30px;
-                    path {
-                        fill: white !important;
-                    }
-                }
-                display: flex;
-                flex-direction: row;
-                gap: 0.7rem;
-                font-size: 0.8rem;
-                letter-spacing: 1px;
-                color: white;
-                font-weight: 300;
-                align-items: center;
-                padding: 0.2rem 0;
-                transition: all 0.3s ease-in-out;
-                cursor: pointer;
-                &:hover {
-                    background-color: #303aa74f;
-                    border-radius: 5px;
-                }
-            }
-            .selected {
-                background-color: #303aa74f;
-                width: 100%;
-                border-radius: 5px;
-                .border {
-                    border: 1px solid white;
-                    border-radius: 60px;
-                    height: 18px;
-                    width: 18px;
-                    > svg {
-                        width: inherit;
-                        height: inherit;
-                        fill: white !important;
-                        path {
-                            fill: white !important;
-                        }
-                    }
-                }
-            }
-        }
+  }
+  .nb_box {
+    border-radius: 30px;
+    padding: 0.1rem 1rem;
+    font-size: 0.8rem;
+    background-color: #161616;
+  }
+  .filter_car_doors_ctn {
+    @extend .filter_box;
+    .filter_car_doors_stepper {
+      display: flex;
+      color: white;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 1.2rem;
+      user-select: none;
+      span {
+        cursor: pointer;
+      }
+      > div {
+        @extend .nb_box;
+      }
     }
-    .filter_car_price_ctn {
-        @extend .filter_box;
-        .filter_car_price {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin-bottom: 0.2rem;
-            gap: 0.5rem;
-            color: white;
-            font-weight: 300;
-            font-size: 0.8rem;
-        }
+  }
+  .filter_car_passengers_ctn {
+    @extend .filter_box;
+    .filter_car_passenger_ctn_list {
+      display: flex;
+      justify-content: space-between;
+      user-select: none;
+      .selected {
+        background-color: #303aa7;
+      }
+      > div {
+        @extend .nb_box;
+        color: white;
+        cursor: pointer;
+      }
     }
-    .filter_car_engine_ctn {
-        @extend .filter_box;
-        .filter_engine_range {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            .filter_engine_range_box {
-                display: flex;
-                flex-direction: column;
-                border-radius: 4px;
-                border: 2px solid rgb(162, 162, 162);
-                padding: 0.1rem 0.4rem;
-                width: 40%;
-                gap: 0.2rem;
-                span:nth-child(1) {
-                    font-size: 0.7rem;
-                    color: rgb(162, 162, 162);
-                }
-                span:nth-child(2) {
-                    font-size: 0.8rem;
-                    color: white;
-                    font-weight: 700;
-                }
-            }
-        }
-    }
-    .nb_box {
-        border-radius: 30px;
-        padding: 0.1rem 1rem;
-        font-size: 0.8rem;
-        background-color: #161616;
-    }
-    .filter_car_doors_ctn {
-        @extend .filter_box;
-        .filter_car_doors_stepper {
-            display: flex;
-            color: white;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
-            font-size: 1.2rem;
-            user-select: none;
-            span {
-                cursor: pointer;
-            }
-            > div {
-                @extend .nb_box;
-            }
-        }
-    }
-    .filter_car_passengers_ctn {
-        @extend .filter_box;
-        .filter_car_passenger_ctn_list {
-            display: flex;
-            justify-content: space-between;
-            user-select: none;
-            .selected {
-                background-color: #303aa7;
-            }
-            > div {
-                @extend .nb_box;
-                color: white;
-                cursor: pointer;
-            }
-        }
-    }
-    .filter_car_fuel_ctn,
-    .filter_car_box_ctn {
-        @extend .filter_car_price_ctn;
-    }
+  }
+  .filter_car_fuel_ctn,
+  .filter_car_box_ctn {
+    @extend .filter_car_price_ctn;
+  }
 }
