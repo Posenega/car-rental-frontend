@@ -65,5 +65,9 @@ export const CarRentalApi = {
     getAll: (): Promise<
       AxiosResponse<{ cars: Car[]; message: string }>
     > => api.get("/car/"),
+    getCategory: (
+      params: string
+    ): Promise<AxiosResponse<{ cars: Car[]; message: string }>> =>
+      api.get(`/car/category/${params}`),
   },
 }
