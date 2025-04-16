@@ -40,6 +40,10 @@ export const CarRentalApi = {
       api.delete("/users/signout", {
         withCredentials: true,
       }),
+    uploadProfileImage: (
+      body: FormData
+    ): Promise<AxiosResponse<{ message: string }>> =>
+      api.put("/users/uploadProfileImage", body),
   },
   branch: {
     create: (

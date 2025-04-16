@@ -1,174 +1,173 @@
 .page {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    color: black;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  color: black;
 }
 
 .main {
-    padding-left: 40px;
+  padding-left: 40px;
 }
 
 .title {
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 20px;
-
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 20px;
 }
 
 .title p {
-    font-size: 25px;
-    margin-left: 20px;
+  font-size: 25px;
+  margin-left: 20px;
 }
 
 .container {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 350px;
-    margin-bottom: 30px;
-
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 350px;
+  margin-bottom: 30px;
 }
 
 .info img {
-    height: 170px;
-    width: 170px;
-    border-radius: 100%;
-    padding: 10px;
-
+  height: 170px;
+  width: 170px;
+  border-radius: 100%;
+  padding: 10px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.info > input {
+  display: none;
 }
 
 .container p {
-    margin-top: 10px;
-    font-size: 20px;
+  margin-top: 10px;
+  font-size: 20px;
 }
 
-
 .points {
-    color: #303AA7;
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 5px;
-    align-items: center;
-    margin-top: 10px;
+  color: #303aa7;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .points p {
-    font-size: 20px;
-    margin-top: 0px;
+  font-size: 20px;
+  margin-top: 0px;
 }
 
 .info {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 20px;
-    align-items: center;
-
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  align-items: center;
 }
 
 .anchors {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .anchors a {
-    padding-right: 100px;
+  padding-right: 100px;
 }
 
 .page nav {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-    font-size: large;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  font-size: large;
+  margin-bottom: 10px;
 }
 
 .page nav a:hover {
-    color: #303AA7;
-    font-weight: 500;
-    cursor: pointer;
-
+  color: #303aa7;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .bookings {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .bookings h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
+  font-size: 30px;
+  margin-bottom: 20px;
 }
 
 /* ========== Tablet (≤ 768px) ========== */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        gap: 30px;
-        padding: 20px;
-    }
+  .container {
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+  }
 
-    .info {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+  .info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
-    .info img {
-        width: 140px;
-        height: 140px;
-    }
+  .info img {
+    width: 140px;
+    height: 140px;
+  }
 
-    .anchors {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-    }
+  .anchors {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
 
-    .tabNav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-    }
+  .tabNav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
 
-    .points {
-        justify-content: center;
-    }
+  .points {
+    justify-content: center;
+  }
 
-    .main {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
-    .page h1 {
-        font-size: 26px;
-    }
+  .page h1 {
+    font-size: 26px;
+  }
 
-    .tabNav a {
-        font-size: 14px;
-    }
+  .tabNav a {
+    font-size: 14px;
+  }
 }
 
 /* ========== Phone (≤ 480px) ========== */
 @media (max-width: 480px) {
-    .info img {
-        width: 120px;
-        height: 120px;
-    }
+  .info img {
+    width: 120px;
+    height: 120px;
+  }
 
-    .points p {
-        font-size: 16px;
-    }
+  .points p {
+    font-size: 16px;
+  }
 
-    .page h1 {
-        font-size: 22px;
-    }
+  .page h1 {
+    font-size: 22px;
+  }
 
-    .tabNav a {
-        font-size: 13px;
-        padding: 5px;
-    }
+  .tabNav a {
+    font-size: 13px;
+    padding: 5px;
+  }
 
-    .main {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+  .main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }

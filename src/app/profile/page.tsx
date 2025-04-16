@@ -1,23 +1,28 @@
 "use client"
-import React from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import styles from "./profile.module.css"
 import { useSearchParams, useRouter } from "next/navigation"
 import { FaCarRear } from "react-icons/fa6"
 import { MdStars } from "react-icons/md"
 import { BsBoxArrowRight } from "react-icons/bs"
-import img from "../../assets/lea.jpg"
+import placeholder from "../../assets/placeholder.jpg"
+import { UserContext } from "@/context/userContext"
 
 // Import each tab component
 import BookingsTab from "./tabs/Bookings"
 import InvoicesTab from "./tabs/Invoices"
 import ReservationTab from "./tabs/Reservations"
 import ReviewsTab from "./tabs/Reviews"
+import { UserContextType } from "@/model/user"
+import { useApiStatus } from "@/hooks/useApiStatus"
+import { CarRentalApi } from "@/api/Api"
 
 type ProfileProps = {
   name: string
   email: string
   image: string
   points: number
+  id: string
 }
 
 const ProfilePage = ({
@@ -25,10 +30,45 @@ const ProfilePage = ({
   email,
   image,
   points,
+  id,
 }: ProfileProps) => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const tab = searchParams.get("tab") || "bookings"
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [imageFile, setImageFile] = useState<string | null>(null)
+
+  const handleImageClick = () => {
+    inputRef.current?.click()
+  }
+
+  const uploadImageProfile = useApiStatus({
+    api: CarRentalApi.user.uploadProfileImage,
+    onSuccess({ result }) {
+      console.log(result)
+    },
+    onFail({ message }) {
+      console.error("Error uploading image:", message)
+    },
+  })
+
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setImageFile(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+      const formData = new FormData()
+      formData.append("mypathtofolder", "userImage")
+      formData.append("image", file)
+      formData.append("userId", id)
+      uploadImageProfile.fire(formData)
+    }
+  }
 
   const renderTabPage = () => {
     switch (tab) {
@@ -49,6 +89,11 @@ const ProfilePage = ({
     router.push(`?tab=${tabName}`)
   }
 
+  if (image) {
+    image = process.env.NEXT_PUBLIC_BASE_URL + image
+  }
+  console.log(image)
+
   return (
     <main className={styles.main}>
       <div className={styles.page}>
@@ -59,7 +104,16 @@ const ProfilePage = ({
 
         <div className={styles.container}>
           <div className={styles.info}>
-            <img src={image} alt="Profile" />
+            <input
+              type="file"
+              ref={inputRef}
+              onChange={handleFileChange}
+            />
+            <img
+              onClick={handleImageClick}
+              src={imageFile || image || placeholder.src}
+              alt="Profile"
+            />
             <div>
               <h1>{name}</h1>
               <p>{email}</p>
@@ -70,8 +124,6 @@ const ProfilePage = ({
             </div>
           </div>
           <nav className={styles.anchors}>
-            <a>Edit profile</a>
-            <a>Change password</a>
             <a>
               <BsBoxArrowRight size={20} />
             </a>
@@ -94,12 +146,28 @@ const ProfilePage = ({
   )
 }
 export default function Page() {
-  return (
-    <ProfilePage
-      name="Lea Chadraoui"
-      email="leachad@gmail.com"
-      image={img.src}
-      points={2450}
-    />
-  )
+  const { user, access } = useContext(UserContext) as UserContextType
+
+  useEffect(() => {
+    if (access === "SIGNED_OUT") {
+      window.location.pathname = "/auth"
+    }
+  }, [access])
+
+  if (access === "WAIT") {
+    return (
+      <main style={{ textAlign: "center", height: "100vh" }}>
+        Loading...
+      </main>
+    )
+  } else
+    return (
+      <ProfilePage
+        name={user.userName}
+        email={user.email}
+        image={user.image}
+        points={user.points}
+        id={user._id}
+      />
+    )
 }

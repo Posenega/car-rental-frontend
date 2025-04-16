@@ -61,7 +61,7 @@ export default function RootLayout({
 }
 
 function AuthLayer({ children }: { children: React.ReactNode }) {
-  const { storeAccessToken, storeUser } = useContext(
+  const { storeAccessToken, storeUser, setAccess } = useContext(
     UserContext
   ) as UserContextType
 
@@ -71,11 +71,15 @@ function AuthLayer({ children }: { children: React.ReactNode }) {
       if (window.location.pathname.includes("auth")) {
         window.location.pathname = "/"
       }
+      setAccess("LOGGED_IN")
       storeUser(result.user)
     },
     onFail({ message }) {
       if (message === "jwt expired") {
         refreshToken.fire()
+        setAccess("WAIT")
+      } else {
+        setAccess("WAIT")
       }
     },
   })
@@ -89,9 +93,7 @@ function AuthLayer({ children }: { children: React.ReactNode }) {
       CarRentalApi.user.signout()
       storeAccessToken("")
       console.log(message)
-      // if (window.location.pathname !== "/auth") {
-      //   window.location.pathname = "/auth"
-      // }
+      setAccess("SIGNED_OUT")
     },
   })
 

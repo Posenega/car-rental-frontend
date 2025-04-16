@@ -14,7 +14,10 @@ export const UserProvider: React.FC<{
     userName: "",
     email: "",
     isAdmin: false,
+    points: 0,
+    image: "",
   })
+  const [access, setAccess] = React.useState<string>("WAIT")
   const [accessToken, setAccessToken] = React.useState<string | null>(
     null
   )
@@ -45,8 +48,9 @@ export const UserProvider: React.FC<{
       userName: "",
       email: "",
       isAdmin: false,
+      points: 0,
+      image: "",
     })
-    console.log("hello")
     window.location.pathname = "/auth"
   }
 
@@ -57,6 +61,8 @@ export const UserProvider: React.FC<{
     storeAccessToken,
     accessToken,
     signout,
+    access,
+    setAccess,
   }
 
   return (

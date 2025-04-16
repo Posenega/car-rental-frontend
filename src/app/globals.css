@@ -10,11 +10,6 @@ body {
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-  }
-}
-
 html,
 body {
   user-select: none;
