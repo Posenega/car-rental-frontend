@@ -1,0 +1,132 @@
+.testimonialsSection {
+    padding: 60px 7vw;
+}
+
+.testimonialsHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.testimonialsTitle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.testimonialsSeeMore {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.testimonialsSeeMore .line {
+    margin-left: 10px;
+    width: 50px;
+    height: 2px;
+    background-color: #303AA7;
+}
+
+.testimonialsSeeMore a {
+    color: #303AA7;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.testimonialsCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.testimonialCard {
+    width: 31%;
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Responsive Breakpoints */
+
+@media (max-width: 992px) {
+    .testimonialCard {
+        width: 48%;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonialsHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .testimonialCard {
+        width: 100%;
+    }
+}
+
+.testimonialsTitle {
+    font-size: 20px;
+}
+
+.testimonialTop {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.testimonialTop img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonialInfo {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.testimonialInfo h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.stars {
+    display: flex;
+    gap: 3px;
+    margin-top: 5px;
+}
+
+.starIcon {
+    color: #FFD700;
+    font-size: 18px;
+}
+
+.testimonialText {
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.testimonialDate {
+    font-size: 14px;
+    color: #303AA7;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.testimonialsSeeMore .line {
+    margin-left: 0;
+}

@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    width: 95%;
+    background-color: white;
+    color: black;
+    justify-content: space-between;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 30px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 25px;
+}
+
+.info h2 {
+    margin: 0px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 70px;
+}
+
+.buttons a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #303aa7;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.buttons a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Tablet (≤ 768px) ===== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 20px;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .info {
+        margin-bottom: 0;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        margin: 0;
+        gap: 15px;
+        font-size: 16px;
+    }
+
+    .buttons a {
+        font-size: 16px;
+    }
+}
+
+/* ===== Phone (≤ 480px) ===== */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    .buttons {
+        gap: 10px;
+        font-size: 14px;
+    }
+
+    .buttons a {
+        font-size: 14px;
+    }
+
+    .info h2 {
+        font-size: 20px;
+    }
+}

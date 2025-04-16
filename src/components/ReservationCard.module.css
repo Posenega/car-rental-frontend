@@ -1,0 +1,251 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 60px;
+    height: 500px;
+    width: 90%;
+    background-color: white;
+    color: black;
+    border: 2px solid #f0f2f3;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 40px;
+    box-sizing: border-box;
+
+
+}
+
+.anyth {
+    display: flex;
+    flex-direction: column;
+}
+
+.modify {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    gap: 30px;
+    color: blue;
+    margin-right: 80px;
+}
+
+/* === Car Info Section === */
+.carInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px;
+    margin-bottom: 20px;
+}
+
+.carInfo img {
+    width: 250px;
+    height: auto;
+
+}
+
+.carInfo h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.carInfo h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 550;
+}
+
+.priceLabel {
+    font-weight: 550;
+    color: #2f3ccf;
+    font-size: 18px;
+}
+
+/* === Additional Info === */
+.sub {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    margin-bottom: 20px;
+
+}
+
+/* === Info Section: Grid Layout === */
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 200px;
+    font-size: 23px;
+
+}
+
+/* === Action Buttons === */
+.buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.view {
+    background-color: #2f3ccf;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modify a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+/* ===== Tablet (≤ 768px) ===== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        padding: 30px 20px;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .carInfo {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .carInfo img {
+        width: 200px;
+    }
+
+    .carInfo h2 {
+        font-size: 24px;
+    }
+
+    .carInfo h3 {
+        font-size: 18px;
+    }
+
+    .sub {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .info {
+        align-items: center;
+        font-size: 18px;
+        gap: 20px;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+
+    .view {
+        width: 180px;
+        font-size: 18px;
+    }
+
+    .modify {
+        margin-right: 0;
+        align-items: center;
+        font-size: 18px;
+    }
+}
+
+/* ===== Phone (≤ 480px) ===== */
+@media (max-width: 480px) {
+    .carInfo img {
+        width: 160px;
+    }
+
+    .carInfo h2 {
+        font-size: 20px;
+    }
+
+    .carInfo h3 {
+        font-size: 16px;
+    }
+
+    .info {
+        font-size: 16px;
+        gap: 15px;
+    }
+
+    .view {
+        width: 160px;
+        font-size: 16px;
+    }
+
+    .modify {
+        font-size: 16px;
+        gap: 20px;
+    }
+
+    .modify a {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 20px 15px;
+    }
+}
+
+/* ===== Smaller Desktop (≤ 1024px) ===== */
+@media (max-width: 1024px) {
+    .container {
+        padding: 40px;
+        height: auto;
+        gap: 40px;
+    }
+
+    .carInfo {
+        gap: 30px;
+    }
+
+    .carInfo img {
+        width: 220px;
+    }
+
+    .carInfo h2 {
+        font-size: 28px;
+    }
+
+    .carInfo h3 {
+        font-size: 20px;
+    }
+
+    .sub {
+        gap: 40px;
+    }
+
+    .info {
+        font-size: 20px;
+        gap: 25px;
+    }
+
+    .view {
+        font-size: 18px;
+        width: 180px;
+    }
+
+    .modify {
+        font-size: 18px;
+        gap: 25px;
+    }
+}

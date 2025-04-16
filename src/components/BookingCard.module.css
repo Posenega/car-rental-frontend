@@ -1,0 +1,178 @@
+/* === Flex Container === */
+.container {
+    display: flex;
+    flex-direction: row;
+    /* Ensure horizontal alignment */
+    flex-wrap: wrap;
+    /* Allow wrapping to next row if needed */
+    padding: 30px;
+    /* Vertically center items */
+    justify-content: flex-start;
+    /* Align items to the start of the row */
+    align-items: flex-start;
+    height: 350px;
+    width: 90%;
+    background-color: white;
+    color: black;
+    border: 2px solid #f0f2f3;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    gap: 5px;
+    margin-top: 40px;
+    box-sizing: border-box;
+    padding-top: 50px;
+}
+
+/* === Car Info Section === */
+.carInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 300px;
+    padding: 20px;
+}
+
+.carInfo img {
+    width: 280px;
+    height: auto;
+
+}
+
+.carInfo h2 {
+    margin: 0;
+    font-size: 35px;
+    font-weight: 550;
+}
+
+.carInfo h3 {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 550;
+}
+
+.priceLabel {
+    font-weight: 550;
+    color: #2f3ccf;
+    font-size: 18px;
+}
+
+/* === Additional Info === */
+.sub {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+
+}
+
+/* === Info Section: Grid Layout === */
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 200px;
+    font-size: 23px;
+
+}
+
+/* === Action Buttons === */
+.buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: 10px;
+}
+
+.buttons a {
+    font-size: 18px;
+}
+
+.invoice {
+    color: #2f3ccf;
+    text-decoration: none;
+}
+
+.view {
+    background-color: #2f3ccf;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* ===== Tablet (≤ 768px) ===== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        align-items: center;
+    }
+
+    .carInfo {
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .carInfo img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    .carInfo h2 {
+        font-size: 28px;
+    }
+
+    .carInfo h3 {
+        font-size: 20px;
+    }
+
+    .sub {
+        margin-left: 0;
+        margin-top: 20px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .info {
+        font-size: 18px;
+        align-items: center;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+}
+
+/* ===== Phone (≤ 480px) ===== */
+@media (max-width: 480px) {
+    .carInfo h2 {
+        font-size: 24px;
+    }
+
+    .carInfo h3 {
+        font-size: 18px;
+    }
+
+    .info {
+        font-size: 16px;
+        gap: 10px;
+    }
+
+    .view {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .buttons a {
+        font-size: 14px;
+    }
+}

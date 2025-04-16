@@ -1,0 +1,80 @@
+.car_card {
+    padding: 1rem 1rem;
+    height: 322px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, #b2b8bb 0%, #6c7074 31%, #26282c 64%);
+    &:hover {
+        .card_image {
+            transform: scale(1.1);
+        }
+    }
+    .card_labels {
+        margin-top: 0.4rem;
+        margin-left: 0.6rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+        color: #fff;
+        margin: 0;
+    }
+    .card_image {
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        margin-top: 1rem;
+        transition: all 0.3s ease-in-out;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+    }
+    .bottom_card {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        .car_info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            .base_price {
+                letter-spacing: 0.5px;
+                font-size: 1rem;
+                font-weight: 500;
+                color: #fff;
+                .sc_price {
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    color: #fff;
+                }
+                .th_price {
+                    font-size: 0.6rem;
+                    font-weight: 400;
+                    color: #b3b3b3;
+                }
+            }
+        }
+        .info {
+            display: flex;
+            gap: 0.4rem;
+        }
+        .btn {
+            background-color: #303aa7;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+                background-color: rgb(49, 55, 236);
+            }
+        }
+    }
+}

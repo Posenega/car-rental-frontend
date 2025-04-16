@@ -1,0 +1,150 @@
+ .container {
+    background-color: white;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space;
+    color: black;
+    border-radius: 20px;
+    border: 2px solid #f0f2f3;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    height: 300px;
+ }
+
+ .container img {
+    width: 400px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+ }
+
+ .sub {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    color: black;
+    align-items: center;
+    width: 100%;
+ }
+
+ .sub h2 {
+    font-size: 30px;
+ }
+
+ .info {
+    width: 100%;
+    padding: 10px;
+ }
+
+ .other {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 20px;
+    gap: 15px;
+ }
+
+ .other p {
+    font-size: 20px;
+ }
+
+ .other a {
+    font-size: 20px;
+ }
+
+ /* ========== smaller screen  ========== */
+ @media (max-width: 1300px) {
+    .container {
+       align-items: center;
+       height: auto;
+       max-width: 100%;
+       margin: 0 auto;
+    }
+
+
+
+    .sub {
+       margin: 20px;
+       align-items: center;
+    }
+
+    .sub h2 {
+       font-size: 15px;
+       text-align: center;
+    }
+
+    .info {
+       padding: 8px;
+    }
+
+    .other {
+       flex-wrap: wrap;
+       justify-content: center;
+       margin: 10px 0;
+       gap: 10px;
+    }
+
+    .other p,
+    .other a {
+       font-size: 14px;
+       text-align: center;
+    }
+ }
+
+ @media (max-width: 768px) {
+    .container {
+       flex-direction: column;
+       align-items: center;
+       height: auto;
+    }
+
+    .container img {
+       width: 100%;
+       height: auto;
+       border-radius: 20px 20px 0 0;
+    }
+
+    .sub {
+       margin: 20px 15px;
+       width: 100%;
+       align-items: center;
+    }
+
+    .sub h2 {
+       font-size: 24px;
+       text-align: center;
+    }
+
+    .info {
+       padding: 5px;
+    }
+
+    .other {
+       flex-wrap: wrap;
+       justify-content: center;
+       margin: 10px 0;
+       gap: 10px;
+    }
+
+    .other p,
+    .other a {
+       font-size: 16px;
+    }
+ }
+
+ /* ========== Phone (480px and below) ========== */
+ @media (max-width: 480px) {
+    .sub h2 {
+       font-size: 20px;
+    }
+
+    .other {
+       flex-direction: column;
+       align-items: center;
+       margin: 8px 0;
+       gap: 6px;
+    }
+
+    .other p,
+    .other a {
+       font-size: 14px;
+       text-align: center;
+    }
+ }
