@@ -46,7 +46,13 @@ export default function CarCard({ car }: { car: Car }) {
             </FilledBox>
           </div>
         </div>
-        <div className={styles.btn}>Reserve now</div>
+        <button
+          onClick={() => {
+            window.location.pathname = "/" + car._id
+          }}
+          className={styles.btn}>
+          Reserve now
+        </button>
       </div>
     </div>
   )

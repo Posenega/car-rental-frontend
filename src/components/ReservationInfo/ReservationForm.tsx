@@ -1,14 +1,34 @@
-"use client";
-import styles from "./ReservationInfo.module.css";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+"use client"
+import styles from "./ReservationInfo.module.css"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import PhoneInput from "react-phone-input-2"
+import "react-phone-input-2/lib/style.css"
+import { Car } from "@/model/car"
+import { useApiStatus } from "@/hooks/useApiStatus"
+import { CarRentalApi } from "@/api/Api"
 
 export default function ReservationForm() {
-  const router = useRouter();
-  const carImage = "/assets/toyota-prius.png";
-  const pricePerDay = 67.02;
+  const router = useRouter()
+  const pricePerDay = 67.02
+  const carDetails = JSON.parse(
+    localStorage.getItem("carDetails") || "{}"
+  )
+  const car: Car = carDetails.car
+
+  // const car: Car = carDetails.car
+
+  const orderCreationApi = useApiStatus({
+    api: CarRentalApi.order.create,
+    onSuccess({ result }) {
+      console.log("Order created successfully:", result)
+      // localStorage.removeItem("carDetails")
+      // window.location.pathname = "/reservation-success"
+    },
+    onFail({ message }) {
+      console.error("Error creating order:", message)
+    },
+  })
 
   const [form, setForm] = useState({
     name: "",
@@ -20,54 +40,59 @@ export default function ReservationForm() {
     pickupDate: "",
     returnDate: "",
     pickupTime: "",
-  });
+  })
 
-  const ageValid = Number(form.age) >= 18 && Number(form.age) <= 75;
+  const ageValid = Number(form.age) >= 18 && Number(form.age) <= 75
 
   const getDayCount = (start: string, end: string) => {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-    const timeDiff = endDate.getTime() - startDate.getTime();
-    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return diffDays > 0 ? diffDays : 1;
-  };
+    const startDate = new Date(start)
+    const endDate = new Date(end)
+    const timeDiff = endDate.getTime() - startDate.getTime()
+    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
+    return diffDays > 0 ? diffDays : 1
+  }
 
   const dayCount =
     form.pickupDate && form.returnDate
       ? getDayCount(form.pickupDate, form.returnDate)
-      : 1;
+      : 1
 
-  const totalPrice = (pricePerDay * dayCount).toFixed(2);
-  const locations = ["Tripoli", "Koura", "Jounieh", "Hazmieh", "Saida"];
+  const totalPrice = (carDetails.totalPrice * dayCount).toFixed(2)
+  const locations = [
+    "Tripoli",
+    "Koura",
+    "Jounieh",
+    "Hazmieh",
+    "Saida",
+  ]
 
   const handleAddToCart = () => {
-    if (!ageValid) return;
+    if (!ageValid) return
 
     const newReservation = {
-      image: carImage,
-      model: "Lexus UX 250h",
-      pickup: form.pickupLocation,
-      return: form.returnLocation,
-      days: dayCount,
-      price: Number(totalPrice),
-      summary: {
-        fullName: form.name,
-        age: form.age,
-        pickupDate: form.pickupDate,
-        returnDate: form.returnDate,
-        pricePerDay: `$${pricePerDay.toFixed(2)}`,
-        totalPrice: `$${totalPrice}`,
-        type: "Hybrid",
-      },
-    };
+      userId: carDetails.userId, // Make sure this exists in localStorage or session
+      carId: carDetails.carId, // Ensure carDetails includes this
+      fullName: form.name,
+      age: Number(form.age),
+      email: form.email,
+      mobileNumber: form.mobile,
+      pickupLocation: form.pickupLocation,
+      dropoffLocation: form.returnLocation,
+      startDate: new Date(form.pickupDate),
+      endDate: new Date(form.returnDate),
+      pickupTime: form.pickupTime,
+      totalPrice: Number(totalPrice),
+      car: carDetails.car, // optional full car object
 
-    const current = JSON.parse(localStorage.getItem("reservations") || "[]");
-    localStorage.setItem(
-      "reservations",
-      JSON.stringify([...current, newReservation])
-    );
-    router.push("/reservation");
-  };
+      // If these options are not selected, set them to default
+      fuelOption: carDetails?.fuelOption,
+      insuranceOption: carDetails?.insuranceOption,
+      addons: carDetails.addons,
+      paymentStatus: "pending", // Default
+      invoiceUrl: "",
+    }
+    orderCreationApi.fire(newReservation)
+  }
 
   return (
     <div className={styles.page}>
@@ -84,7 +109,9 @@ export default function ReservationForm() {
                 type="text"
                 className={styles.input}
                 value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, name: e.target.value })
+                }
               />
             </div>
             <div className={styles.smallField}>
@@ -95,7 +122,9 @@ export default function ReservationForm() {
                   !ageValid && form.age ? styles.invalid : ""
                 }`}
                 value={form.age}
-                onChange={(e) => setForm({ ...form, age: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, age: e.target.value })
+                }
               />
               {!ageValid && form.age && (
                 <p className={styles.errorText}>
@@ -111,7 +140,9 @@ export default function ReservationForm() {
             type="email"
             className={styles.input}
             value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            onChange={(e) =>
+              setForm({ ...form, email: e.target.value })
+            }
           />
 
           {/* Mobile Number */}
@@ -143,8 +174,9 @@ export default function ReservationForm() {
                 {locations.map((loc) => (
                   <span
                     key={loc}
-                    onClick={() => setForm({ ...form, pickupLocation: loc })}
-                  >
+                    onClick={() =>
+                      setForm({ ...form, pickupLocation: loc })
+                    }>
                     {loc}
                   </span>
                 ))}
@@ -165,8 +197,9 @@ export default function ReservationForm() {
                 {locations.map((loc) => (
                   <span
                     key={loc}
-                    onClick={() => setForm({ ...form, returnLocation: loc })}
-                  >
+                    onClick={() =>
+                      setForm({ ...form, returnLocation: loc })
+                    }>
                     {loc}
                   </span>
                 ))}
@@ -214,8 +247,7 @@ export default function ReservationForm() {
           <button
             className={styles.reserveBtn}
             onClick={handleAddToCart}
-            disabled={!ageValid}
-          >
+            disabled={!ageValid}>
             Add to Cart
           </button>
         </div>
@@ -223,7 +255,13 @@ export default function ReservationForm() {
         {/* SUMMARY */}
         <div className={styles.summaryCard}>
           <h3 className={styles.summaryTitle}>Reservation Summary</h3>
-          <img src={carImage} alt="car" className={styles.summaryImage} />
+          <img
+            src={
+              process.env.NEXT_PUBLIC_BASE_URL + "/" + car.carImage
+            }
+            alt="car"
+            className={styles.summaryImage}
+          />
           <div className={styles.carInfo}>
             <p className={styles.model}>Lexus UX 250h</p>
             <p className={styles.badge}>Hybrid</p>
@@ -241,7 +279,8 @@ export default function ReservationForm() {
             </div>
             <div className={styles.row}>
               <p>
-                <span className={styles.label}>Email:</span> {form.email || "-"}
+                <span className={styles.label}>Email:</span>{" "}
+                {form.email || "-"}
               </p>
               <p>
                 <span className={styles.label}>Phone:</span>{" "}
@@ -265,7 +304,7 @@ export default function ReservationForm() {
             <div className={styles.row}>
               <p>
                 <span className={styles.label}>Price/Day:</span> $
-                {pricePerDay.toFixed(2)}
+                {carDetails.totalPrice.toFixed(2)}
               </p>
               <p>
                 <span className={`${styles.label} ${styles.total}`}>
@@ -277,5 +316,5 @@ export default function ReservationForm() {
         </div>
       </div>
     </div>
-  );
+  )
 }

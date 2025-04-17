@@ -1,156 +1,161 @@
 .page {
-    background-color: #f2f2f2;
-    padding: 40px;
-    min-height: 100vh;
+  background-color: #f2f2f2;
+  padding: 40px;
+  padding-top: 100px;
+  min-height: 100vh;
 }
 
 .card {
-    display: flex;
-    border-radius: 20px;
-    background: white;
-    overflow: hidden;
-    max-width: 1100px;
-    margin: auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  border-radius: 20px;
+  background: white;
+  overflow: hidden;
+  max-width: 1100px;
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .left {
-    flex: 1;
-    padding: 40px;
-    background: linear-gradient(to bottom, #B2B8BB 0%, #6C7074 31%, #26282C 63%);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+  flex: 1;
+  padding: 40px;
+  background: linear-gradient(
+    to bottom,
+    #b2b8bb 0%,
+    #6c7074 31%,
+    #26282c 63%
+  );
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .title {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .tags {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
 .tag {
-    background-color: rgba(255, 255, 255, 0.15);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
 .carImage {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto 30px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 30px;
 }
 
 .features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 20px;
-    font-size: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  font-size: 15px;
 }
 
 .features div {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .right {
-    flex: 1;
-    padding: 40px;
+  flex: 1;
+  padding: 40px;
 }
 
 .section {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .section h3 {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .option {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    gap: 20px;
-    cursor: pointer;
-    transition: 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  gap: 20px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .option input {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .option.selected {
-    border: 2px solid black;
+  border: 2px solid black;
 }
 
-
 .option p {
-    font-size: 14px;
-    margin-top: 5px;
-    color: #444;
+  font-size: 14px;
+  margin-top: 5px;
+  color: #444;
 }
 
 .total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    margin-top: 30px;
-    text-decoration: underline;
-    text-decoration-color: #303aa7;
-    text-decoration-thickness: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  margin-top: 30px;
+  text-decoration: underline;
+  text-decoration-color: #303aa7;
+  text-decoration-thickness: 3px;
 }
 
 .nextBtn {
-    background-color: #303aa7;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    padding: 8px 40px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: #303aa7;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 40px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .toggle {
-    width: 40px;
-    height: 20px;
-    border-radius: 20px;
-    background-color: #ccc;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.3s;
+  width: 40px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #ccc;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .toggle::before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 16px;
-    height: 16px;
-    background-color: white;
-    border-radius: 50%;
-    transition: left 0.3s;
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  transition: left 0.3s;
 }
 
 .toggle.active {
-    background-color: #303aa7;
+  background-color: #303aa7;
 }
 
 .toggle.active::before {
-    left: 22px;
+  left: 22px;
 }

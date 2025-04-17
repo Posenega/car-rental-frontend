@@ -1,58 +1,41 @@
-"use client";
-import styles from "./ReservationSection.module.css";
-import { useState, useEffect } from "react";
-import { Icon } from "@iconify/react";
+"use client"
+import styles from "./ReservationSection.module.css"
+import { useState, useEffect, useContext } from "react"
+import { Icon } from "@iconify/react"
+import { useApiStatus } from "@/hooks/useApiStatus"
+import { CarRentalApi } from "@/api/Api"
+import { OrderContext } from "@/context/orderContext"
+import { OrderContextType } from "@/model/order"
+import { UserContext } from "@/context/userContext"
+import { UserContextType } from "@/model/user"
 
 export default function ReservationSection() {
-const [reservations, setReservations] = useState<Reservation[]>([]);
-  const [showSummaryIndex, setShowSummaryIndex] = useState<number | null>(null);
+  const { orders, storeOrders } = useContext(
+    OrderContext
+  ) as OrderContextType
+  const { user } = useContext(UserContext) as UserContextType
+  const getOrders = useApiStatus({
+    api: CarRentalApi.order.getAll,
+    onSuccess({ result }) {
+      storeOrders(result.orders)
+    },
+    onFail({ message }) {},
+  })
 
-  // Load reservations from localStorage
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("reservations") || "[]");
-    setReservations(saved);
-  }, []);
+    getOrders.fire(user._id)
+  }, [])
 
-  const subtotal = reservations.reduce((acc, res) => acc + res.price, 0);
-  const services = 100;
-  const total = subtotal + services;
-
-  interface Reservation {
-    image: string;
-    model: string;
-    pickup: string;
-    return: string;
-    days: number;
-    price: number;
-    summary: {
-      fullName: string;
-      age: string;
-      pickupDate: string;
-      returnDate: string;
-      pricePerDay: string;
-      totalPrice: string;
-      type: string;
-    };
-  }
-
-
-  const handleDelete = (index: number) => {
-    const updated = [...reservations];
-    updated.splice(index, 1);
-    setReservations(updated);
-    localStorage.setItem("reservations", JSON.stringify(updated));
-  };
-
-  if (reservations.length === 0) {
+  if (orders.length === 0) {
     return (
       <div className={styles.emptyWrapper}>
         <h2>My Reservations</h2>
-        <p>You have no reservations yet.</p>
+        <p>You have no orders yet.</p>
         <a href="/cars" className={styles.browseLink}>
           Browse Cars →
         </a>
       </div>
-    );
+    )
   }
 
   return (
@@ -69,13 +52,17 @@ const [reservations, setReservations] = useState<Reservation[]>([]);
         <span></span>
       </div>
 
-      {reservations.map((r, i) => (
+      {orders.map((r, i) => (
         <div key={i} className={styles.row}>
           <div>
-            <img src={r.image} alt={r.model} className={styles.carImage} />
+            {/* <img
+              src={r.image}
+              alt={r.model}
+              className={styles.carImage}
+            /> */}
             <p
               className={styles.viewSummary}
-              onClick={() => setShowSummaryIndex(i)}
+              // onClick={() => setShowSummaryIndex(i)}
             >
               View Summary
             </p>
@@ -116,52 +103,50 @@ const [reservations, setReservations] = useState<Reservation[]>([]);
       {showSummaryIndex !== null && (
         <div
           className={styles.summaryModal}
-          onClick={() => setShowSummaryIndex(null)}
-        >
+          onClick={() => setShowSummaryIndex(null)}>
           <div
             className={styles.modalContent}
-            onClick={(e) => e.stopPropagation()}
-          >
+            onClick={(e) => e.stopPropagation()}>
             <h3>Reservation Summary</h3>
             <div className={styles.summaryCar}>
-              <img src={reservations[showSummaryIndex].image} />
-              <p>{reservations[showSummaryIndex].model}</p>
+              <img src={orders[showSummaryIndex].image} />
+              <p>{orders[showSummaryIndex].model}</p>
               <p className={styles.hybrid}>
-                {reservations[showSummaryIndex].summary?.type}
+                {orders[showSummaryIndex].summary?.type}
               </p>
             </div>
             <div className={styles.infoGrid}>
               <div>
                 <span className={styles.label}>Pickup Branch:</span>{" "}
-                {reservations[showSummaryIndex].pickup}
+                {orders[showSummaryIndex].pickup}
               </div>
               <div>
                 <span className={styles.label}>Return Branch:</span>{" "}
-                {reservations[showSummaryIndex].return}
+                {orders[showSummaryIndex].return}
               </div>
               <div>
                 <span className={styles.label}>Pickup Date:</span>{" "}
-                {reservations[showSummaryIndex].summary?.pickupDate}
+                {orders[showSummaryIndex].summary?.pickupDate}
               </div>
               <div>
                 <span className={styles.label}>Return Date:</span>{" "}
-                {reservations[showSummaryIndex].summary?.returnDate}
+                {orders[showSummaryIndex].summary?.returnDate}
               </div>
               <div>
                 <span className={styles.label}>Full Name:</span>{" "}
-                {reservations[showSummaryIndex].summary?.fullName}
+                {orders[showSummaryIndex].summary?.fullName}
               </div>
               <div>
                 <span className={styles.label}>Age:</span>{" "}
-                {reservations[showSummaryIndex].summary?.age}
+                {orders[showSummaryIndex].summary?.age}
               </div>
               <div>
                 <span className={styles.label}>Price /day:</span>{" "}
-                {reservations[showSummaryIndex].summary?.pricePerDay}
+                {orders[showSummaryIndex].summary?.pricePerDay}
               </div>
               <div>
                 <span className={styles.label}>Total Price:</span>{" "}
-                {reservations[showSummaryIndex].summary?.totalPrice}
+                {orders[showSummaryIndex].summary?.totalPrice}
               </div>
             </div>
             <button className={styles.checkoutBtn}>Checkout</button>
@@ -169,5 +154,5 @@ const [reservations, setReservations] = useState<Reservation[]>([]);
         </div>
       )}
     </section>
-  );
+  )
 }

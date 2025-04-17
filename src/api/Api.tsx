@@ -7,6 +7,7 @@ import {
 import { User } from "@/model/user"
 import { BranchesReponse, BranchParams } from "./models/ApiBranch"
 import { Car, CarFilters } from "./models/ApiCar"
+import { Order } from "@/model/order"
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -69,13 +70,29 @@ export const CarRentalApi = {
       params: string
     ): Promise<AxiosResponse<{ cars: Car[]; message: string }>> =>
       api.get(`/car/category/${params}`),
-    getAll: (): Promise<
-      AxiosResponse<{ cars: Car[]; message: string }>
-    > => api.get("/car/"),
+    getCar: (
+      id: string
+    ): Promise<AxiosResponse<{ car: Car; message: string }>> =>
+      api.get(`/car/${id}`),
     filter: (
       params: CarFilters
     ): Promise<AxiosResponse<{ cars: Car[] }>> => {
       return api.get("/car/filtered", { params })
     },
+    getAveragePrice: (): Promise<AxiosResponse<number>> =>
+      api.get("/car/get/averageRentalPrice"),
+  },
+  order: {
+    create: (
+      data: any
+    ): Promise<AxiosResponse<{ message: string; orderId: string }>> =>
+      api.post("/order/create", data),
+    getAll: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string; orders: Order[] }>> =>
+      api.get(`/order/getAll/${id}`),
+    getTopCar: (): Promise<
+      AxiosResponse<{ message: string; car: Car }>
+    > => api.get("/order/getMostReservedCarId"),
   },
 }
