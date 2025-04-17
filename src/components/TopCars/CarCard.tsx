@@ -1,14 +1,14 @@
-import styles from "./TopCars.module.css";
-import { Icon } from "@iconify/react";
+import styles from "./TopCars.module.css"
+import { Icon } from "@iconify/react"
 
 interface CarCardProps {
-  name: string;
-  image: string;
-  price: string;
+  name: string
+  image: string
+  price: string
   features: {
-    icon: string;
-    text: string;
-  }[];
+    icon: string
+    text: string
+  }[]
 }
 
 const CarCard = ({ name, image, price, features }: CarCardProps) => {
@@ -31,7 +31,7 @@ const CarCard = ({ name, image, price, features }: CarCardProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CarCard;
+export default CarCard

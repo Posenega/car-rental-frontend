@@ -12,6 +12,7 @@ export interface ServicesPrice {
 }
 
 export interface ICar {
+  _id: string
   carName: string
   carYear: string
   engineType: string
@@ -33,6 +34,7 @@ export interface ICar {
 }
 
 export class Car implements ICar {
+  _id: string
   carName: string
   carYear: string
   engineType: string
@@ -52,6 +54,7 @@ export class Car implements ICar {
   servicesPrice: ServicesPrice
   type: string
   constructor(car: ICar) {
+    this._id = car._id
     this.carName = car.carName
     this.carYear = car.carYear
     this.engineType = car.engineType

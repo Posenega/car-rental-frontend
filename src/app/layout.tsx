@@ -11,6 +11,7 @@ import { BranchProvider } from "@/context/branchContext"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import { CarProvider } from "@/context/carContext"
+import { OrderProvider } from "@/context/orderContext"
 import { ReviewProvider } from "@/context/reviewContext"
 
 const roboto = Roboto({
@@ -52,15 +53,17 @@ export default function RootLayout({
       <UserProvider>
         <BranchProvider>
           <CarProvider>
-            <ReviewProvider>
-              <AuthLayer>
-                <body className={`${roboto.variable}`}>
+            <OrderProvider>
+              <ReviewProvider>
+                <AuthLayer>
                   {path.includes("auth") || <Header />}
-                  {children}
+                  <body className={`${roboto.variable}`}>
+                    {children}
+                  </body>
                   {path.includes("auth") || <Footer />}
-                </body>
-              </AuthLayer>
-            </ReviewProvider>
+                </AuthLayer>
+              </ReviewProvider>
+            </OrderProvider>
           </CarProvider>
         </BranchProvider>
       </UserProvider>

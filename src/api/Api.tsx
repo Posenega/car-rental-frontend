@@ -7,6 +7,7 @@ import {
 import { User } from "@/model/user"
 import { BranchesReponse, BranchParams } from "./models/ApiBranch"
 import { Car, CarFilters } from "./models/ApiCar"
+import { Order } from "@/model/order"
 import { Review } from "@/model/review"
 import { string } from "prop-types"
 
@@ -64,26 +65,51 @@ export const CarRentalApi = {
       body: FormData
     ): Promise<AxiosResponse<{ message: string }>> =>
       api.post("/car/create", body),
-    getAll: (entry?: string): Promise<
-      AxiosResponse<{ cars: Car[]; message: string }>
-    > => api.get(`/car/all/${entry}`),
+    getAll: (
+      entry?: string
+    ): Promise<AxiosResponse<{ cars: Car[]; message: string }>> =>
+      api.get(`/car/all/${entry}`),
     getCategory: (
       params: string
     ): Promise<AxiosResponse<{ cars: Car[]; message: string }>> =>
       api.get(`/car/category/${params}`),
+    getCar: (
+      id: string
+    ): Promise<AxiosResponse<{ car: Car; message: string }>> =>
+      api.get(`/car/${id}`),
 
     filter: (
       params: CarFilters
     ): Promise<AxiosResponse<{ cars: Car[] }>> => {
       return api.get("/car/filtered", { params })
     },
+    getAveragePrice: (): Promise<AxiosResponse<number>> =>
+      api.get("/car/get/averageRentalPrice"),
+  },
+  order: {
+    create: (
+      data: any
+    ): Promise<AxiosResponse<{ message: string; orderId: string }>> =>
+      api.post("/order/create", data),
+    getAll: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string; orders: Order[] }>> =>
+      api.get(`/order/getAll/${id}`),
+    getTopCar: (): Promise<
+      AxiosResponse<{ message: string; car: Car }>
+    > => api.get("/order/getMostReservedCarId"),
   },
   review: {
-    create: (body: any): Promise<AxiosResponse<{ message: string }>> =>
+    create: (
+      body: any
+    ): Promise<AxiosResponse<{ message: string }>> =>
       api.post("/reviews/create", body),
-    getAll: (): Promise<AxiosResponse<{ message: string, data: Review[] }>> =>
-      api.get("/reviews/"),
-    getUserReviews: (id: string): Promise<AxiosResponse<{ message: string, data: Review }>> =>
-      api.get(`/reviews/${id}`)
-  }
+    getAll: (): Promise<
+      AxiosResponse<{ message: string; data: Review[] }>
+    > => api.get("/reviews/"),
+    getUserReviews: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string; data: Review }>> =>
+      api.get(`/reviews/${id}`),
+  },
 }
