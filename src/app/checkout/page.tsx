@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./checkout.module.scss";
-import { Icon } from "@iconify/react";
+
 
 export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<"location" | "online">(
@@ -27,12 +27,32 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <h1>Checkout</h1>
 
       <div className={styles.checkoutGrid}>
+
         {/* Payment Section */}
-        <div className={styles.payment}>
+        <div className={styles.entries}>
+          <div className={styles.entry}>
+            <p>Full Name</p>
+            <input placeholder="Full Name" />
+          </div>
+          <div className={styles.entry}>
+            <p>Mobile Number</p>
+            <input placeholder="Mobile Number" />
+          </div>
+          <div style={{ display: "flex", justifyContent: 'space-between' }}>
+            <div className={styles.entry}>
+              <p>Pickup Location</p>
+              <input placeholder="Pickup Location" />
+            </div>
+            <div className={styles.entry}>
+              <p>Return Location</p>
+              <input placeholder="Return Location" />
+            </div>
+          </div>
+
           <h2>Choose Payment Method</h2>
           <div className={styles.methods}>
             <label
@@ -156,6 +176,6 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

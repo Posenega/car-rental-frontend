@@ -1,5 +1,5 @@
 .page {
-  padding: 50px 40px;
+  padding: 100px 40px;
   background: #f4f4f4;
   min-height: 100vh;
 
@@ -18,7 +18,7 @@
   flex-wrap: wrap;
 }
 
-.payment {
+.entries {
   width: 400px;
 
   h2 {
@@ -146,5 +146,22 @@
       font-size: 1.1rem;
       color: #303aa7;
     }
+  }
+}
+
+.entry {
+  margin-bottom: 0.3rem;
+
+  p {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+
+  input {
+    background-color: transparent;
+    padding: 0.4rem 0.4rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
   }
 }
