@@ -9,7 +9,9 @@ export default function ContactSection() {
   const [phone, setPhone] = useState("");
 
   return (
-    <section className={styles.wrapper}>
+    <section
+
+      className={styles.wrapper}>
       <div className={styles.content}>
         {/* LEFT FORM */}
         <div className={styles.left}>

@@ -32,7 +32,7 @@ const Testimonials = () => {
         <h2 className={styles.testimonialsTitle}>What Our Client Says</h2>
         <div className={styles.testimonialsSeeMore}>
           <div className={styles.line}></div>
-          <a href="#">See More</a>
+          <a href="/reviews">See More</a>
         </div>
       </div>
 

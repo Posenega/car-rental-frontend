@@ -120,7 +120,9 @@ const CarCategory = () => {
                 </li>
               ))}
             </ul>
-            <button className={styles.viewBtn}>View Cars</button>
+            <button className={styles.viewBtn} onClick={() => {
+              window.location.pathname = `/cars/${cat.title}`;
+            }}>View Cars</button>
           </div>
         ))}
       </div>

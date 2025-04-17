@@ -1,6 +1,7 @@
 import styles from "./CarCategory.module.css";
 // import { Icon } from "@iconify/react";
 
+
 interface CategoryCardProps {
   title: string;
   image: string;
@@ -23,7 +24,10 @@ const CategoryCard = ({ title, image, features, icon }: CategoryCardProps) => {
           </li>
         ))}
       </ul>
-      <button className={styles.viewCarsButton}>View Cars</button>
+      <button className={styles.viewCarsButton} onClick={() => {
+        console.log("hello")
+        window.location.pathname = `/cars/${title}`;
+      }}>View </button>
     </div>
   );
 };

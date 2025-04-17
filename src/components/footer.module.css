@@ -1,62 +1,101 @@
-.main {
-  background-color: #2B2A2A;
-    display: flex;
-    justify-content: space-between;
-    height: 200px;
-    flex-wrap: nowrap;
-    
-  }
-  .main div{
-    margin: 20px;
-    margin-left: 40px;
-    width: 400px;
-    overflow: hidden;
+.container {
+  background-color: #26282c;
+  display: flex;
+  justify-content: space-between;
+  height: 200px;
+  flex: 1;
+  flex-direction: row;
+  color: white;
+  padding: 20px;
+
+}
+
+.sub {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.sub div {
+  display: flex;
+  flex-direction: row;
+}
+
+.sub h2 {
+  color: white;
+  font-size: 27px;
+  margin-left: 10px;
+}
+
+.sub p {
+  color: white;
+  font-size: 13px;
+  width: 250px;
+}
+
+.links {
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.links li {
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+.links a:hover {
+  color: gray;
+}
+
+.icons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 50px;
+}
+
+.c {
+  color: white;
+  display: flex;
+  text-align: left;
+  gap: 10px;
+  flex-direction: row;
+}
+
+/* Tablet screens (≤768px) */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
     align-items: center;
+    height: auto;
+    padding: 30px 20px;
+    gap: 20px;
   }
-  
-  .main div div{
-    margin:0;
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: nowrap;
-    
-  }
-  .main h2{
-    color: white;
-    font-size: 27px;
-    margin-left:10px;
-  }
-  .main p{
-    color: white;
-    font-size: 13px;
-    margin-bottom: 40px;
-    width: 250px;
-  }
-  .links{
-    display: flex;
-    color: white;
-    align-items: center;
-    justify-content: center;
-  }
-  .links li{
-    margin-bottom: 10px;
-    list-style: none;
-  }
-  .links a:hover{
-    color: gray;
-  }
-  .icons{
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-  }
-  .c{
-    color: white;
-    display: flex;
-    gap: 10px;
-    font-size: 15px;
+}
+
+/* Phone screens (≤480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
   }
 
-  
+  .sub h2 {
+    font-size: 22px;
+  }
+
+  .sub p {
+    font-size: 12px;
+  }
+
+  .links li {
+    margin-bottom: 8px;
+  }
+
+  .icons {
+    gap: 15px;
+  }
+}

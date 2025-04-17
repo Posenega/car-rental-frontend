@@ -7,9 +7,11 @@ import { useApiStatus } from "@/hooks/useApiStatus";
 import { CarRentalApi } from "@/api/Api";
 import { CarContext } from "@/context/carContext";
 import { CarContextType } from "@/model/car";
-
+import { useSearchParams } from "next/navigation";
 export default function page() {
   const { storeCars, cars } = useContext(CarContext) as CarContextType;
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("query");
 
   const getAllCars = useApiStatus({
     api: CarRentalApi.car.getAll,
@@ -32,15 +34,21 @@ export default function page() {
   });
 
   useEffect(() => {
-    getAllCars.fire();
-  }, []);
 
+    if (searchQuery) {
+      console.log("Search query from URL:", searchQuery);
+      // Optionally:
+      getAllCars.fire(searchQuery);
+    } else {
+      getAllCars.fire();
+    }
+  }, [searchQuery]);
   return (
     <main className={styles.main}>
       <div style={{ display: "flex" }}>
         <FilterBar
           onApplyFilters={(filters) => {
-            getFilteredCars.fire( filters );
+            getFilteredCars.fire(filters);
           }}
         />
         <div className={styles.list_ctn}>

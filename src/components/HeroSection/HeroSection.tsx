@@ -1,7 +1,10 @@
 "use client";
 import styles from "./HeroSection.module.css";
+import { useState } from "react";
+
 
 const HeroSection = () => {
+  const [inputValue, setInputValue] = useState("");
   return (
     <section className={styles.hero}>
       <h1 className={styles.title}>Find the perfect ride for any journey</h1>
@@ -30,8 +33,16 @@ const HeroSection = () => {
           type="text"
           placeholder="Search"
           className={styles.searchInput}
+          onChange={(e) => {
+            setInputValue(e.target.value)
+          }}
         />
-        <button className={styles.filterBtn}>Filter</button>
+        <button className={styles.filterBtn} onClick={() => {
+          if (inputValue.trim() !== "") {
+            console.log(inputValue);
+            window.location.href = `/cars?query=${encodeURIComponent(inputValue)}`;
+          }
+        }}>Search</button>
       </div>
     </section>
   );

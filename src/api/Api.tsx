@@ -1,4 +1,4 @@
-import axios, { Axios, AxiosResponse } from "axios"
+import axios, { AxiosResponse } from "axios"
 import {
   AuthResponse,
   UserLoginParams,
@@ -62,16 +62,14 @@ export const CarRentalApi = {
       body: FormData
     ): Promise<AxiosResponse<{ message: string }>> =>
       api.post("/car/create", body),
-    getAll: (): Promise<
+    getAll: (entry?: string): Promise<
       AxiosResponse<{ cars: Car[]; message: string }>
-    > => api.get("/car/"),
+    > => api.get(`/car/all/${entry}`),
     getCategory: (
       params: string
     ): Promise<AxiosResponse<{ cars: Car[]; message: string }>> =>
       api.get(`/car/category/${params}`),
-    getAll: (): Promise<
-      AxiosResponse<{ cars: Car[]; message: string }>
-    > => api.get("/car/"),
+
     filter: (
       params: CarFilters
     ): Promise<AxiosResponse<{ cars: Car[] }>> => {

@@ -52,9 +52,11 @@ export default function RootLayout({
         <BranchProvider>
           <CarProvider>
             <AuthLayer>
-              {path.includes("auth") || <Header />}
-              <body className={`${roboto.variable}`}>{children}</body>
-              {path.includes("auth") || <Footer />}
+              <body className={`${roboto.variable}`}>
+                {path.includes("auth") || <Header />}
+                {children}
+                {path.includes("auth") || <Footer />}
+              </body>
             </AuthLayer>
           </CarProvider>
         </BranchProvider>

@@ -68,94 +68,96 @@ export default function ReviewsSection() {
   };
 
   return (
-  <div className={styles.reviewsPageContainer}>
-    <div className={styles.reviewsWrapper}>
-      <div className={styles.stats}>
-        <div>
-          <h4>Total Reviews</h4>
-          <h2 className={styles.bigNumber}>50</h2>
-          <p>Check out what our clients have to say</p>
-        </div>
-        <div>
-          <h4>Average Rating</h4>
-          <div className={styles.starsRow}>
-            <h2 className={styles.bigNumber}>{averageRating}</h2>
-            <div className={styles.stars}>
-              {[...Array(Math.floor(averageRating))].map((_, i) => (
-                <Icon icon="mdi:star" key={i} style={{ color: "#FFD700" }} />
-              ))}
-              {averageRating % 1 !== 0 && (
-                <Icon icon="mdi:star-half" style={{ color: "#FFD700" }} />
-              )}
+    <main>
+      <div className={styles.reviewsPageContainer}>
+        <div className={styles.reviewsWrapper}>
+          <div className={styles.stats}>
+            <div>
+              <h4>Total Reviews</h4>
+              <h2 className={styles.bigNumber}>50</h2>
+              <p>Check out what our clients have to say</p>
+            </div>
+            <div>
+              <h4>Average Rating</h4>
+              <div className={styles.starsRow}>
+                <h2 className={styles.bigNumber}>{averageRating}</h2>
+                <div className={styles.stars}>
+                  {[...Array(Math.floor(averageRating))].map((_, i) => (
+                    <Icon icon="mdi:star" key={i} style={{ color: "#FFD700" }} />
+                  ))}
+                  {averageRating % 1 !== 0 && (
+                    <Icon icon="mdi:star-half" style={{ color: "#FFD700" }} />
+                  )}
+                </div>
+              </div>
+              <p>Average rating on this year</p>
+            </div>
+            <div>
+              <button className={styles.feedbackBtn}>Leave us feedback</button>
             </div>
           </div>
-          <p>Average rating on this year</p>
-        </div>
-        <div>
-          <button className={styles.feedbackBtn}>Leave us feedback</button>
-        </div>
-      </div>
 
-      <div className={styles.reviewsList}>
-        {staticReviews.slice(0, visibleReviews).map((r, idx) => (
-          <div key={idx} className={styles.reviewItem}>
-            <div className={styles.leftSide}>
-              <img src={r.image} alt={r.name} />
-              <div className={styles.info}>
-                <h4>{r.name}</h4>
-                <p className={styles.date}>{r.date}</p>
+          <div className={styles.reviewsList}>
+            {staticReviews.slice(0, visibleReviews).map((r, idx) => (
+              <div key={idx} className={styles.reviewItem}>
+                <div className={styles.leftSide}>
+                  <img src={r.image} alt={r.name} />
+                  <div className={styles.info}>
+                    <h4>{r.name}</h4>
+                    <p className={styles.date}>{r.date}</p>
+                  </div>
+                </div>
+                <div className={styles.rightSide}>
+                  <div className={styles.stars}>
+                    {[...Array(Math.floor(r.rating))].map((_, i) => (
+                      <Icon icon="mdi:star" key={i} style={{ color: "#FFD700" }} />
+                    ))}
+                    {r.rating % 1 !== 0 && (
+                      <Icon icon="mdi:star-half" style={{ color: "#FFD700" }} />
+                    )}
+                  </div>
+                  <p className={styles.text}>{r.text}</p>
+                  <button className={styles.viewCarBtn}>View car</button>
+                </div>
               </div>
-            </div>
-            <div className={styles.rightSide}>
-              <div className={styles.stars}>
-                {[...Array(Math.floor(r.rating))].map((_, i) => (
-                  <Icon icon="mdi:star" key={i} style={{ color: "#FFD700" }} />
-                ))}
-                {r.rating % 1 !== 0 && (
-                  <Icon icon="mdi:star-half" style={{ color: "#FFD700" }} />
-                )}
-              </div>
-              <p className={styles.text}>{r.text}</p>
-              <button className={styles.viewCarBtn}>View car</button>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {visibleReviews < staticReviews.length && (
-        <button className={styles.loadMoreBtn} onClick={handleLoadMore}>
-          Load More
-        </button>
-      )}
-    </div>
+          {visibleReviews < staticReviews.length && (
+            <button className={styles.loadMoreBtn} onClick={handleLoadMore}>
+              Load More
+            </button>
+          )}
+        </div>
 
-    <div className={styles.feedbackSection}>
-      <h2 className={styles.feedbackTitle}>Leave a Feedback</h2>
-      <div className={styles.messageBox}>
-        <h3>Write a review</h3>
-        <textarea
-          value={feedback}
-          onChange={(e) => setFeedback(e.target.value)}
-          placeholder="Write your message here..."
-        />
-      </div>
-      <div className={styles.ratingBox}>
-        <h3>Rate your experience</h3>
-        <div className={styles.ratingStars}>
-          {[1, 2, 3, 4, 5].map((val) => (
-            <Icon
-              key={val}
-              icon={val <= starRating ? "mdi:star" : "mdi:star-outline"}
-              className={styles.ratingIcon}
-              onClick={() => setStarRating(val)}
+        <div className={styles.feedbackSection}>
+          <h2 className={styles.feedbackTitle}>Leave a Feedback</h2>
+          <div className={styles.messageBox}>
+            <h3>Write a review</h3>
+            <textarea
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              placeholder="Write your message here..."
             />
-          ))}
+          </div>
+          <div className={styles.ratingBox}>
+            <h3>Rate your experience</h3>
+            <div className={styles.ratingStars}>
+              {[1, 2, 3, 4, 5].map((val) => (
+                <Icon
+                  key={val}
+                  icon={val <= starRating ? "mdi:star" : "mdi:star-outline"}
+                  className={styles.ratingIcon}
+                  onClick={() => setStarRating(val)}
+                />
+              ))}
+            </div>
+            <button className={styles.submitBtn} onClick={handleSubmitFeedback}>
+              Submit Feedback
+            </button>
+          </div>
         </div>
-        <button className={styles.submitBtn} onClick={handleSubmitFeedback}>
-          Submit Feedback
-        </button>
       </div>
-    </div>
-  </div>
-);
+    </main>
+  );
 }
