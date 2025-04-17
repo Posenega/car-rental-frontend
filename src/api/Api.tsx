@@ -7,6 +7,8 @@ import {
 import { User } from "@/model/user"
 import { BranchesReponse, BranchParams } from "./models/ApiBranch"
 import { Car, CarFilters } from "./models/ApiCar"
+import { Review } from "@/model/review"
+import { string } from "prop-types"
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -76,4 +78,12 @@ export const CarRentalApi = {
       return api.get("/car/filtered", { params })
     },
   },
+  review: {
+    create: (body: any): Promise<AxiosResponse<{ message: string }>> =>
+      api.post("/reviews/create", body),
+    getAll: (): Promise<AxiosResponse<{ message: string, data: Review[] }>> =>
+      api.get("/reviews/"),
+    getUserReviews: (id: string): Promise<AxiosResponse<{ message: string, data: Review }>> =>
+      api.get(`/reviews/${id}`)
+  }
 }

@@ -199,6 +199,11 @@
     align-self: flex-start;
 }
 
+.submitBtn:hover {
+    background: #040d72;
+
+}
+
 @media (max-width: 768px) {
     .reviewItem {
         flex-direction: column;
@@ -217,7 +222,7 @@
         margin-left: 0;
     }
 
-    .ratingBox{
+    .ratingBox {
         margin-left: 0;
         gap: 10px;
     }
