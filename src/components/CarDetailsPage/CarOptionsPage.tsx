@@ -3,10 +3,8 @@ import styles from "./CarDetails.module.css";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 
-// 1. Define strict types for the keys
 type AddonKey = "chauffeur" | "babySeat" | "satellite" | "gps";
 
-// 2. Addon type
 type AddonOption = {
   key: AddonKey;
   label: string;

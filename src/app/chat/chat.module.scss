@@ -1,0 +1,81 @@
+.chatPage {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding: 60px; // adds space all around the chat box
+
+  .chatBox {
+    width: 100%;
+    height: calc(100vh - 120px); // adjust for top+bottom padding
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+
+  .header {
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    background-color: #303aa7;
+    color: white;
+    text-align: center;
+  }
+
+  .messages {
+    padding: 20px 40px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .botMsg {
+    background-color: #f0f3ff;
+    padding: 10px 15px;
+    border-radius: 12px;
+    align-self: flex-start;
+    max-width: 50%;
+    font-size: 0.95rem;
+  }
+
+  .userMsg {
+    background-color: #303aa7;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    align-self: flex-end;
+    max-width: 50%;
+    font-size: 0.95rem;
+  }
+
+  .inputArea {
+    display: flex;
+    border-top: 1px solid #eee;
+    background: white;
+
+    input {
+      flex: 1;
+      padding: 15px;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 15px 25px;
+      background-color: #303aa7;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+
+      &:hover {
+        background-color: #1f289e;
+      }
+    }
+  }
+}
