@@ -43,7 +43,7 @@ const footer = () => {
             <a href="/contact">Contact Us</a>{" "}
           </li>
           <li>
-            <a>Chat Support</a>{" "}
+            <a href="/chat">Chat Support</a>{" "}
           </li>
         </ul>
       </div>

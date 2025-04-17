@@ -29,11 +29,9 @@ const AboutUsPage = () => {
                 Provide reliable and high-quality rental cars across Lebanon
               </h3>
             </div>
-            {/* <div className="vertical_line"></div> */}
             <div className={styles.mission_card}>
               <h3>Make car booking effortless with a modern user experience</h3>
             </div>
-            {/* <div className="vertical_line"></div> */}
             <div className={styles.mission_card}>
               <h3>
                 Offer flexible and affordable pricing with full transparency
@@ -48,7 +46,7 @@ const AboutUsPage = () => {
               <div className={styles.choose_top}>
                 <FaCar size={40} style={{ color: "#303AA7" }} />
                 <h3>Wide Range of Vehicles</h3>
-                <a href="#">View All</a>
+                <a href="/cars">View All</a>
               </div>
               <p>
                 Choose from economy, luxury, SUVs, and eco-friendly electric
@@ -59,7 +57,7 @@ const AboutUsPage = () => {
               <div className={styles.choose_top}>
                 <IoLocationSharp size={40} style={{ color: "#303AA7" }} />
                 <h3>Multiple Branch Locations</h3>
-                <a href="#">View All</a>
+                <a href="/branches">View All</a>
               </div>
               <p>
                 Easily pick up and drop off your rental at convenient locations
@@ -70,7 +68,7 @@ const AboutUsPage = () => {
               <div className={styles.choose_top}>
                 <BiMessageRounded size={40} style={{ color: "#303AA7" }} />
                 <h3>24/7 Customer Support</h3>
-                <a href="#">View All</a>
+                <a href="/chat">View All</a>
               </div>
               <p>
                 Our team is available anytime to assist with reservations,
