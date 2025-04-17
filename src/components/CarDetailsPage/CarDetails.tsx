@@ -2,10 +2,10 @@
 import styles from "./CarDetails.module.css";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
-import { useRouter } from "next/navigation"; // 👈 Added for routing
+import { useRouter } from "next/navigation";
 
 export default function CarDetailsPage() {
-  const router = useRouter(); // 👈 Hook to navigate
+  const router = useRouter(); 
 
   const basePrice = 67.02;
 
@@ -132,7 +132,7 @@ export default function CarDetailsPage() {
             </span>
             <button
               className={styles.nextBtn}
-              onClick={() => router.push("/addons")} // 👈 Go to addons page
+              onClick={() => router.push("/addons")}
             >
               Next
             </button>

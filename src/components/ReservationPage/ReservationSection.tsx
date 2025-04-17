@@ -5,9 +5,8 @@ import { Icon } from "@iconify/react";
 
 export default function ReservationSection() {
 const [reservations, setReservations] = useState<Reservation[]>([]);
-  const [showSummaryIndex, setShowSummaryIndex] = useState<number | null>(null);
+const [showSummaryIndex, setShowSummaryIndex] = useState<number | null>(null);
 
-  // Load reservations from localStorage
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("reservations") || "[]");
     setReservations(saved);
