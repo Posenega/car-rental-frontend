@@ -112,7 +112,7 @@ export const CarRentalApi = {
       api.delete(`/order/${id}`),
     getPaidOrders: (
       id: string
-    ): Promise<AxiosResponse<{ message: string, orders: Order[] }>> =>
+    ): Promise<AxiosResponse<{ message: string; orders: Order[] }>> =>
       api.get(`/order/paid/${id}`),
   },
   review: {
