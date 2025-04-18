@@ -1,11 +1,15 @@
+import { Car } from "./car"
+
 export class Order {
   _id: string
+  fullName: string
   userId: string
   carId: string
   startDate: Date
   endDate: Date
   pickupLocation: string
   dropoffLocation: string
+  paymentOption?: string
   fuelOption: { type: string; price: number }
   selectedInsurance: {
     full: Number
@@ -19,12 +23,14 @@ export class Order {
     gps: Number
   }
   totalPrice: Number
-  paymentStatus: String
+  paymentStatus?: String
   invoiceUrl: String
+  car?: Car
 
   constructor(order: {
     _id: string
     userId: string
+    fullName: string
     carId: string
     startDate: Date
     endDate: Date
@@ -45,8 +51,10 @@ export class Order {
     totalPrice: Number
     paymentStatus: String
     invoiceUrl: String
+    car: Car
   }) {
     this._id = order._id
+    this.fullName = order.fullName
     this.userId = order.userId
     this.carId = order.carId
     this.startDate = order.startDate
@@ -59,6 +67,7 @@ export class Order {
     this.totalPrice = order.totalPrice
     this.paymentStatus = order.paymentStatus
     this.invoiceUrl = order.invoiceUrl
+    this.car = order.car
   }
 }
 

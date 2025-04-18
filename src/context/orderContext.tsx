@@ -32,6 +32,7 @@ export const OrderProvider: React.FC<{
     totalPrice: 0,
     paymentStatus: "",
     invoiceUrl: "",
+    fullName: "",
   })
 
   const [orders, setOrders] = React.useState<Order[]>([])

@@ -98,6 +98,14 @@ export const CarRentalApi = {
     getTopCar: (): Promise<
       AxiosResponse<{ message: string; car: Car }>
     > => api.get("/order/getMostReservedCarId"),
+    getOrder: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string; order: Order }>> =>
+      api.get(`/order/${id}`),
+    validateOrder: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string }>> =>
+      api.post(`/order/validate/${id}`),
   },
   review: {
     create: (
