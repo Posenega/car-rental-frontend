@@ -83,7 +83,7 @@ export default function page() {
       <div className={styles.form}>
         {/* Basic Car Details */}
         <div>
-          <label>Car Year</label>
+          <label>Car Name</label>
           <CustomInput
             control={control}
             name="carName"

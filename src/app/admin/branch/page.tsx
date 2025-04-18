@@ -22,7 +22,9 @@ export default function page() {
   const { storeBranches, branches } = useContext(
     BranchContext
   ) as BranchContextType
-  const [coords, setCoords] = React.useState<MapLocation[]>([])
+  const [coords, setCoords] = React.useState<
+    { label: string; id: string; mapLocation: MapLocation }[]
+  >([])
   const [image, setImage] = React.useState<string>("")
   const [imageFile, setImageFile] = React.useState<File>()
   const [mapLocation, setMapLocation] = React.useState<MapLocation>({
@@ -69,8 +71,12 @@ export default function page() {
       storeBranches(result.data)
       const tempCoordinates = result.data.map((branch) => {
         return {
-          lat: branch.mapLocation.lat,
-          lng: branch.mapLocation.lng,
+          id: branch._id,
+          label: branch.branchName,
+          mapLocation: {
+            lat: branch.mapLocation.lat,
+            lng: branch.mapLocation.lng,
+          },
         }
       })
       setCoords(tempCoordinates)
@@ -165,7 +171,7 @@ export default function page() {
             <Image height={200} width={200} alt="alt" src={image} />
           </div>
         )}
-        <MapComponent coords={coords} onSelect={handleSelect} />
+        <MapComponent onSelect={handleSelect} coords={coords} />
         <button onClick={handleSubmit(submit)}>Add Branch</button>
       </div>
       <div>
@@ -177,8 +183,7 @@ export default function page() {
               <span
                 onClick={() => {
                   deleteBranchApi.fire(value._id)
-                }}
-              >
+                }}>
                 delete
               </span>
             </p>

@@ -56,11 +56,13 @@ export default function RootLayout({
             <OrderProvider>
               <ReviewProvider>
                 <AuthLayer>
-                  {path.includes("auth") || <Header />}
+                  {path.includes("auth") ||
+                    path.includes("admin") || <Header />}
                   <body className={`${roboto.variable}`}>
                     {children}
                   </body>
-                  {path.includes("auth") || <Footer />}
+                  {path.includes("auth") ||
+                    path.includes("admin") || <Footer />}
                 </AuthLayer>
               </ReviewProvider>
             </OrderProvider>
