@@ -108,6 +108,7 @@
 .cartIcon {
   position: relative;
 }
+
 .inside {
   position: absolute;
   height: 10px;
@@ -118,17 +119,80 @@
   border-radius: 50%;
 }
 
-/* === Responsive Styles === */
-/* Tablet screen (768px and below) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  transition: all 0.3s ease;
+}
+
 @media (max-width: 768px) {
-  .main {
+  .navbar {
     display: none;
+  }
+
+  .hamburger {
+    display: flex;
   }
 }
 
-/* Phone screen (480px and below) */
-@media (max-width: 480px) {
-  .main {
+/* Hamburger icon for mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+  position: fixed;
+  /* fixed so it stays when scrolling */
+  top: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.215);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* Drawer content */
+.drawerContent {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.drawerContent a {
+  color: black;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.drawerContent a:hover {
+  color: gray;
+}
+
+/* Show hamburger and hide navbar on small screens */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar {
     display: none;
   }
 }

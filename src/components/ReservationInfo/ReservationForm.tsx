@@ -9,10 +9,12 @@ import { CarRentalApi } from "@/api/Api"
 import MapComponent from "../MapComponent/MapComponent"
 import { BranchContext } from "@/context/branchContext"
 import { Branch, BranchContextType } from "@/model/branch"
+import BranchCard from "../BranchCard"
 
 export default function ReservationForm() {
   const [locations, setLocations] = useState<string[]>([])
-  const { storeBranches, } = useContext(
+  const [showModal, setShowModal] = useState<Boolean>(false)
+  const { storeBranches, storeBranch, branch } = useContext(
     BranchContext
   ) as BranchContextType
   const [coords, setCoords] = useState<
@@ -22,6 +24,7 @@ export default function ReservationForm() {
         lat: number
         lng: number
       }
+      id: string
     }[]
     | null
   >([])
@@ -43,6 +46,16 @@ export default function ReservationForm() {
       console.error("Error creating order:", message)
     },
   })
+  const getBranch = useApiStatus({
+    api: CarRentalApi.branch.getBranch,
+    onSuccess({ result }) {
+      console.log("Order created successfully:", result)
+      storeBranch(result.branch)
+    },
+    onFail({ message }) {
+      console.error("Error creating order:", message)
+    },
+  })
   const getBranches = useApiStatus({
     api: CarRentalApi.branch.getAll,
     onSuccess({ result }) {
@@ -55,6 +68,7 @@ export default function ReservationForm() {
       storeBranches(result.data)
       let coordsTemp = branchesTemp.map((branch) => {
         return {
+          id: branch._id,
           label: branch.branchName,
           mapLocation: {
             lat: branch.mapLocation.lat,
@@ -132,6 +146,23 @@ export default function ReservationForm() {
 
   return (
     <div className={styles.page}>
+      {showModal && <div className={styles.modal}>
+        <div onClick={() => {
+          setShowModal(false)
+        }} className={styles.layer} />
+        <div className={styles.card}>
+          <BranchCard
+            key={branch._id}
+            name={branch.branchName}
+            address={branch.location}
+            phone={branch.phoneNumber}
+            hours={branch.openingHours}
+            mapUrl={`https://www.google.com/maps?q=${branch.mapLocation.lat},${branch.mapLocation.lng}`
+            }
+            image={branch.branchImage}
+          />
+        </div>
+      </div>}
       <div className={styles.wrapper}>
         {/* LEFT FORM */}
         <div className={styles.left}>
@@ -361,8 +392,9 @@ export default function ReservationForm() {
             <MapComponent
               clickable={false}
               coords={coords || []}
-              onSelect={(location) => {
-                console.log("Selected location:", location)
+              onSelect={(id: string) => {
+                setShowModal(true)
+                getBranch.fire(id)
               }}
             />
           </div>

@@ -54,6 +54,7 @@ export default function CheckoutPage() {
     },
     onFail({ message }) {
       console.log(message)
+      setCouponError(message)
     },
   })
 
@@ -132,45 +133,57 @@ export default function CheckoutPage() {
       <div className={styles.checkoutGrid}>
         {/* Payment Section */}
         <div className={styles.payment}>
-          <h2>Choose Payment Method</h2>
-          <label>Redeem your points</label>
-          <input
-            type="checkbox"
-            checked={points}
-            disabled={couponDiscount > 0}
-            onChange={() => {
-              setPoints(!points)
-              if (!points) {
-                setCouponCode("")
-                setCouponDiscount(0)
-                setCouponError("")
-              }
-            }}
-          />
-          <label>Have a coupon?</label>
-          <input
-            type="text"
-            value={couponCode}
-            disabled={points}
-            onChange={(e) => setCouponCode(e.target.value)}
-            placeholder="Enter coupon code"
-          />
-          <button
-            disabled={points}
-            onClick={() => {
-              applyCoupon.fire(couponCode)
-            }}
-            type="button">
-            Apply Coupon
-          </button>
-          {couponError && (
-            <p className={styles.error}>{couponError}</p>
-          )}
-          {couponDiscount > 0 && (
-            <p className={styles.success}>
-              Coupon applied: {couponDiscount}% off
-            </p>
-          )}
+          <div className={styles.pointsCouponWrapper}>
+            <div className={styles.pointsCheckbox}>
+              <label>Redeem your points</label>
+              <input
+                type="checkbox"
+                checked={points}
+                disabled={couponDiscount > 0}
+                onChange={() => {
+                  setPoints(!points)
+                  if (!points) {
+                    setCouponCode("")
+                    setCouponDiscount(0)
+                    setCouponError("")
+                  }
+                }}
+              />
+            </div>
+
+            <div className={styles.couponField}>
+              <label>Have a coupon?</label>
+              <div className={styles.inputRow}>
+                <input
+                  type="text"
+                  value={couponCode}
+                  disabled={points}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  placeholder="Enter coupon code"
+                />
+                <button
+                  disabled={points}
+                  onClick={() => {
+                    applyCoupon.fire(couponCode)
+                  }}
+                  type="button">
+                  Apply
+                </button>
+              </div>
+
+              {couponError && (
+                <p className={styles.error}>
+                  Coupon error: invalid or already used
+                </p>
+              )}
+
+              {couponDiscount > 0 && (
+                <p className={styles.success}>
+                  Coupon applied: {couponDiscount}% off
+                </p>
+              )}
+            </div>
+          </div>
 
           <div className={styles.methods}>
             <label
@@ -333,9 +346,9 @@ export default function CheckoutPage() {
                 $
                 {JSON.stringify(
                   Number(order?.totalPrice ?? 0) -
-                    (Number(order?.totalPrice ?? 0) *
-                      couponDiscount) /
-                      100
+                  (Number(order?.totalPrice ?? 0) *
+                    couponDiscount) /
+                  100
                 )}
               </span>
               {points && (
@@ -355,6 +368,6 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
-    </main>
+    </main >
   )
 }

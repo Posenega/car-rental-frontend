@@ -10,6 +10,7 @@ import { Car, CarFilters } from "./models/ApiCar"
 import { Order } from "@/model/order"
 import { Review } from "@/model/review"
 import { string } from "prop-types"
+import { Branch } from "@/model/branch"
 import { EmailRequestInterface } from "./models/ApiEmail"
 
 const api = axios.create({
@@ -60,6 +61,10 @@ export const CarRentalApi = {
       id: string
     ): Promise<AxiosResponse<{ message: string }>> =>
       api.delete(`/branch/delete/${id}`),
+    getBranch: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string, branch: Branch }>> =>
+      api.get(`/branch/${id}`),
   },
   car: {
     create: (
