@@ -41,7 +41,7 @@ const Header = () => {
                   <a href="/profile">Profile</a>
                   <hr />
                   <a href="/points">🎖️ Points</a>
-                  <a href="/support">💬 Chat Support</a>
+                  <a href="/chat">💬 Chat Support</a>
                 </div>
               )}
             </div>
