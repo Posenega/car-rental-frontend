@@ -10,7 +10,6 @@
     justify-content: flex-start;
     /* Align items to the start of the row */
     align-items: flex-start;
-    height: 350px;
     width: 90%;
     background-color: white;
     color: black;
@@ -34,7 +33,7 @@
 }
 
 .carInfo img {
-    width: 280px;
+    width: 250px;
     height: auto;
 
 }

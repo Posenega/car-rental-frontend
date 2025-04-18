@@ -17,14 +17,32 @@ export default function ReservationSection() {
   const getOrders = useApiStatus({
     api: CarRentalApi.order.getAll,
     onSuccess({ result }) {
+      console.log(result.orders)
       storeOrders(result.orders)
     },
-    onFail({ message }) {},
+    onFail({ message }) { },
+  })
+  const deleteOrders = useApiStatus({
+    api: CarRentalApi.order.deleteOrder,
+    onSuccess({ result }) {
+      console.log(result.orders)
+      window.location.pathname = "/reservation"
+    },
+    onFail({ message }) {
+      console.log(message)
+    },
   })
 
   useEffect(() => {
+    console.log(user._id)
     getOrders.fire(user._id)
-  }, [])
+  }, [user])
+
+
+  const handleDelete = (index: number) => {
+    const id = orders[index]._id
+    deleteOrders.fire(id)
+  }
 
   if (orders.length === 0) {
     return (
@@ -55,25 +73,27 @@ export default function ReservationSection() {
       {orders.map((r, i) => (
         <div key={i} className={styles.row}>
           <div>
-            {/* <img
-              src={r.image}
-              alt={r.model}
+            <img
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/" + r.car?.carImage}
+              alt={r.car?.carName}
               className={styles.carImage}
-            /> */}
+            />
             <p
               className={styles.viewSummary}
-              // onClick={() => setShowSummaryIndex(i)}
+            // onClick={() => setShowSummaryIndex(i)}
             >
               View Summary
             </p>
           </div>
-          <span>{r.model}</span>
+          <span>{r.car?.carYear}</span>
           <span>
-            {r.pickup} → {r.return}
+            {r.pickupLocation} → {r.dropoffLocation}
           </span>
-          <span>{r.days} days</span>
-          <span>{r.price}$</span>
-          <Icon icon="mdi:pencil-outline" className={styles.icon} />
+          <span>{Math.ceil(
+            (new Date(r.endDate).getTime() - new Date(r.startDate).getTime()) /
+            (1000 * 60 * 60 * 24)
+          )} days</span>
+          <span>{r.totalPrice}$</span>
           <Icon
             icon="mdi:delete-outline"
             className={styles.icon}
@@ -87,72 +107,7 @@ export default function ReservationSection() {
         Continue Shopping
       </a>
 
-      <div className={styles.totalBox}>
-        <p>
-          Subtotal : <strong>{subtotal}$</strong>
-        </p>
-        <p>
-          Services : <strong>{services}$</strong>
-        </p>
-        <p>
-          Total: <strong>{total}$</strong>
-        </p>
-        <button className={styles.checkoutBtn}>Checkout</button>
-      </div>
 
-      {showSummaryIndex !== null && (
-        <div
-          className={styles.summaryModal}
-          onClick={() => setShowSummaryIndex(null)}>
-          <div
-            className={styles.modalContent}
-            onClick={(e) => e.stopPropagation()}>
-            <h3>Reservation Summary</h3>
-            <div className={styles.summaryCar}>
-              <img src={orders[showSummaryIndex].image} />
-              <p>{orders[showSummaryIndex].model}</p>
-              <p className={styles.hybrid}>
-                {orders[showSummaryIndex].summary?.type}
-              </p>
-            </div>
-            <div className={styles.infoGrid}>
-              <div>
-                <span className={styles.label}>Pickup Branch:</span>{" "}
-                {orders[showSummaryIndex].pickup}
-              </div>
-              <div>
-                <span className={styles.label}>Return Branch:</span>{" "}
-                {orders[showSummaryIndex].return}
-              </div>
-              <div>
-                <span className={styles.label}>Pickup Date:</span>{" "}
-                {orders[showSummaryIndex].summary?.pickupDate}
-              </div>
-              <div>
-                <span className={styles.label}>Return Date:</span>{" "}
-                {orders[showSummaryIndex].summary?.returnDate}
-              </div>
-              <div>
-                <span className={styles.label}>Full Name:</span>{" "}
-                {orders[showSummaryIndex].summary?.fullName}
-              </div>
-              <div>
-                <span className={styles.label}>Age:</span>{" "}
-                {orders[showSummaryIndex].summary?.age}
-              </div>
-              <div>
-                <span className={styles.label}>Price /day:</span>{" "}
-                {orders[showSummaryIndex].summary?.pricePerDay}
-              </div>
-              <div>
-                <span className={styles.label}>Total Price:</span>{" "}
-                {orders[showSummaryIndex].summary?.totalPrice}
-              </div>
-            </div>
-            <button className={styles.checkoutBtn}>Checkout</button>
-          </div>
-        </div>
-      )}
     </section>
   )
 }

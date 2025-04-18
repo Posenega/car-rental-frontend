@@ -1,17 +1,17 @@
 import styles from "./BookingCard.module.css";
 
 type BookingProps = {
-  carImage: string;
-  carModel: string;
-  carType: string;
-  totalPrice: string;
-  pickupBranch: string;
-  pickupDate: string;
-  returnBranch: string;
-  returnDate: string;
-  addons: string;
-  status: string;
-  invoiceLink: string;
+  carImage?: string;
+  carModel?: string;
+  carType?: string;
+  totalPrice?: string;
+  pickupBranch?: string;
+  pickupDate?: string;
+  returnBranch?: string;
+  returnDate?: string;
+  addons?: string;
+  status?: String;
+  invoiceLink?: string;
 };
 
 const BookingCard = ({
@@ -30,7 +30,7 @@ const BookingCard = ({
   return (
     <div className={styles.container}>
       <div className={styles.carInfo}>
-        <img src={carImage} alt="Car" />
+        <img src={process.env.NEXT_PUBLIC_BASE_URL + "/" + carImage} alt="Car" />
         <h2>{carModel}</h2>
         <h3>{carType}</h3>
         <p>
@@ -59,9 +59,6 @@ const BookingCard = ({
           <p><strong>Return Date:</strong> {returnDate}</p>
         </div>
 
-        <div className={styles.buttons}>
-          <button className={styles.view}>View Details</button>
-        </div>
       </div>
     </div>
   );

@@ -106,6 +106,14 @@ export const CarRentalApi = {
       id: string
     ): Promise<AxiosResponse<{ message: string }>> =>
       api.post(`/order/validate/${id}`),
+    deleteOrder: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string }>> =>
+      api.delete(`/order/${id}`),
+    getPaidOrders: (
+      id: string
+    ): Promise<AxiosResponse<{ message: string, orders: Order[] }>> =>
+      api.get(`/order/paid/${id}`),
   },
   review: {
     create: (

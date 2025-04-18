@@ -2,6 +2,7 @@ import styles from "./TopCars.module.css"
 import { Icon } from "@iconify/react"
 
 interface CarCardProps {
+  id?: string,
   name: string
   image: string
   price: string
@@ -11,7 +12,7 @@ interface CarCardProps {
   }[]
 }
 
-const CarCard = ({ name, image, price, features }: CarCardProps) => {
+const CarCard = ({ id, name, image, price, features }: CarCardProps) => {
   return (
     <div className={styles.card}>
       <img src={image} alt={name} className={styles.carImage} />
@@ -27,7 +28,9 @@ const CarCard = ({ name, image, price, features }: CarCardProps) => {
         </ul>
         <div className={styles.footer}>
           <p className={styles.price}>{price}</p>
-          <button className={styles.reserveBtn}>Reserve Now</button>
+          <button onClick={() => {
+            window.location.pathname = `/${id}`
+          }} className={styles.reserveBtn}>Reserve Now</button>
         </div>
       </div>
     </div>

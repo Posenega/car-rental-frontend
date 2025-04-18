@@ -51,7 +51,7 @@ const TopCars = () => {
     <section className={styles.topCars}>
       <h2 className={styles.title}>Top Cars</h2>
       <div className={styles.carList}>
-        <CarCard {...carProp} />
+        <CarCard id={car?._id} {...carProp} />
         <h3>Average Daily Rental Price: {price}$</h3>
       </div>
     </section>

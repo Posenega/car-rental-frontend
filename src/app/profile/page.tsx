@@ -133,9 +133,6 @@ const ProfilePage = ({
         <nav className={styles.tabNav}>
           <a onClick={() => handleTabClick("bookings")}>Bookings</a>
           <a onClick={() => handleTabClick("invoices")}>Invoices</a>
-          <a onClick={() => handleTabClick("reservation")}>
-            Reservation
-          </a>
           <a onClick={() => handleTabClick("reviews")}>Reviews</a>
         </nav>
 
