@@ -106,7 +106,7 @@ export const CarRentalApi = {
       body: any
     ): Promise<AxiosResponse<{ message: string }>> =>
       api.post(`/order/validate/${body.orderId}`, {
-        totalPrice: body.totalPrice
+        totalPrice: body.totalPrice,
       }),
     deleteOrder: (
       id: string
@@ -129,5 +129,16 @@ export const CarRentalApi = {
       id: string
     ): Promise<AxiosResponse<{ message: string; data: Review }>> =>
       api.get(`/reviews/${id}`),
+  },
+  coupon: {
+    validateCoupon: (
+      code: string
+    ): Promise<
+      AxiosResponse<{
+        valid: boolean
+        discountAmount: number
+        message?: string
+      }>
+    > => api.get(`/coupons/validate/${code}`),
   },
 }

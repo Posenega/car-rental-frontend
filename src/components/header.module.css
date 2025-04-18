@@ -105,6 +105,19 @@
   gap: 10px;
 }
 
+.cartIcon {
+  position: relative;
+}
+.inside {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  border-radius: 50%;
+}
+
 /* === Responsive Styles === */
 /* Tablet screen (768px and below) */
 @media (max-width: 768px) {

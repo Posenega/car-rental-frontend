@@ -21,6 +21,9 @@ export default function CheckoutPage() {
     expiry: "",
     cvc: "",
   })
+  const [couponCode, setCouponCode] = useState("")
+  const [couponDiscount, setCouponDiscount] = useState(0) // in percentage
+  const [couponError, setCouponError] = useState("")
 
   const getOrder = useApiStatus({
     api: CarRentalApi.order.getOrder,
@@ -37,6 +40,17 @@ export default function CheckoutPage() {
     onSuccess({ result }) {
       console.log(result)
       window.location.href = "/"
+    },
+    onFail({ message }) {
+      console.log(message)
+    },
+  })
+
+  const applyCoupon = useApiStatus({
+    api: CarRentalApi.coupon.validateCoupon,
+    onSuccess({ result }) {
+      console.log(result.discountAmount)
+      setCouponDiscount(result.discountAmount)
     },
     onFail({ message }) {
       console.log(message)
@@ -74,7 +88,6 @@ export default function CheckoutPage() {
   }
 
   const handleConfirm = () => {
-    console.log("hello")
     if (paymentMethod === "online") {
       if (
         !cardDetails.name ||
@@ -90,18 +103,26 @@ export default function CheckoutPage() {
     localStorage.removeItem("carDetails")
     var totalPrice = Number(order?.totalPrice)
     var body: {
-      totalPrice: Number,
+      totalPrice: Number
       orderId: string
     } = {
       totalPrice: Number(order?.totalPrice ?? 0),
-      orderId: orderId
+      orderId: orderId,
     }
+    let finalPrice = Number(order?.totalPrice ?? 0)
+
+    // Apply points OR coupon
     if (points) {
-      body.totalPrice = Number(order?.totalPrice ?? 0) - user.points
+      finalPrice -= user.points
+    } else if (couponDiscount > 0) {
+      finalPrice -= (totalPrice * couponDiscount) / 100
     }
 
-
-    validateOrder.fire(body)
+    validateOrder.fire({
+      orderId,
+      totalPrice: finalPrice,
+      couponCode: couponCode,
+    })
   }
 
   return (
@@ -113,9 +134,44 @@ export default function CheckoutPage() {
         <div className={styles.payment}>
           <h2>Choose Payment Method</h2>
           <label>Redeem your points</label>
-          <input type="checkbox" checked={points} onChange={() => {
-            setPoints(!points)
-          }} />
+          <input
+            type="checkbox"
+            checked={points}
+            disabled={couponDiscount > 0}
+            onChange={() => {
+              setPoints(!points)
+              if (!points) {
+                setCouponCode("")
+                setCouponDiscount(0)
+                setCouponError("")
+              }
+            }}
+          />
+          <label>Have a coupon?</label>
+          <input
+            type="text"
+            value={couponCode}
+            disabled={points}
+            onChange={(e) => setCouponCode(e.target.value)}
+            placeholder="Enter coupon code"
+          />
+          <button
+            disabled={points}
+            onClick={() => {
+              applyCoupon.fire(couponCode)
+            }}
+            type="button">
+            Apply Coupon
+          </button>
+          {couponError && (
+            <p className={styles.error}>{couponError}</p>
+          )}
+          {couponDiscount > 0 && (
+            <p className={styles.success}>
+              Coupon applied: {couponDiscount}% off
+            </p>
+          )}
+
           <div className={styles.methods}>
             <label
               className={
@@ -262,7 +318,9 @@ export default function CheckoutPage() {
                   if (value !== 0) {
                     return (
                       <li key={key}>
-                        <>{key} : {value}</>
+                        <>
+                          {key} : {value}
+                        </>
                       </li>
                     )
                   }
@@ -272,17 +330,27 @@ export default function CheckoutPage() {
             <p className={styles.total}>
               <strong>Total Price:</strong>{" "}
               <span className={points ? styles.cross : ""}>
-                ${JSON.stringify(order?.totalPrice)}
+                $
+                {JSON.stringify(
+                  Number(order?.totalPrice ?? 0) -
+                    (Number(order?.totalPrice ?? 0) *
+                      couponDiscount) /
+                      100
+                )}
               </span>
-              {points && <>{" "} -
-                <span>
-                  {" "}${JSON.stringify(user.points)}{" "}
-                </span>
-                =
-                <span>
-                  {" "}${JSON.stringify(Number(order?.totalPrice ?? 0) - user.points)}
-                </span>
-              </>}
+              {points && (
+                <>
+                  {" "}
+                  -<span> ${JSON.stringify(user.points)} </span>=
+                  <span>
+                    {" "}
+                    $
+                    {JSON.stringify(
+                      Number(order?.totalPrice ?? 0) - user.points
+                    )}
+                  </span>
+                </>
+              )}
             </p>
           </div>
         </div>

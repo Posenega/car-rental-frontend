@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import styles from "./header.module.css"
 import { MdPersonOutline } from "react-icons/md"
 import { HiOutlineShoppingCart } from "react-icons/hi"
@@ -10,6 +10,16 @@ import { UserContextType } from "@/model/user"
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false)
+  const [contain, setContain] = useState(false)
+
+  useEffect(() => {
+    const order = localStorage.getItem("order")
+    if (order) {
+      setContain(true)
+    } else {
+      setContain(false)
+    }
+  }, [])
   const { user } = useContext(UserContext) as UserContextType
 
   return (
@@ -29,7 +39,10 @@ const Header = () => {
 
           <div className={styles.rightIcons}>
             <a href="/checkout" className={styles.icon}>
-              <HiOutlineShoppingCart size={20} />
+              <div className={styles.cartIcon}>
+                {contain && <div className={styles.inside} />}
+                <HiOutlineShoppingCart size={20} />
+              </div>
             </a>
             <div className={styles.dropdownWrapper}>
               <div
