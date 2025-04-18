@@ -1,35 +1,59 @@
-import React from "react"
-import styles from "./branches.module.css"
-import BranchCard from "../../components/BranchCard"
-import img from "../../assets/branch.png"
+"use client";
 
-const branches = [
-  {
-    name: "Beirut Branch",
-    address: "Hamra Main Street, Beirut",
-    phone: "01 234 567",
-    hours: "Mon-Fri: 9AM - 6PM",
-    mapUrl: "https://maps.google.com/?q=Beirut",
-    image: img.src,
-  },
-  {
-    name: "Jounieh Branch",
-    address: "Highway Exit 7, Jounieh",
-    phone: "09 876 543",
-    hours: "Mon-Sat: 8AM - 8PM",
-    mapUrl: "https://maps.google.com/?q=Jounieh",
-    image: img.src,
-  },
-]
+import React, { useEffect, useState } from "react";
+import styles from "./branches.module.css";
+import BranchCard from "../../components/BranchCard";
+import { CarRentalApi } from "@/api/Api"; // update path if needed
+
+export interface Branch {
+  _id: string;
+  branchName: string;
+  location: string;
+  phoneNumber: string;
+  openingHours: string;
+  url: string;
+  mapLocation: any;
+  branchImage: string;
+}
+
+export interface BranchesResponse {
+  message: string;
+  data: Branch[];
+}
 
 const BranchesPage = () => {
+  //adding code
+  const [branches, setBranches] = useState<Branch[]>([]);
+
+  useEffect(() => {
+    const getBranches = async () => {
+      try {
+        const response = await CarRentalApi.branch.getAll(); // your Axios call
+        setBranches(response.data.data); // assuming backend returns { message, data: [...] }
+      } catch (error) {
+        console.error("Failed to fetch branches:", error);
+      }
+    };
+
+    getBranches();
+  }, []);
+
   return (
     <main>
       <div className={styles.page}>
         <h1>Explore our Branches</h1>
         <div className={styles.branch_container}>
-          {branches.map((branch, idx) => (
-            <BranchCard key={idx} {...branch} />
+          {branches.map((branch) => (
+            <BranchCard
+              key={branch._id}
+              name={branch.branchName}
+              address={branch.location}
+              phone={branch.phoneNumber}
+              hours={branch.openingHours}
+              mapUrl={`https://www.google.com/maps?q=${branch.mapLocation.lat},${branch.mapLocation.lng}`
+              }
+              image={branch.branchImage} // update if deployed
+            />
           ))}
         </div>
       </div>

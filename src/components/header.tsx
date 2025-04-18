@@ -40,7 +40,6 @@ const Header = () => {
                   <a href="/signup">Sign up</a>
                   <a href="/profile">Profile</a>
                   <hr />
-                  <a href="/points">🎖️ Points</a>
                   <a href="/chat">💬 Chat Support</a>
                 </div>
               )}

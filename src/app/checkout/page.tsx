@@ -1,14 +1,18 @@
 "use client"
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "./checkout.module.scss"
 import { CarRentalApi } from "@/api/Api"
 import { useApiStatus } from "@/hooks/useApiStatus"
 import { Order } from "@/model/order"
+import { UserContext } from "@/context/userContext"
+import { UserContextType } from "@/model/user"
 
 export default function CheckoutPage() {
+  const { user } = useContext(UserContext) as UserContextType
   const [paymentMethod, setPaymentMethod] = useState<
     "location" | "online"
   >("location")
+  const [points, setPoints] = useState(false)
   const [order, setOrder] = useState<Order>()
   const [orderId, setOrderId] = useState<string>("")
   const [cardDetails, setCardDetails] = useState({
@@ -84,7 +88,20 @@ export default function CheckoutPage() {
     }
     localStorage.removeItem("order")
     localStorage.removeItem("carDetails")
-    validateOrder.fire(orderId)
+    var totalPrice = Number(order?.totalPrice)
+    var body: {
+      totalPrice: Number,
+      orderId: string
+    } = {
+      totalPrice: Number(order?.totalPrice ?? 0),
+      orderId: orderId
+    }
+    if (points) {
+      body.totalPrice = Number(order?.totalPrice ?? 0) - user.points
+    }
+
+
+    validateOrder.fire(body)
   }
 
   return (
@@ -95,6 +112,10 @@ export default function CheckoutPage() {
         {/* Payment Section */}
         <div className={styles.payment}>
           <h2>Choose Payment Method</h2>
+          <label>Redeem your points</label>
+          <input type="checkbox" checked={points} onChange={() => {
+            setPoints(!points)
+          }} />
           <div className={styles.methods}>
             <label
               className={
@@ -241,7 +262,7 @@ export default function CheckoutPage() {
                   if (value !== 0) {
                     return (
                       <li key={key}>
-                        {key}: {value}
+                        <>{key} : {value}</>
                       </li>
                     )
                   }
@@ -250,7 +271,18 @@ export default function CheckoutPage() {
             </ul>
             <p className={styles.total}>
               <strong>Total Price:</strong>{" "}
-              <span>${order?.totalPrice}</span>
+              <span className={points ? styles.cross : ""}>
+                ${JSON.stringify(order?.totalPrice)}
+              </span>
+              {points && <>{" "} -
+                <span>
+                  {" "}${JSON.stringify(user.points)}{" "}
+                </span>
+                =
+                <span>
+                  {" "}${JSON.stringify(Number(order?.totalPrice ?? 0) - user.points)}
+                </span>
+              </>}
             </p>
           </div>
         </div>
