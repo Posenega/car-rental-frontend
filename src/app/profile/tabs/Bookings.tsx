@@ -1,13 +1,12 @@
-"use client";
-import React, { useContext, useEffect, useState } from "react";
-import BookingCard from "../../../components/BookingCard";
-import styles from "../profile.module.css";
-import carImg from "../../../assets/car.png";
-import { useApiStatus } from "@/hooks/useApiStatus";
-import { CarRentalApi } from "@/api/Api";
-import { UserContext } from "@/context/userContext";
-import { UserContextType } from "@/model/user";
-import { Order } from "@/model/order";
+"use client"
+import React, { useContext, useEffect, useState } from "react"
+import BookingCard from "../../../components/BookingCard"
+import styles from "../profile.module.css"
+import { useApiStatus } from "@/hooks/useApiStatus"
+import { CarRentalApi } from "@/api/Api"
+import { UserContext } from "@/context/userContext"
+import { UserContextType } from "@/model/user"
+import { Order } from "@/model/order"
 
 const BookingsTab = () => {
   const { user } = useContext(UserContext) as UserContextType
@@ -41,24 +40,27 @@ const BookingsTab = () => {
     <section className={styles.bookings}>
       <h2>My Bookings</h2>
       {orders.map((value, index) => {
-        return < BookingCard
-          key={index}
-          carImage={value.car?.carImage}
-          carModel={value.car?.carName}
-          carType={value.car?.fuelType}
-          totalPrice={JSON.stringify(value.totalPrice)}
-          pickupBranch={value.pickupLocation}
-          pickupDate={formatDateToDDMMYYYY(new Date(value.startDate))}
-          returnBranch={value.dropoffLocation}
-          returnDate={formatDateToDDMMYYYY(new Date(value.endDate))}
-          addons="GPS, Child Seat"
-          status={value.paymentStatus}
-          invoiceLink="#"
-        />
-      })
-      }
+        return (
+          <BookingCard
+            key={index}
+            carImage={value.car?.carImage}
+            carModel={value.car?.carName}
+            carType={value.car?.fuelType}
+            totalPrice={JSON.stringify(value.totalPrice)}
+            pickupBranch={value.pickupLocation}
+            pickupDate={formatDateToDDMMYYYY(
+              new Date(value.startDate)
+            )}
+            returnBranch={value.dropoffLocation}
+            returnDate={formatDateToDDMMYYYY(new Date(value.endDate))}
+            addons="GPS, Child Seat"
+            status={value.paymentStatus}
+            invoiceLink={value.invoiceUrl}
+          />
+        )
+      })}
     </section>
-  );
+  )
 }
 
-export default BookingsTab;
+export default BookingsTab

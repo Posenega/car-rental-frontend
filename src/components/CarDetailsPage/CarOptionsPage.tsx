@@ -192,6 +192,7 @@ export default function FinalReservationPage() {
                   "carDetails",
                   JSON.stringify(data)
                 )
+                window.location.pathname = "/reservation-info"
               }}>
               Reserve
             </button>

@@ -44,7 +44,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
   onSelect,
 }) => {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API || "",
+    googleMapsApiKey: "AIzaSyDMcq48hm0zmZkhjol54AkUIjFmJU6ikKI",
   })
 
   const [selectedLocation, setSelectedLocation] =
@@ -75,9 +75,8 @@ const MapComponent: React.FC<MapComponentProps> = ({
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={12}
-      onClick={handleMapClick}
-    >
+      zoom={8}
+      onClick={handleMapClick}>
       {coords.map((loc) => (
         <Marker
           // key={lo}

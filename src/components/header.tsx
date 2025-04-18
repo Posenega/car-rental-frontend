@@ -25,7 +25,7 @@ const Header = () => {
           </div>
 
           <div className={styles.rightIcons}>
-            <a href="/cart" className={styles.icon}>
+            <a href="/checkout" className={styles.icon}>
               <HiOutlineShoppingCart size={20} />
             </a>
             <div className={styles.dropdownWrapper}>

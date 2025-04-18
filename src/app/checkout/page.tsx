@@ -10,13 +10,13 @@ export default function CheckoutPage() {
     "location" | "online"
   >("location")
   const [order, setOrder] = useState<Order>()
+  const [orderId, setOrderId] = useState<string>("")
   const [cardDetails, setCardDetails] = useState({
     name: "",
     cardNumber: "",
     expiry: "",
     cvc: "",
   })
-  const orderid = "68017872893f806cd1cb1b9c"
 
   const getOrder = useApiStatus({
     api: CarRentalApi.order.getOrder,
@@ -40,17 +40,18 @@ export default function CheckoutPage() {
   })
 
   useEffect(() => {
-    getOrder.fire(orderid)
-  }, [orderid])
-
-  useEffect(() => {
     const storedOrder = localStorage.getItem("order")
     if (storedOrder) {
       const parsedOrder = JSON.parse(storedOrder)
       setOrder(parsedOrder)
       setPaymentMethod(parsedOrder.paymentOption)
+      setOrderId(parsedOrder._id)
     }
   }, [])
+
+  useEffect(() => {
+    getOrder.fire(orderId)
+  }, [orderId])
 
   function formatDateToDDMMYYYY(date: Date): string {
     const day = String(date.getDate()).padStart(2, "0")
@@ -83,7 +84,7 @@ export default function CheckoutPage() {
     }
     localStorage.removeItem("order")
     localStorage.removeItem("carDetails")
-    validateOrder.fire(orderid)
+    validateOrder.fire(orderId)
   }
 
   return (

@@ -1,16 +1,27 @@
 "use client"
 import styles from "./ReservationInfo.module.css"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useContext, useEffect, useState } from "react"
 import PhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
 import { Car } from "@/model/car"
 import { useApiStatus } from "@/hooks/useApiStatus"
 import { CarRentalApi } from "@/api/Api"
+import MapComponent from "../MapComponent/MapComponent"
+import { BranchContext } from "@/context/branchContext"
+import { BranchContextType } from "@/model/branch"
 
 export default function ReservationForm() {
-  const router = useRouter()
-  const pricePerDay = 67.02
+  const [locations, setLocations] = useState<string[]>([])
+  const { storeBranches, branches } = useContext(
+    BranchContext
+  ) as BranchContextType
+  const [coords, setCoords] = useState<
+    | {
+        lat: number
+        lng: number
+      }[]
+    | null
+  >([])
   const carDetails = JSON.parse(
     localStorage.getItem("carDetails") || "{}"
   )
@@ -22,8 +33,30 @@ export default function ReservationForm() {
     api: CarRentalApi.order.create,
     onSuccess({ result }) {
       console.log("Order created successfully:", result)
-      // localStorage.removeItem("carDetails")
-      // window.location.pathname = "/reservation-success"
+      localStorage.removeItem("carDetails")
+      window.location.pathname = "/"
+    },
+    onFail({ message }) {
+      console.error("Error creating order:", message)
+    },
+  })
+  const getBranches = useApiStatus({
+    api: CarRentalApi.branch.getAll,
+    onSuccess({ result }) {
+      let branchesTemp = result.data
+      let branchesNames = branchesTemp.map((branch) => {
+        return branch.branchName
+      })
+
+      setLocations(branchesNames)
+      storeBranches(result.data)
+      let coordsTemp = branchesTemp.map((branch) => {
+        return {
+          lat: branch.mapLocation.lat,
+          lng: branch.mapLocation.lng,
+        }
+      })
+      setCoords(coordsTemp)
     },
     onFail({ message }) {
       console.error("Error creating order:", message)
@@ -58,13 +91,6 @@ export default function ReservationForm() {
       : 1
 
   const totalPrice = (carDetails.totalPrice * dayCount).toFixed(2)
-  const locations = [
-    "Tripoli",
-    "Koura",
-    "Jounieh",
-    "Hazmieh",
-    "Saida",
-  ]
 
   const handleAddToCart = () => {
     if (!ageValid) return
@@ -93,6 +119,10 @@ export default function ReservationForm() {
     }
     orderCreationApi.fire(newReservation)
   }
+
+  useEffect(() => {
+    getBranches.fire()
+  }, [])
 
   return (
     <div className={styles.page}>
@@ -253,65 +283,82 @@ export default function ReservationForm() {
         </div>
 
         {/* SUMMARY */}
-        <div className={styles.summaryCard}>
-          <h3 className={styles.summaryTitle}>Reservation Summary</h3>
-          <img
-            src={
-              process.env.NEXT_PUBLIC_BASE_URL + "/" + car.carImage
-            }
-            alt="car"
-            className={styles.summaryImage}
-          />
-          <div className={styles.carInfo}>
-            <p className={styles.model}>Lexus UX 250h</p>
-            <p className={styles.badge}>Hybrid</p>
+        <div>
+          <div className={styles.summaryCard}>
+            <h3 className={styles.summaryTitle}>
+              Reservation Summary
+            </h3>
+            <img
+              src={
+                process.env.NEXT_PUBLIC_BASE_URL + "/" + car.carImage
+              }
+              alt="car"
+              className={styles.summaryImage}
+            />
+            <div className={styles.carInfo}>
+              <p className={styles.model}>Lexus UX 250h</p>
+              <p className={styles.badge}>Hybrid</p>
+            </div>
+            <div className={styles.summaryGrid}>
+              <div className={styles.row}>
+                <p>
+                  <span className={styles.label}>Full Name:</span>{" "}
+                  {form.name || "-"}
+                </p>
+                <p>
+                  <span className={styles.label}>Age:</span>{" "}
+                  {form.age ? `${form.age} yrs` : "-"}
+                </p>
+              </div>
+              <div className={styles.row}>
+                <p>
+                  <span className={styles.label}>Email:</span>{" "}
+                  {form.email || "-"}
+                </p>
+                <p>
+                  <span className={styles.label}>Phone:</span>{" "}
+                  {form.mobile || "-"}
+                </p>
+              </div>
+              <div className={styles.row}>
+                <p>
+                  <span className={styles.label}>Pickup:</span>{" "}
+                  {form.pickupLocation || "-"}
+                </p>
+                <p>
+                  <span className={styles.label}>Return:</span>{" "}
+                  {form.returnLocation || "-"}
+                </p>
+              </div>
+              <p>
+                <span className={styles.label}>Pickup Time:</span>{" "}
+                {form.pickupTime || "-"}
+              </p>
+              <div className={styles.row}>
+                <p>
+                  <span className={styles.label}>Price/Day:</span> $
+                  {carDetails.totalPrice.toFixed(2)}
+                </p>
+                <p>
+                  <span className={`${styles.label} ${styles.total}`}>
+                    Total: ${totalPrice}
+                  </span>
+                </p>
+              </div>
+            </div>
           </div>
-          <div className={styles.summaryGrid}>
-            <div className={styles.row}>
-              <p>
-                <span className={styles.label}>Full Name:</span>{" "}
-                {form.name || "-"}
-              </p>
-              <p>
-                <span className={styles.label}>Age:</span>{" "}
-                {form.age ? `${form.age} yrs` : "-"}
-              </p>
-            </div>
-            <div className={styles.row}>
-              <p>
-                <span className={styles.label}>Email:</span>{" "}
-                {form.email || "-"}
-              </p>
-              <p>
-                <span className={styles.label}>Phone:</span>{" "}
-                {form.mobile || "-"}
-              </p>
-            </div>
-            <div className={styles.row}>
-              <p>
-                <span className={styles.label}>Pickup:</span>{" "}
-                {form.pickupLocation || "-"}
-              </p>
-              <p>
-                <span className={styles.label}>Return:</span>{" "}
-                {form.returnLocation || "-"}
-              </p>
-            </div>
-            <p>
-              <span className={styles.label}>Pickup Time:</span>{" "}
-              {form.pickupTime || "-"}
-            </p>
-            <div className={styles.row}>
-              <p>
-                <span className={styles.label}>Price/Day:</span> $
-                {carDetails.totalPrice.toFixed(2)}
-              </p>
-              <p>
-                <span className={`${styles.label} ${styles.total}`}>
-                  Total: ${totalPrice}
-                </span>
-              </p>
-            </div>
+          <div
+            style={{
+              marginTop: "20px",
+              borderRadius: "10px",
+              overflow: "hidden",
+            }}>
+            <MapComponent
+              coords={coords || []}
+              onSelect={(location) => {
+                console.log("Selected location:", location)
+              }}
+            />
           </div>
         </div>
       </div>

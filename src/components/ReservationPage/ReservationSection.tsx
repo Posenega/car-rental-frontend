@@ -20,7 +20,7 @@ export default function ReservationSection() {
       console.log(result.orders)
       storeOrders(result.orders)
     },
-    onFail({ message }) { },
+    onFail({ message }) {},
   })
   const deleteOrders = useApiStatus({
     api: CarRentalApi.order.deleteOrder,
@@ -37,7 +37,6 @@ export default function ReservationSection() {
     console.log(user._id)
     getOrders.fire(user._id)
   }, [user])
-
 
   const handleDelete = (index: number) => {
     const id = orders[index]._id
@@ -74,26 +73,36 @@ export default function ReservationSection() {
         <div key={i} className={styles.row}>
           <div>
             <img
-              src={process.env.NEXT_PUBLIC_BASE_URL + "/" + r.car?.carImage}
+              src={
+                process.env.NEXT_PUBLIC_BASE_URL +
+                "/" +
+                r.car?.carImage
+              }
               alt={r.car?.carName}
               className={styles.carImage}
             />
             <p
               className={styles.viewSummary}
-            // onClick={() => setShowSummaryIndex(i)}
-            >
-              View Summary
+              onClick={() => {
+                localStorage.setItem("order", JSON.stringify(r))
+                window.location.pathname = "/checkout"
+              }}>
+              Checkout
             </p>
           </div>
           <span>{r.car?.carYear}</span>
           <span>
             {r.pickupLocation} → {r.dropoffLocation}
           </span>
-          <span>{Math.ceil(
-            (new Date(r.endDate).getTime() - new Date(r.startDate).getTime()) /
-            (1000 * 60 * 60 * 24)
-          )} days</span>
-          <span>{r.totalPrice}$</span>
+          <span>
+            {Math.ceil(
+              (new Date(r.endDate).getTime() -
+                new Date(r.startDate).getTime()) /
+                (1000 * 60 * 60 * 24)
+            )}{" "}
+            days
+          </span>
+          <span>{JSON.stringify(r.totalPrice)}$</span>
           <Icon
             icon="mdi:delete-outline"
             className={styles.icon}
@@ -106,8 +115,6 @@ export default function ReservationSection() {
         <Icon icon="mdi:arrow-left" />
         Continue Shopping
       </a>
-
-
     </section>
   )
 }
