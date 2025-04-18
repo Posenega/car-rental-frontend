@@ -1,17 +1,33 @@
-"use client";
-import styles from "./ContactSection.module.css";
-import { Icon } from "@iconify/react";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
-import { useState } from "react";
+"use client"
+import styles from "./ContactSection.module.css"
+import { Icon } from "@iconify/react"
+import PhoneInput from "react-phone-input-2"
+import "react-phone-input-2/lib/style.css"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { CarRentalApi } from "@/api/Api"
+import { useApiStatus } from "@/hooks/useApiStatus"
 
 export default function ContactSection() {
-  const [phone, setPhone] = useState("");
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  })
+
+  const sendEmail = useApiStatus({
+    api: CarRentalApi.email.send,
+    onSuccess({ result }) {
+      console.log(result)
+    },
+    onFail({ message }) {},
+  })
 
   return (
-    <section
-
-      className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <div className={styles.content}>
         {/* LEFT FORM */}
         <div className={styles.left}>
@@ -19,34 +35,79 @@ export default function ContactSection() {
 
           <div className={styles.inputGroup}>
             <label>Full Name</label>
-            <input type="text" placeholder="Enter your full name..." />
+            <Controller
+              control={control}
+              name="name"
+              render={({ field: { value, onChange } }) => (
+                <input
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Enter your full name..."
+                />
+              )}
+            />
           </div>
 
           <div className={styles.inputGroup}>
             <label>Email Address</label>
-            <input type="email" placeholder="Enter your email address..." />
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { value, onChange } }) => (
+                <input
+                  type="email"
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Enter your email address..."
+                />
+              )}
+            />
           </div>
 
           <div className={styles.inputGroup}>
             <label>Phone Number</label>
-            <PhoneInput
-              country={"lb"}
-              value={phone}
-              onChange={(val) => setPhone(val)}
-              inputClass={styles.phoneInput}
-              containerClass={styles.phoneContainer}
-              buttonClass={styles.phoneButton}
+            <Controller
+              control={control}
+              name="phone"
+              render={({ field: { value, onChange } }) => (
+                <PhoneInput
+                  country={"lb"}
+                  value={value}
+                  onChange={(val) => onChange(val)}
+                  inputClass={styles.phoneInput}
+                  containerClass={styles.phoneContainer}
+                  buttonClass={styles.phoneButton}
+                />
+              )}
             />
           </div>
 
           <div className={styles.inputGroup}>
             <label>Message</label>
-            <textarea placeholder="Enter your message here..." />
+            <Controller
+              control={control}
+              name="message"
+              render={({ field: { value, onChange } }) => (
+                <textarea
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Enter your message here..."
+                />
+              )}
+            />
           </div>
 
-          <button className={styles.sendBtn}>Send message</button>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              handleSubmit((data) => {
+                sendEmail.fire(data)
+              })()
+            }}
+            className={styles.sendBtn}>
+            Send message
+          </button>
         </div>
-
         {/* RIGHT MAP */}
         <div className={styles.map}>
           <img
@@ -54,7 +115,6 @@ export default function ContactSection() {
             alt="Lebanon map"
             className={styles.mapImage}
           />
-
           {/* Pins (top %, left %) approximate — adjust visually */}
           <div
             className={styles.pin}
@@ -87,14 +147,21 @@ export default function ContactSection() {
       {/* CONTACT INFO */}
       <div className={styles.reachOut}>
         <button className={styles.reachBtn}>Reach Out To Us</button>
-        <h2 className={styles.subheading}>We’d Love to Hear From You.</h2>
+        <h2 className={styles.subheading}>
+          We’d Love to Hear From You.
+        </h2>
 
         <div className={styles.contactOptions}>
           <div className={styles.option}>
-            <Icon icon="mdi:email-outline" className={styles.optionIcon} />
+            <Icon
+              icon="mdi:email-outline"
+              className={styles.optionIcon}
+            />
             <p>Email Support</p>
             <span>Our team can respond in real-time.</span>
-            <a href="mailto:mountmotors@wtw.com">mountmotors@wtw.com</a>
+            <a href="mailto:mountmotors@wtw.com">
+              mountmotors@wtw.com
+            </a>
           </div>
 
           <div className={styles.option}>
@@ -108,7 +175,10 @@ export default function ContactSection() {
           </div>
 
           <div className={styles.option}>
-            <Icon icon="mdi:phone-outline" className={styles.optionIcon} />
+            <Icon
+              icon="mdi:phone-outline"
+              className={styles.optionIcon}
+            />
             <p>Call Us Directly</p>
             <span>Available during working hours.</span>
             <a href="tel:+96112345678">+961 12 345 678</a>
@@ -116,5 +186,5 @@ export default function ContactSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

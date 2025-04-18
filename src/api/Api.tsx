@@ -10,6 +10,7 @@ import { Car, CarFilters } from "./models/ApiCar"
 import { Order } from "@/model/order"
 import { Review } from "@/model/review"
 import { string } from "prop-types"
+import { EmailRequestInterface } from "./models/ApiEmail"
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -140,5 +141,11 @@ export const CarRentalApi = {
         message?: string
       }>
     > => api.get(`/coupons/validate/${code}`),
+  },
+  email: {
+    send: (
+      body: EmailRequestInterface
+    ): Promise<AxiosResponse<{ message: string }>> =>
+      api.post("/email/send", body),
   },
 }
