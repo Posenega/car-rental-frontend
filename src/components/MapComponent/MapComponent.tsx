@@ -15,7 +15,11 @@ type Location = {
 
 type MapComponentProps = {
   onSelect?: (location: Location | UserLocation) => void
-  coords: MapLocation[]
+  coords: {
+    mapLocation: MapLocation
+    label: string
+  }[]
+  clickable: boolean
 }
 
 type UserLocation = {
@@ -42,6 +46,7 @@ const predefinedLocations: Location[] = [
 const MapComponent: React.FC<MapComponentProps> = ({
   coords,
   onSelect,
+  clickable = true,
 }) => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDMcq48hm0zmZkhjol54AkUIjFmJU6ikKI",
@@ -51,7 +56,10 @@ const MapComponent: React.FC<MapComponentProps> = ({
     useState<UserLocation | null>(null)
 
   const handleMarkerClick = useCallback(
-    (loc: Location) => {},
+    (loc: Location) => {
+      if (onSelect) onSelect(loc)
+
+    },
     [onSelect]
   )
 
@@ -76,13 +84,13 @@ const MapComponent: React.FC<MapComponentProps> = ({
       mapContainerStyle={containerStyle}
       center={center}
       zoom={8}
-      onClick={handleMapClick}>
-      {coords.map((loc) => (
+      onClick={clickable && handleMapClick}>
+      {coords.map((loc, index) => (
         <Marker
           // key={lo}
-          position={{ lat: loc.lat, lng: loc.lng }}
-          label={"a"}
-          // onClick={() => handleMarkerClick(loc)}
+          position={{ lat: loc.mapLocation.lat, lng: loc.mapLocation.lng }}
+          label={loc.label}
+          onClick={() => handleMarkerClick({ id: index, lat: loc.mapLocation.lat, lng: loc.mapLocation.lng, label: "a" })}
         />
       ))}
 

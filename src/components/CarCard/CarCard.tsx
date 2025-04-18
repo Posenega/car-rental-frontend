@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import styles from "./CarCard.module.scss"
 import CarLabel from "../Labels/CarLabel/CarLabel"
 import Image from "next/image"
@@ -8,8 +8,11 @@ import Door from "@/icons/Door"
 import Gearbox from "@/icons/Gearbox"
 import CarImage from "@/images/car.png"
 import { Car } from "@/model/car"
+import { UserContext } from "@/context/userContext"
+import { UserContextType } from "@/model/user"
 
 export default function CarCard({ car }: { car: Car }) {
+  const { access } = useContext(UserContext) as UserContextType
   return (
     <div className={styles.car_card}>
       <h2>{car.carName}</h2>
@@ -47,10 +50,15 @@ export default function CarCard({ car }: { car: Car }) {
           </div>
         </div>
         <button
+          disabled={access === "WAIT"}
           onClick={() => {
-            window.location.pathname = "/" + car._id
+            if (access === "SIGNED_OUT") {
+              window.location.pathname = "/auth"
+            } else {
+              window.location.pathname = "/" + car._id
+            }
           }}
-          className={styles.btn}>
+          className={access === "WAIT" ? styles.disabled : styles.btn}>
           Reserve now
         </button>
       </div>

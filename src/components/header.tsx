@@ -1,13 +1,16 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import styles from "./header.module.css"
 import { MdPersonOutline } from "react-icons/md"
 import { HiOutlineShoppingCart } from "react-icons/hi"
 import { IoCarSportOutline } from "react-icons/io5"
+import { UserContext } from "@/context/userContext"
+import { UserContextType } from "@/model/user"
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false)
+  const { user } = useContext(UserContext) as UserContextType
 
   return (
     <header className={styles.main}>
@@ -36,9 +39,8 @@ const Header = () => {
               </div>
               {showDropdown && (
                 <div className={styles.dropdown}>
-                  <a href="/login">Log in</a>
-                  <a href="/signup">Sign up</a>
-                  <a href="/profile">Profile</a>
+                  {user._id === "" && <a href="/auth">Log in</a>}
+                  {user._id !== "" && <a href="/profile">Profile</a>}
                   <hr />
                   <a href="/chat">💬 Chat Support</a>
                 </div>

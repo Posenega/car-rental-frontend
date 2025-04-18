@@ -32,6 +32,7 @@ const ProfilePage = ({
   points,
   id,
 }: ProfileProps) => {
+  const { storeAccessToken, setAccess } = useContext(UserContext) as UserContextType
   const searchParams = useSearchParams()
   const router = useRouter()
   const tab = searchParams.get("tab") || "bookings"
@@ -46,6 +47,17 @@ const ProfilePage = ({
     api: CarRentalApi.user.uploadProfileImage,
     onSuccess({ result }) {
       console.log(result)
+    },
+    onFail({ message }) {
+      console.error("Error uploading image:", message)
+    },
+  })
+  const signOutUser = useApiStatus({
+    api: CarRentalApi.user.signout,
+    onSuccess({ result }) {
+      storeAccessToken("")
+      setAccess("SIGNED_OUT")
+      window.location.pathname = "/"
     },
     onFail({ message }) {
       console.error("Error uploading image:", message)
@@ -92,7 +104,7 @@ const ProfilePage = ({
   if (image) {
     image = process.env.NEXT_PUBLIC_BASE_URL + image
   }
-  console.log(image)
+
 
   return (
     <main className={styles.main}>
@@ -124,9 +136,11 @@ const ProfilePage = ({
             </div>
           </div>
           <nav className={styles.anchors}>
-            <a>
+            <div onClick={() => {
+              signOutUser.fire()
+            }} style={{ cursor: "pointer" }}>
               <BsBoxArrowRight size={20} />
-            </a>
+            </div>
           </nav>
         </div>
 

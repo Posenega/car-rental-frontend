@@ -13,7 +13,7 @@ import { CarRentalApi } from "@/api/Api";
 
 export default function ReviewsSection() {
   const { reviews, storeReviews } = useContext(ReviewContext) as ReviewContextType
-  const { user } = useContext(UserContext) as UserContextType
+  const { user, access } = useContext(UserContext) as UserContextType
   const [starRating, setStarRating] = useState(0)
   const [feedback, setFeedback] = useState("")
   const [averageRating, setAverageRating] = useState(0)
@@ -143,7 +143,7 @@ export default function ReviewsSection() {
                 />
               ))}
             </div>
-            <button className={styles.submitBtn} onClick={() => {
+            <button disabled={access === "WAIT" || access === "SIGNED_OUT"} className={access === "WAIT" || access === "SIGNED_OUT" ? styles.disabled : styles.submitBtn} onClick={() => {
               const data = {
                 userId: user._id,
                 name: user.userName,
@@ -152,6 +152,7 @@ export default function ReviewsSection() {
                 rating: starRating,
               }
               createReview.fire(data)
+
             }}>
               Submit Feedback
             </button>

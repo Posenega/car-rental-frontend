@@ -8,18 +8,21 @@ import { useApiStatus } from "@/hooks/useApiStatus"
 import { CarRentalApi } from "@/api/Api"
 import MapComponent from "../MapComponent/MapComponent"
 import { BranchContext } from "@/context/branchContext"
-import { BranchContextType } from "@/model/branch"
+import { Branch, BranchContextType } from "@/model/branch"
 
 export default function ReservationForm() {
   const [locations, setLocations] = useState<string[]>([])
-  const { storeBranches, branches } = useContext(
+  const { storeBranches, } = useContext(
     BranchContext
   ) as BranchContextType
   const [coords, setCoords] = useState<
     | {
+      label: string
+      mapLocation: {
         lat: number
         lng: number
-      }[]
+      }
+    }[]
     | null
   >([])
   const carDetails = JSON.parse(
@@ -43,7 +46,7 @@ export default function ReservationForm() {
   const getBranches = useApiStatus({
     api: CarRentalApi.branch.getAll,
     onSuccess({ result }) {
-      let branchesTemp = result.data
+      let branchesTemp: Branch[] = result.data
       let branchesNames = branchesTemp.map((branch) => {
         return branch.branchName
       })
@@ -52,8 +55,11 @@ export default function ReservationForm() {
       storeBranches(result.data)
       let coordsTemp = branchesTemp.map((branch) => {
         return {
-          lat: branch.mapLocation.lat,
-          lng: branch.mapLocation.lng,
+          label: branch.branchName,
+          mapLocation: {
+            lat: branch.mapLocation.lat,
+            lng: branch.mapLocation.lng,
+          }
         }
       })
       setCoords(coordsTemp)
@@ -148,9 +154,8 @@ export default function ReservationForm() {
               <label className={styles.label}>Age</label>
               <input
                 type="number"
-                className={`${styles.input} ${
-                  !ageValid && form.age ? styles.invalid : ""
-                }`}
+                className={`${styles.input} ${!ageValid && form.age ? styles.invalid : ""
+                  }`}
                 value={form.age}
                 onChange={(e) =>
                   setForm({ ...form, age: e.target.value })
@@ -354,6 +359,7 @@ export default function ReservationForm() {
               overflow: "hidden",
             }}>
             <MapComponent
+              clickable={false}
               coords={coords || []}
               onSelect={(location) => {
                 console.log("Selected location:", location)
