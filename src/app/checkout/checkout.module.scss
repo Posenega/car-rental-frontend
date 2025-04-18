@@ -27,6 +27,7 @@
   }
 }
 
+
 .methods {
   display: flex;
   flex-direction: column;
@@ -152,4 +153,101 @@
 .cross {
   text-decoration: line-through;
   color: red;
+}
+
+
+//added 
+// ==== Points and Coupon Styles ====
+
+.pointsCouponWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.pointsCheckbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 16px;
+
+  input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
+  label {
+    font-weight: 500;
+    color: #333;
+  }
+}
+
+.couponField {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  label {
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .inputRow {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  input[type="text"] {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    transition: border 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: black;
+    }
+
+    &:disabled {
+      background-color: #f0f0f0;
+    }
+  }
+
+  button {
+    padding: 10px 16px;
+    background-color: black;
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: #333;
+    }
+  }
+}
+
+// Optional: feedback messages
+.error {
+  color: #d32f2f;
+  font-size: 14px;
+}
+
+.success {
+  color: #388e3c;
+  font-size: 14px;
 }

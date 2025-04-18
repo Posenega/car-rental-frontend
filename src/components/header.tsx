@@ -1,25 +1,27 @@
 "use client"
 
-import React, { useEffect, useState, useContext } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import styles from "./header.module.css"
 import { MdPersonOutline } from "react-icons/md"
 import { HiOutlineShoppingCart } from "react-icons/hi"
 import { IoCarSportOutline } from "react-icons/io5"
 import { UserContext } from "@/context/userContext"
 import { UserContextType } from "@/model/user"
+import Drawer from "react-modern-drawer"
+import "react-modern-drawer/dist/index.css"
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false)
+  const [showDrawer, setShowDrawer] = useState(false)
   const [contain, setContain] = useState(false)
+
+  const toggleDrawer = () => setShowDrawer((prev) => !prev)
 
   useEffect(() => {
     const order = localStorage.getItem("order")
-    if (order) {
-      setContain(true)
-    } else {
-      setContain(false)
-    }
+    setContain(!!order)
   }, [])
+
   const { user } = useContext(UserContext) as UserContextType
 
   return (
@@ -62,6 +64,29 @@ const Header = () => {
           </div>
         </nav>
       </div>
+      <div className={styles.hamburger} onClick={() => setShowDrawer(true)}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      {/* === Drawer for Mobile Navigation === */}
+      <Drawer
+        open={showDrawer}
+        onClose={() => setShowDrawer(false)}
+        direction="right"
+        className={styles.drawer}
+      >
+        <div className={styles.drawerContent}>
+          <a href="/" onClick={() => setShowDrawer(false)}>Home</a>
+          <a href="/cars" onClick={() => setShowDrawer(false)}>Cars</a>
+          <a href="/reservation" onClick={() => setShowDrawer(false)}>Reservation</a>
+          <a href="/reviews" onClick={() => setShowDrawer(false)}>Reviews</a>
+          {user._id !== "" && <a href="/profile" onClick={() => setShowDrawer(false)}>Profile</a>}
+          {user._id !== "" && <a href="/logout" onClick={() => setShowDrawer(false)}>Logout</a>}
+          {user._id === "" && <a href="/auth" onClick={() => setShowDrawer(false)}>Login</a>}
+        </div>
+      </Drawer>
     </header>
   )
 }

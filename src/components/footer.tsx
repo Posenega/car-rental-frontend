@@ -48,8 +48,8 @@ const footer = () => {
         </ul>
       </div>
       <div className={styles.icons}>
-        <PiInstagramLogoBold size={30} />
-        <TfiFacebook size={30} />
+        <a href="https://www.instagram.com/advancedcarrentallebanon/"><PiInstagramLogoBold size={30} /></a>
+        <a href="https://www.facebook.com/"><TfiFacebook size={30} /></a>
       </div>
     </footer>
   );

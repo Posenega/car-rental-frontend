@@ -14,10 +14,11 @@ type Location = {
 }
 
 type MapComponentProps = {
-  onSelect?: (location: Location | UserLocation) => void
+  onSelect?: (id: string) => void
   coords: {
     mapLocation: MapLocation
     label: string
+    id: string
   }[]
   clickable: boolean
 }
@@ -56,8 +57,12 @@ const MapComponent: React.FC<MapComponentProps> = ({
     useState<UserLocation | null>(null)
 
   const handleMarkerClick = useCallback(
-    (loc: Location) => {
-      if (onSelect) onSelect(loc)
+    (loc: {
+      mapLocation: MapLocation
+      label: string
+      id: string
+    }) => {
+      if (onSelect) onSelect(loc.id)
 
     },
     [onSelect]
@@ -89,8 +94,8 @@ const MapComponent: React.FC<MapComponentProps> = ({
         <Marker
           // key={lo}
           position={{ lat: loc.mapLocation.lat, lng: loc.mapLocation.lng }}
-          label={loc.label}
-          onClick={() => handleMarkerClick({ id: index, lat: loc.mapLocation.lat, lng: loc.mapLocation.lng, label: "a" })}
+          // label={loc.label}
+          onClick={() => handleMarkerClick(loc)}
         />
       ))}
 
